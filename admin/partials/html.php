@@ -10,6 +10,8 @@ if(storedTheme==='light') theme='light';
 var root=document.documentElement;
 root.setAttribute('data-bs-theme',theme);
 root.setAttribute('data-startbar',theme);
+root.style.backgroundColor=theme==='dark'?'#080810':'#f0f4f8';
+root.style.minHeight='100vh';
 if(storedTheme!==theme){
 try{localStorage.setItem('adminTheme',theme);}catch(e){}
 }

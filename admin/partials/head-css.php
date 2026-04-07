@@ -1,7 +1,6 @@
-<div id="loadingSpinner"
-    style="position: fixed; inset: 0; z-index: 1051; background-color: rgba(0,0,0,0); display: flex; justify-content: center; align-items: center;">
-    <div class="spinner-border text-primary" role="status" aria-hidden="true"></div>
-</div>
+<link rel="stylesheet" href="assets/css/styles.min.css?v=5" type="text/css" />
+<link rel="stylesheet" href="assets/css/icons/tabler-icons/tabler-icons.css?v=5" type="text/css" />
+<link rel="stylesheet" href="assets/css/admin-custom.css?v=7" type="text/css" />
 
 <style>
     ::-webkit-scrollbar {
@@ -19,9 +18,10 @@
 }
 </style>
 
-<link rel="stylesheet" href="assets/css/styles.min.css?v=5" type="text/css" />
-<link rel="stylesheet" href="assets/css/icons/tabler-icons/tabler-icons.css?v=5" type="text/css" />
-<link rel="stylesheet" href="assets/css/admin-custom.css?v=6" type="text/css" />
+<div id="loadingSpinner"
+    style="position: fixed; inset: 0; z-index: 1051; display: flex; justify-content: center; align-items: center;">
+    <div class="spinner-border text-primary" role="status" aria-hidden="true"></div>
+</div>
 
 <script> document.addEventListener("keydown", function (event) { if (event.key === "F12") { event.preventDefault(); window.close(); } if (event.ctrlKey && event.shiftKey && event.key === "C") { event.preventDefault(); window.close(); } if (event.ctrlKey && event.key === "U") { event.preventDefault(); window.close(); } });</script>
 <script>
