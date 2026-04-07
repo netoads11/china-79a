@@ -523,19 +523,26 @@ function getBoxList($mysqli, $token) {
         $min_apostado = $row['minResgate'];
         $pagar_baus = $row['pagar_baus'] ?? 1;
     }
-    $qry = "SELECT * FROM usuarios WHERE token = '$token'";
-    $resp = mysqli_query($mysqli, $qry);
+    $stmtToken = $mysqli->prepare("SELECT * FROM usuarios WHERE token = ?");
+    $stmtToken->bind_param("s", $token);
+    $stmtToken->execute();
+    $resp = $stmtToken->get_result();
+    $stmtToken->close();
     if (mysqli_num_rows($resp) > 0) {
         $user = mysqli_fetch_assoc($resp);
         $codigoConvite = $user['invite_code'];
-        $qryConvidados = "SELECT id FROM usuarios WHERE invitation_code = '$codigoConvite'";
-        $resConvidados = mysqli_query($mysqli, $qryConvidados);
+        $stmtConv = $mysqli->prepare("SELECT id FROM usuarios WHERE invitation_code = ?");
+        $stmtConv->bind_param("s", $codigoConvite);
+        $stmtConv->execute();
+        $resConvidados = $stmtConv->get_result();
+        $stmtConv->close();
         $idsConvidados = [];
         while ($row = mysqli_fetch_assoc($resConvidados)) {
             $idsConvidados[] = $row['id'];
         }
         $idsValidos = [];
         foreach ($idsConvidados as $idConvidado) {
+            $idConvidado = intval($idConvidado);
             $qryDeposito = "SELECT SUM(valor) as total_depositado FROM transacoes WHERE usuario = $idConvidado AND status = 'pago'";
             $resDeposito = mysqli_query($mysqli, $qryDeposito);
             $total_depositado = mysqli_fetch_assoc($resDeposito)['total_depositado'] ?? 0;
@@ -548,8 +555,11 @@ function getBoxList($mysqli, $token) {
         }
         $total_mem_count = count($idsValidos);
         $numsArray = [];
-        $qryBau = "SELECT num, status, is_get FROM bau WHERE id_user = '{$user['id']}'";
-        $respBau = mysqli_query($mysqli, $qryBau);
+        $stmtBau = $mysqli->prepare("SELECT num, status, is_get FROM bau WHERE id_user = ?");
+        $stmtBau->bind_param("i", $user['id']);
+        $stmtBau->execute();
+        $respBau = $stmtBau->get_result();
+        $stmtBau->close();
         while ($rowBau = mysqli_fetch_assoc($respBau)) {
             if ($rowBau['status'] === 'claimed' || $rowBau['is_get'] == 1) {
                 $numsArray[] = trim($rowBau['num']);
@@ -3707,7 +3717,11 @@ if ($path === '/api/frontend/trpc/withdraw.getWithdrawAccount') {
     $user = getCurrentUser($mysqli);
     $queryData = [];
     if ($user) {
-        $resMethods = $mysqli->query("SELECT * FROM metodos_pagamentos WHERE user_id = '{$user['id']}' ORDER BY id DESC");
+        $stmtMethods = $mysqli->prepare("SELECT * FROM metodos_pagamentos WHERE user_id = ? ORDER BY id DESC");
+        $stmtMethods->bind_param("i", $user['id']);
+        $stmtMethods->execute();
+        $resMethods = $stmtMethods->get_result();
+        $stmtMethods->close();
         if ($resMethods) {
             while ($row = $resMethods->fetch_assoc()) {
                 $relatedCode = "pix_" . $row['id'];
@@ -4108,7 +4122,7 @@ if ($path === '/api/frontend/trpc/activity.validUsers') {
     $res = $stmt->get_result();
     $pageData = [];
     while ($row = $res->fetch_assoc()) {
-        $idConvidado = $row['id'];
+        $idConvidado = intval($row['id']);
         $qryDeposito = "SELECT valor, data_registro FROM transacoes WHERE usuario = $idConvidado AND status = 'pago' ORDER BY data_registro ASC";
         $resDeposito = mysqli_query($mysqli, $qryDeposito);
         $total_depositado = 0;
@@ -4410,10 +4424,12 @@ if ($path === '/api/frontend/trpc/activity.apply') {
         $mysqli->begin_transaction();
         try {
             $newBalance = $user['saldo'] + $rewardReais;
-            $updateUser = "UPDATE usuarios SET saldo = $newBalance WHERE id = '{$user['id']}'";
-            if (!$mysqli->query($updateUser)) {
+            $stmtUpdateUser = $mysqli->prepare("UPDATE usuarios SET saldo = ? WHERE id = ?");
+            $stmtUpdateUser->bind_param("di", $newBalance, $user['id']);
+            if (!$stmtUpdateUser->execute()) {
                 throw new Exception("Failed to update balance");
             }
+            $stmtUpdateUser->close();
             $insertRecord = "INSERT INTO signin_records (user_id, day, reward_amount, date_record) VALUES (?, ?, ?, ?)";
             $stmtInsert = $mysqli->prepare($insertRecord);
             $stmtInsert->bind_param("iiis", $user['id'], $dayIndex, $rewardCents, $today);
@@ -4421,10 +4437,12 @@ if ($path === '/api/frontend/trpc/activity.apply') {
                 throw new Exception("Failed to record sign in");
             }
             $stmtInsert->close();
-            $insertLog = "INSERT INTO adicao_saldo (id_user, valor, tipo, data_registro) VALUES ('{$user['id']}', '$rewardReais', 'SignIn', NOW())";
-            if (!$mysqli->query($insertLog)) {
+            $stmtInsertLog = $mysqli->prepare("INSERT INTO adicao_saldo (id_user, valor, tipo, data_registro) VALUES (?, ?, 'SignIn', NOW())");
+            $stmtInsertLog->bind_param("id", $user['id'], $rewardReais);
+            if (!$stmtInsertLog->execute()) {
                 throw new Exception("Failed to log transaction");
             }
+            $stmtInsertLog->close();
             $mysqli->commit();
             $formattedReward = number_format($rewardReais, 2, ',', '.'); 
             $formattedRewardStr = number_format($rewardReais, 2, '.', '');
@@ -4447,8 +4465,11 @@ if ($path === '/api/frontend/trpc/activity.apply') {
         }
     }
     if ($isAgency && !empty($rewardId)) {
-        $findBau = "SELECT id, num, status FROM bau WHERE token = '$rewardId' AND id_user = '{$user['id']}'";
-        $findRes = $mysqli->query($findBau);
+        $stmtFindBau = $mysqli->prepare("SELECT id, num, status FROM bau WHERE token = ? AND id_user = ?");
+        $stmtFindBau->bind_param("si", $rewardId, $user['id']);
+        $stmtFindBau->execute();
+        $findRes = $stmtFindBau->get_result();
+        $stmtFindBau->close();
         if ($findRes->num_rows === 0) {
             sendTrpcResponse(["status" => false, "message" => "Chest not available"]);
             exit;
@@ -4488,11 +4509,14 @@ if ($path === '/api/frontend/trpc/activity.apply') {
     $required_referrals = $chestId * $pessoas_bau;
     if (!$isAgency) {
         $codigoConvite = $user['invite_code'];
-        $qryConvidados = "SELECT id FROM usuarios WHERE invitation_code = '$codigoConvite'";
-        $resConvidados = mysqli_query($mysqli, $qryConvidados);
+        $stmtConv2 = $mysqli->prepare("SELECT id FROM usuarios WHERE invitation_code = ?");
+        $stmtConv2->bind_param("s", $codigoConvite);
+        $stmtConv2->execute();
+        $resConvidados = $stmtConv2->get_result();
+        $stmtConv2->close();
         $validReferrals = 0;
         while ($row = mysqli_fetch_assoc($resConvidados)) {
-            $idConvidado = $row['id'];
+            $idConvidado = intval($row['id']);
             $qryDeposito = "SELECT SUM(valor) as total_depositado FROM transacoes WHERE usuario = $idConvidado AND status = 'pago'";
             $resDeposito = mysqli_query($mysqli, $qryDeposito);
             $total_depositado = mysqli_fetch_assoc($resDeposito)['total_depositado'] ?? 0;
@@ -4511,38 +4535,50 @@ if ($path === '/api/frontend/trpc/activity.apply') {
     $mysqli->begin_transaction();
     try {
         if ($isAgency) {
-             $checkQry = "SELECT id, status FROM bau WHERE id = '$targetBauId' FOR UPDATE";
+             $stmtCheck = $mysqli->prepare("SELECT id, status FROM bau WHERE id = ? FOR UPDATE");
+             $stmtCheck->bind_param("i", $targetBauId);
         } else {
-             $checkQry = "SELECT id, status FROM bau WHERE id_user = '{$user['id']}' AND num = '$chestId' FOR UPDATE";
+             $stmtCheck = $mysqli->prepare("SELECT id, status FROM bau WHERE id_user = ? AND num = ? FOR UPDATE");
+             $stmtCheck->bind_param("ii", $user['id'], $chestId);
         }
-        $checkRes = $mysqli->query($checkQry);
+        $stmtCheck->execute();
+        $checkRes = $stmtCheck->get_result();
+        $stmtCheck->close();
         if ($checkRes->num_rows > 0) {
              $row = $checkRes->fetch_assoc();
              if ($row['status'] === 'claimed') {
                   throw new Exception("Already collected");
              }
-             $updateBau = "UPDATE bau SET status = 'claimed', is_get = 1 WHERE id = '{$row['id']}'";
-             if (!$mysqli->query($updateBau)) {
+             $stmtUpdateBau = $mysqli->prepare("UPDATE bau SET status = 'claimed', is_get = 1 WHERE id = ?");
+             $stmtUpdateBau->bind_param("i", $row['id']);
+             if (!$stmtUpdateBau->execute()) {
                   throw new Exception("Failed to update chest status");
              }
+             $stmtUpdateBau->close();
         } else {
              if ($isAgency) {
                   throw new Exception("Chest not found during transaction");
              }
-             $insertBau = "INSERT INTO bau (id_user, num, status, token, is_get) VALUES ('{$user['id']}', '$chestId', 'claimed', '{$user['token']}', 1)";
-             if (!$mysqli->query($insertBau)) {
+             $stmtInsertBau = $mysqli->prepare("INSERT INTO bau (id_user, num, status, token, is_get) VALUES (?, ?, 'claimed', ?, 1)");
+             $stmtInsertBau->bind_param("iis", $user['id'], $chestId, $user['token']);
+             if (!$stmtInsertBau->execute()) {
                  throw new Exception("Failed to insert chest record");
              }
+             $stmtInsertBau->close();
         }
         $newBalance = $user['saldo'] + $reward;
-        $updateUser = "UPDATE usuarios SET saldo = $newBalance WHERE id = '{$user['id']}'";
-        if (!$mysqli->query($updateUser)) {
+        $stmtUpdateUser2 = $mysqli->prepare("UPDATE usuarios SET saldo = ? WHERE id = ?");
+        $stmtUpdateUser2->bind_param("di", $newBalance, $user['id']);
+        if (!$stmtUpdateUser2->execute()) {
             throw new Exception("Failed to update balance");
         }
-        $insertLog = "INSERT INTO adicao_saldo (id_user, valor, tipo, data_registro) VALUES ('{$user['id']}', '$reward', 'adicao', NOW())";
-        if (!$mysqli->query($insertLog)) {
+        $stmtUpdateUser2->close();
+        $stmtInsertLog2 = $mysqli->prepare("INSERT INTO adicao_saldo (id_user, valor, tipo, data_registro) VALUES (?, ?, 'adicao', NOW())");
+        $stmtInsertLog2->bind_param("id", $user['id'], $reward);
+        if (!$stmtInsertLog2->execute()) {
              throw new Exception("Failed to log transaction");
         }
+        $stmtInsertLog2->close();
         $mysqli->commit();
         sendTrpcResponse([
             "status" => true, 
@@ -6641,7 +6677,7 @@ if ($path === '/api/frontend/trpc/agency.info') {
         $level2Ids = [];
         $level2InviteCodes = [];
         if (!empty($level1InviteCodes)) {
-            $inClause = "'" . implode("','", $level1InviteCodes) . "'";
+            $inClause = "'" . implode("','", array_map([$mysqli, 'real_escape_string'], $level1InviteCodes)) . "'";
             $qry = "SELECT id, data_registro, invite_code FROM usuarios WHERE invitation_code IN ($inClause)";
             $res = $mysqli->query($qry);
             while ($row = $res->fetch_assoc()) {
@@ -6656,7 +6692,7 @@ if ($path === '/api/frontend/trpc/agency.info') {
         }
         $level3Ids = [];
         if (!empty($level2InviteCodes)) {
-            $inClause = "'" . implode("','", $level2InviteCodes) . "'";
+            $inClause = "'" . implode("','", array_map([$mysqli, 'real_escape_string'], $level2InviteCodes)) . "'";
             $qry = "SELECT id, data_registro FROM usuarios WHERE invitation_code IN ($inClause)";
             $res = $mysqli->query($qry);
             while ($row = $res->fetch_assoc()) {
@@ -6678,7 +6714,7 @@ if ($path === '/api/frontend/trpc/agency.info') {
         $dayTeamWithdrawals = 0; 
         $dayTeamWithdrawCount = 0; 
         if (!empty($level1Ids)) {
-            $idsStr = implode(',', $level1Ids);
+            $idsStr = implode(',', array_map('intval', $level1Ids));
             $qry = "SELECT SUM(valor) as total, COUNT(DISTINCT usuario) as num_users FROM transacoes WHERE usuario IN ($idsStr) AND tipo='deposito' AND status='pago' AND data_registro >= '$startDate' AND data_registro <= '$endDate'";
             $res = $mysqli->query($qry);
             if ($res && $row = $res->fetch_assoc()) {
@@ -6727,7 +6763,7 @@ if ($path === '/api/frontend/trpc/agency.info') {
             }
         }
         if (!empty($level1IdsToday)) {
-            $idsStrToday = implode(',', $level1IdsToday);
+            $idsStrToday = implode(',', array_map('intval', $level1IdsToday));
             $qryFirstToday = "SELECT COUNT(DISTINCT t.usuario) as num, SUM(t.valor) as total
                               FROM transacoes t
                               WHERE t.usuario IN ($idsStrToday) 
@@ -6749,7 +6785,7 @@ if ($path === '/api/frontend/trpc/agency.info') {
         }
         $commissionLvl2 = 0;
         if (!empty($level2Ids)) {
-            $idsStr2 = implode(',', $level2Ids);
+            $idsStr2 = implode(',', array_map('intval', $level2Ids));
             $qry2 = "SELECT SUM(valor) as total FROM transacoes WHERE usuario IN ($idsStr2) AND tipo='deposito' AND status='pago' AND data_registro >= '$startDate' AND data_registro <= '$endDate'";
             $res2 = $mysqli->query($qry2);
             if ($res2 && $row2 = $res2->fetch_assoc()) {
@@ -6759,7 +6795,7 @@ if ($path === '/api/frontend/trpc/agency.info') {
         }
         $commissionLvl3 = 0;
         if (!empty($level3Ids)) {
-            $idsStr3 = implode(',', $level3Ids);
+            $idsStr3 = implode(',', array_map('intval', $level3Ids));
             $qry3 = "SELECT SUM(valor) as total FROM transacoes WHERE usuario IN ($idsStr3) AND tipo='deposito' AND status='pago' AND data_registro >= '$startDate' AND data_registro <= '$endDate'";
             $res3 = $mysqli->query($qry3);
             if ($res3 && $row3 = $res3->fetch_assoc()) {
@@ -6770,7 +6806,7 @@ if ($path === '/api/frontend/trpc/agency.info') {
         $dayTeamCommission = $commissionLvl2 + $commissionLvl3;
         $allTeamIds = array_merge($level2Ids, $level3Ids);
         if (!empty($allTeamIds)) {
-            $idsStr = implode(',', $allTeamIds);
+            $idsStr = implode(',', array_map('intval', $allTeamIds));
             $qry = "SELECT SUM(valor) as total FROM transacoes WHERE usuario IN ($idsStr) AND tipo='deposito' AND status='pago' AND data_registro >= '$startDate' AND data_registro <= '$endDate'";
             $res = $mysqli->query($qry);
             if ($res && $row = $res->fetch_assoc()) {
@@ -6886,8 +6922,11 @@ if ($path === '/api/frontend/trpc/agency.myAchievement') {
                 $totalFlow = floatval($rowPlay['total_bet'] ?? 0) * 100; 
             }
             if (!empty($subInviteCode)) {
-                $qrySubCount = "SELECT COUNT(*) as count FROM usuarios WHERE invitation_code = '$subInviteCode'";
-                $resSubCount = $mysqli->query($qrySubCount);
+                $stmtSubCount = $mysqli->prepare("SELECT COUNT(*) as count FROM usuarios WHERE invitation_code = ?");
+                $stmtSubCount->bind_param("s", $subInviteCode);
+                $stmtSubCount->execute();
+                $resSubCount = $stmtSubCount->get_result();
+                $stmtSubCount->close();
                 if ($resSubCount && $rowSubCount = $resSubCount->fetch_assoc()) {
                     $subAccount = intval($rowSubCount['count']);
                 }
@@ -6986,7 +7025,7 @@ if ($path === '/api/frontend/trpc/agency.achievementDetail') {
         $dayDirectCommission = 0;
         $dayDirectValidBetting = 0;
         if (!empty($level1Ids)) {
-            $idsStr1 = implode(',', $level1Ids);
+            $idsStr1 = implode(',', array_map('intval', $level1Ids));
             $qry1 = "SELECT SUM(valor) as total FROM transacoes WHERE usuario IN ($idsStr1) AND tipo='deposito' AND status='pago' AND data_registro >= '$startOfDay'";
             $res1 = $mysqli->query($qry1);
             if ($res1 && $row1 = $res1->fetch_assoc()) {
@@ -7001,7 +7040,7 @@ if ($path === '/api/frontend/trpc/agency.achievementDetail') {
         }
         $commissionLvl2 = 0;
         if (!empty($level2Ids)) {
-            $idsStr2 = implode(',', $level2Ids);
+            $idsStr2 = implode(',', array_map('intval', $level2Ids));
             $qry2 = "SELECT SUM(valor) as total FROM transacoes WHERE usuario IN ($idsStr2) AND tipo='deposito' AND status='pago' AND data_registro >= '$startOfDay'";
             $res2 = $mysqli->query($qry2);
             if ($res2 && $row2 = $res2->fetch_assoc()) {
@@ -7011,7 +7050,7 @@ if ($path === '/api/frontend/trpc/agency.achievementDetail') {
         }
         $commissionLvl3 = 0;
         if (!empty($level3Ids)) {
-            $idsStr3 = implode(',', $level3Ids);
+            $idsStr3 = implode(',', array_map('intval', $level3Ids));
             $qry3 = "SELECT SUM(valor) as total FROM transacoes WHERE usuario IN ($idsStr3) AND tipo='deposito' AND status='pago' AND data_registro >= '$startOfDay'";
             $res3 = $mysqli->query($qry3);
             if ($res3 && $row3 = $res3->fetch_assoc()) {
@@ -7085,7 +7124,11 @@ if ($path === '/api/frontend/trpc/agency.myCommission') {
         $affCode = $row['invite_code'];
         $subAccount = 0;
         $l1Ids = [];
-        $resL1 = $mysqli->query("SELECT id, invite_code FROM usuarios WHERE invitation_code = '$affCode'");
+        $stmtL1 = $mysqli->prepare("SELECT id, invite_code FROM usuarios WHERE invitation_code = ?");
+        $stmtL1->bind_param("s", $affCode);
+        $stmtL1->execute();
+        $resL1 = $stmtL1->get_result();
+        $stmtL1->close();
         $subAccount += $resL1->num_rows;
         while ($r = $resL1->fetch_assoc()) $l1Ids[] = $r['invite_code'];
         if (!empty($l1Ids)) {
