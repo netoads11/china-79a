@@ -116,26 +116,24 @@ include_once "validar_2fa.php";
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_user'])) {
         $real_name = $_POST['real_name'];
         $token = $_POST['token'];
-        $password = $_POST['password'];
-        $statusaff = $_POST['statusaff'];
-        $freeze = $_POST['freeze'];
-        $lobby = $_POST['lobby'];
+        $raw_password = $_POST['password'];
+        $statusaff = intval($_POST['statusaff']);
+        $freeze = intval($_POST['freeze']);
+        $lobby = intval($_POST['lobby']);
         $invite = $_POST['invite'];
         $senha_saque = $_POST['senhaparasacar'];
+        $safe_id_user = intval($id_user);
 
-        $update_query = "UPDATE usuarios SET 
-            mobile='$real_name', 
-            token='$token', 
-            password='$password', 
-            statusaff='$statusaff', 
-            invite_code='$invite', 
-            senhaparasacar='$senha_saque', 
-            freeze='$freeze', 
-            lobby='$lobby', 
-            relogar='1' 
-            WHERE id='" . intval($id_user) . "'";
+        if (!empty($raw_password)) {
+            $hashed_password = password_hash($raw_password, PASSWORD_BCRYPT);
+            $stmt_upd = $mysqli->prepare("UPDATE usuarios SET mobile=?, token=?, password=?, statusaff=?, invite_code=?, senhaparasacar=?, freeze=?, lobby=?, relogar='1' WHERE id=?");
+            $stmt_upd->bind_param("sssisisii", $real_name, $token, $hashed_password, $statusaff, $invite, $senha_saque, $freeze, $lobby, $safe_id_user);
+        } else {
+            $stmt_upd = $mysqli->prepare("UPDATE usuarios SET mobile=?, token=?, statusaff=?, invite_code=?, senhaparasacar=?, freeze=?, lobby=?, relogar='1' WHERE id=?");
+            $stmt_upd->bind_param("ssiisiii", $real_name, $token, $statusaff, $invite, $senha_saque, $freeze, $lobby, $safe_id_user);
+        }
 
-        $update_res = mysqli_query($mysqli, $update_query);
+        $update_res = $stmt_upd->execute();
 
         if ($update_res) {
             $toastType = 'success';

@@ -14,7 +14,7 @@ if (isset($_POST['nome']) && isset($_POST['id_slider']) && isset($_POST['status'
 	$status =   PHP_SEGURO($_POST['status']);
 	$CRSF =   PHP_SEGURO($_POST['_csrf']);
 	$imgNome  = $_FILES['img']['name'];
-	$format_img  = PHP_SEGURO($_POST['format_img']);
+	$format_img  = basename(PHP_SEGURO($_POST['format_img']));
 	#------------------------------------------------------------#
 	$fileLocal	= '../../uploads/';
 	#------------------------------------------------------------#

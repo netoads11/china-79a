@@ -183,10 +183,13 @@ function enviarSaldo($email, $saldo)
     global $mysqli;
 
     // Monta a query de atualização
-    $qry = "UPDATE usuarios SET saldo = saldo + '" . $saldo . "' WHERE mobile = '" . $email . "'";
+    $stmt_upd = $mysqli->prepare("UPDATE usuarios SET saldo = saldo + ? WHERE mobile = ?");
+    $stmt_upd->bind_param("ds", $saldo, $email);
+    $stmt_upd->execute();
+    $qry = true; // compatibilidade com if abaixo
 
     // Executa a consulta
-    if (mysqli_query($mysqli, $qry)) {
+    if ($stmt_upd->affected_rows >= 0) {
         // Busca o id do usuário
         $stmt = $mysqli->prepare("SELECT id FROM usuarios WHERE mobile = ?");
         $stmt->bind_param("s", $email);
@@ -212,8 +215,10 @@ function withdrawSaldo($email, $saldo)
 	global $mysqli;
 
 	// Verifica o saldo atual do usuário
-	$qryCheckSaldo = "SELECT saldo FROM usuarios WHERE mobile = '" . $email . "'";
-	$result = mysqli_query($mysqli, $qryCheckSaldo);
+	$stmtChk = $mysqli->prepare("SELECT saldo FROM usuarios WHERE mobile = ?");
+	$stmtChk->bind_param("s", $email);
+	$stmtChk->execute();
+	$result = $stmtChk->get_result();
 
 	if ($result && mysqli_num_rows($result) > 0) {
 		$row = mysqli_fetch_assoc($result);
@@ -222,13 +227,12 @@ function withdrawSaldo($email, $saldo)
 		// Verifica se o saldo é suficiente para o saque
 		if ($saldoAtual >= $saldo) {
 			// Monta a query de atualização do saldo
-			$qry = "UPDATE usuarios SET saldo = saldo - '" . $saldo . "' WHERE mobile = '" . $email . "'";
-
-			// Executa a consulta de atualização
-			if (mysqli_query($mysqli, $qry)) {
-				return 1;  // Sucesso
+			$stmtUpd = $mysqli->prepare("UPDATE usuarios SET saldo = saldo - ? WHERE mobile = ?");
+			$stmtUpd->bind_param("ds", $saldo, $email);
+			if ($stmtUpd->execute()) {
+				return 1;
 			} else {
-				return 0;  // Falha na execução da query
+				return 0;
 			}
 		} else {
 			return -1;  // Saldo insuficiente
@@ -262,12 +266,14 @@ $data_aurenpay = data_aurenpay();
 function afiliado_de_quem($refer)
 {
 	global $mysqli;
-	$qry = "SELECT real_name FROM usuarios WHERE invite_code='" . $refer . "'";
-	$res = mysqli_query($mysqli, $qry);
+	$stmtRef = $mysqli->prepare("SELECT real_name FROM usuarios WHERE invite_code = ?");
+	$stmtRef->bind_param("s", $refer);
+	$stmtRef->execute();
+	$res = $stmtRef->get_result();
 	$dinheiro = 'Sem afiliação'; // Valor padrão
 
 	if ($res) {
-		while ($row = mysqli_fetch_assoc($res)) {
+		while ($row = $res->fetch_assoc()) {
 			if (!empty($row['real_name'])) {
 				$dinheiro = $row['real_name'];
 			}
@@ -456,10 +462,12 @@ function saldo_user($id)
 function saldo_user_email($id)
 {
 	global $mysqli;
-	$qry = "SELECT * FROM usuarios WHERE mobile='" . $id . "'";
-	$res = mysqli_query($mysqli, $qry);
-	if (mysqli_num_rows($res) > 0) {
-		$data = mysqli_fetch_assoc($res);
+	$stmt = $mysqli->prepare("SELECT * FROM usuarios WHERE mobile = ?");
+	$stmt->bind_param("s", $id);
+	$stmt->execute();
+	$res = $stmt->get_result();
+	if ($res->num_rows > 0) {
+		$data = $res->fetch_assoc();
 		$saldo_arr = array(
 			"saldo" => $data['saldo'],
 			"user_id" => $data['id'],
@@ -478,10 +486,12 @@ function saldo_user_email($id)
 function saldo_user_pix($id)
 {
 	global $mysqli;
-	$qry = "SELECT * FROM metodos_pagamentos WHERE chave='" . $id . "'";
-	$res = mysqli_query($mysqli, $qry);
-	if (mysqli_num_rows($res) > 0) {
-		$data = mysqli_fetch_assoc($res);
+	$stmt = $mysqli->prepare("SELECT * FROM metodos_pagamentos WHERE chave = ?");
+	$stmt->bind_param("s", $id);
+	$stmt->execute();
+	$res = $stmt->get_result();
+	if ($res->num_rows > 0) {
+		$data = $res->fetch_assoc();
 		$saldo = saldo_user($data['user_id'])['saldo'];
 		
 		$info = array(
@@ -681,14 +691,11 @@ function financeiro_saldo_user($id)
 function pegar_refer($refer)
 {
 	global $mysqli;
-	$qry = "SELECT * FROM usuarios WHERE token_refer='" . $refer . "'";
-	$res = mysqli_query($mysqli, $qry);
-	if (mysqli_num_rows($res) > 0) {
-		$ex_refer = 1;
-	} else {
-		$ex_refer = 0;
-	}
-	return $ex_refer;
+	$stmt = $mysqli->prepare("SELECT id FROM usuarios WHERE token_refer = ?");
+	$stmt->bind_param("s", $refer);
+	$stmt->execute();
+	$res = $stmt->get_result();
+	return $res->num_rows > 0 ? 1 : 0;
 }
 #=====================================================#
 #=====================================================#
@@ -785,24 +792,26 @@ function request_paymentPIX($transactionId)
 function count_refer_direto($refer)
 {
 	global $mysqli;
-	$qry = "SELECT * FROM usuarios WHERE invitation_code='" . $refer . "'";
-	$res = mysqli_query($mysqli, $qry);
-	$ex_refer = mysqli_num_rows($res);
-	return $ex_refer;
+	$stmt = $mysqli->prepare("SELECT COUNT(*) as total FROM usuarios WHERE invitation_code = ?");
+	$stmt->bind_param("s", $refer);
+	$stmt->execute();
+	$res = $stmt->get_result();
+	$row = $res->fetch_assoc();
+	return (int)$row['total'];
 }
 #=====================================================#
 # count saque
 function total_saques_id($id)
 {
 	global $mysqli;
-	$qry = "SELECT SUM(valor) as total_soma FROM solicitacao_saques WHERE id_user='" . $id . "'";
-	$result = mysqli_query($mysqli, $qry);
-	while ($row = mysqli_fetch_assoc($result)) {
-		if ($row['total_soma'] > 0) {
-			$dinheiro = $row['total_soma'];
-		} else {
-			$dinheiro = '0.00';
-		}
+	$safe_id = intval($id);
+	$stmt = $mysqli->prepare("SELECT SUM(valor) as total_soma FROM solicitacao_saques WHERE id_user = ?");
+	$stmt->bind_param("i", $safe_id);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$dinheiro = '0.00';
+	while ($row = $result->fetch_assoc()) {
+		if ($row['total_soma'] > 0) { $dinheiro = $row['total_soma']; }
 	}
 	return $dinheiro;
 }
@@ -811,14 +820,14 @@ function total_saques_id($id)
 function total_dep_id($id)
 {
 	global $mysqli;
-	$qry = "SELECT SUM(valor) as total_soma FROM transacoes WHERE usuario='" . $id . "' AND tipo='deposito'";
-	$result = mysqli_query($mysqli, $qry);
-	while ($row = mysqli_fetch_assoc($result)) {
-		if ($row['total_soma'] > 0) {
-			$dinheiro = $row['total_soma'];
-		} else {
-			$dinheiro = '0.00';
-		}
+	$safe_id = intval($id);
+	$stmt = $mysqli->prepare("SELECT SUM(valor) as total_soma FROM transacoes WHERE usuario = ? AND tipo='deposito'");
+	$stmt->bind_param("i", $safe_id);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$dinheiro = '0.00';
+	while ($row = $result->fetch_assoc()) {
+		if ($row['total_soma'] > 0) { $dinheiro = $row['total_soma']; }
 	}
 	return $dinheiro;
 }
@@ -826,14 +835,14 @@ function total_dep_id($id)
 function total_dep_pagos_id($id)
 {
 	global $mysqli;
-	$qry = "SELECT SUM(valor) as total_soma FROM transacoes WHERE usuario='" . $id . "' AND tipo='deposito' AND status='pago'";
-	$result = mysqli_query($mysqli, $qry);
-	while ($row = mysqli_fetch_assoc($result)) {
-		if ($row['total_soma'] > 0) {
-			$dinheiro = $row['total_soma'];
-		} else {
-			$dinheiro = '0.00';
-		}
+	$safe_id = intval($id);
+	$stmt = $mysqli->prepare("SELECT SUM(valor) as total_soma FROM transacoes WHERE usuario = ? AND tipo='deposito' AND status='pago'");
+	$stmt->bind_param("i", $safe_id);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$dinheiro = '0.00';
+	while ($row = $result->fetch_assoc()) {
+		if ($row['total_soma'] > 0) { $dinheiro = $row['total_soma']; }
 	}
 	return $dinheiro;
 }
@@ -841,13 +850,14 @@ function total_dep_pagos_id($id)
 function total_dep_afiliado($id)
 {
 	global $mysqli;
-	$qry = "SELECT SUM(valor) as total_soma FROM transacoes WHERE usuario IN (SELECT id FROM usuarios where invitation_code = '" . $id . "') AND tipo='deposito' AND status='pago'";
-	$result = mysqli_query($mysqli, $qry);
-	while ($row = mysqli_fetch_assoc($result)) {
+	$stmt = $mysqli->prepare("SELECT SUM(valor) as total_soma FROM transacoes WHERE usuario IN (SELECT id FROM usuarios WHERE invitation_code = ?) AND tipo='deposito' AND status='pago'");
+	$stmt->bind_param("s", $id);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$dinheiro = '0.00';
+	while ($row = $result->fetch_assoc()) {
 		if ($row['total_soma'] > 0) {
 			$dinheiro = $row['total_soma'];
-		} else {
-			$dinheiro = '0.00';
 		}
 	}
 	return $dinheiro;
@@ -857,14 +867,14 @@ function total_dep_afiliado($id)
 function total_CPA_REV_id($id)
 {
 	global $mysqli;
-	$qry = "SELECT SUM(valor) as total_soma FROM pay_valores_cassino WHERE id_user='" . $id . "' AND tipo=0 OR tipo=1";
-	$result = mysqli_query($mysqli, $qry);
-	while ($row = mysqli_fetch_assoc($result)) {
-		if ($row['total_soma'] > 0) {
-			$dinheiro = $row['total_soma'];
-		} else {
-			$dinheiro = '0.00';
-		}
+	$safe_id = intval($id);
+	$stmt = $mysqli->prepare("SELECT SUM(valor) as total_soma FROM pay_valores_cassino WHERE id_user = ? AND (tipo=0 OR tipo=1)");
+	$stmt->bind_param("i", $safe_id);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$dinheiro = '0.00';
+	while ($row = $result->fetch_assoc()) {
+		if ($row['total_soma'] > 0) { $dinheiro = $row['total_soma']; }
 	}
 	return $dinheiro;
 }
@@ -872,14 +882,14 @@ function total_CPA_REV_id($id)
 function total_CPA_id($id)
 {
 	global $mysqli;
-	$qry = "SELECT SUM(valor) as total_soma FROM pay_valores_cassino WHERE id_user='" . $id . "' AND tipo=0";
-	$result = mysqli_query($mysqli, $qry);
-	while ($row = mysqli_fetch_assoc($result)) {
-		if ($row['total_soma'] > 0) {
-			$dinheiro = $row['total_soma'];
-		} else {
-			$dinheiro = '0.00';
-		}
+	$safe_id = intval($id);
+	$stmt = $mysqli->prepare("SELECT SUM(valor) as total_soma FROM pay_valores_cassino WHERE id_user = ? AND tipo=0");
+	$stmt->bind_param("i", $safe_id);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$dinheiro = '0.00';
+	while ($row = $result->fetch_assoc()) {
+		if ($row['total_soma'] > 0) { $dinheiro = $row['total_soma']; }
 	}
 	return $dinheiro;
 }
@@ -887,14 +897,14 @@ function total_CPA_id($id)
 function total_REV_id($id)
 {
 	global $mysqli;
-	$qry = "SELECT SUM(valor) as total_soma FROM pay_valores_cassino WHERE id_user='" . $id . "' AND tipo=1";
-	$result = mysqli_query($mysqli, $qry);
-	while ($row = mysqli_fetch_assoc($result)) {
-		if ($row['total_soma'] > 0) {
-			$dinheiro = $row['total_soma'];
-		} else {
-			$dinheiro = '0.00';
-		}
+	$safe_id = intval($id);
+	$stmt = $mysqli->prepare("SELECT SUM(valor) as total_soma FROM pay_valores_cassino WHERE id_user = ? AND tipo=1");
+	$stmt->bind_param("i", $safe_id);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$dinheiro = '0.00';
+	while ($row = $result->fetch_assoc()) {
+		if ($row['total_soma'] > 0) { $dinheiro = $row['total_soma']; }
 	}
 	return $dinheiro;
 }
@@ -904,10 +914,11 @@ function total_REV_id($id)
 function data_user_id($id)
 {
 	global $mysqli;
-	$qry = "SELECT * FROM usuarios WHERE id='" . $id . "'";
-	$res = mysqli_query($mysqli, $qry);
-	$data = mysqli_fetch_assoc($res);
-	return $data;
+	$safe_id = intval($id);
+	$stmt = $mysqli->prepare("SELECT * FROM usuarios WHERE id = ?");
+	$stmt->bind_param("i", $safe_id);
+	$stmt->execute();
+	return $stmt->get_result()->fetch_assoc();
 }
 
 function distribution($code) {
@@ -1325,46 +1336,50 @@ function pegarLinkJogoDrakon($provider_real, $game_id, $user_id, $isMobile)
 function gamecode($id)
 {
 	global $mysqli;
-	$qry = "SELECT game_code FROM games WHERE game_code='" . $id . "'";
-	$res = mysqli_query($mysqli, $qry);
-	$data = mysqli_fetch_assoc($res);
-	return $data['game_code'];
+	$stmt = $mysqli->prepare("SELECT game_code FROM games WHERE game_code = ?");
+	$stmt->bind_param("s", $id);
+	$stmt->execute();
+	$data = $stmt->get_result()->fetch_assoc();
+	return $data['game_code'] ?? null;
 }
 
 function gameprovider($id)
 {
 	global $mysqli;
-	$qry = "SELECT provider FROM games WHERE game_code='" . $id . "'";
-	$res = mysqli_query($mysqli, $qry);
-	$data = mysqli_fetch_assoc($res);
-	return $data['provider'];
+	$stmt = $mysqli->prepare("SELECT provider FROM games WHERE game_code = ?");
+	$stmt->bind_param("s", $id);
+	$stmt->execute();
+	$data = $stmt->get_result()->fetch_assoc();
+	return $data['provider'] ?? null;
 }
 
 function gameapi($id)
 {
 	global $mysqli;
-	$qry = "SELECT api FROM games WHERE game_code='" . $id . "'";
-	$res = mysqli_query($mysqli, $qry);
-	$data = mysqli_fetch_assoc($res);
-	return $data['api'];
+	$stmt = $mysqli->prepare("SELECT api FROM games WHERE game_code = ?");
+	$stmt->bind_param("s", $id);
+	$stmt->execute();
+	$data = $stmt->get_result()->fetch_assoc();
+	return $data['api'] ?? null;
 }
 
 function localizarchavepix($id)
 {
 	global $mysqli;
-	$qry = "SELECT chave, tipo, cpf, realname FROM metodos_pagamentos WHERE chave='" . $id . "'";
-	$res = mysqli_query($mysqli, $qry);
-	$data = mysqli_fetch_assoc($res);
-	return $data;
+	$stmt = $mysqli->prepare("SELECT chave, tipo, cpf, realname FROM metodos_pagamentos WHERE chave = ?");
+	$stmt->bind_param("s", $id);
+	$stmt->execute();
+	return $stmt->get_result()->fetch_assoc();
 }
 
 function localizarchavepix2($id)
 {
 	global $mysqli;
-	$qry = "SELECT chave, tipo, cpf, realname FROM metodos_pagamentos WHERE id='" . $id . "'";
-	$res = mysqli_query($mysqli, $qry);
-	$data = mysqli_fetch_assoc($res);
-	return $data;
+	$safe_id = intval($id);
+	$stmt = $mysqli->prepare("SELECT chave, tipo, cpf, realname FROM metodos_pagamentos WHERE id = ?");
+	$stmt->bind_param("i", $safe_id);
+	$stmt->execute();
+	return $stmt->get_result()->fetch_assoc();
 }
 
 
@@ -1400,9 +1415,10 @@ function localizarpix($id)
 function adicionarsaldo($id, $valor)
 {
 	global $mysqli;
-	$qry = "UPDATE financeiro SET saldo= saldo + '" . $valor . "' WHERE usuario='" . $id . "'";
-	$res = mysqli_query($mysqli, $qry);
-	
+	$stmt = $mysqli->prepare("UPDATE financeiro SET saldo = saldo + ? WHERE usuario = ?");
+	$stmt->bind_param("ds", $valor, $id);
+	$res = $stmt->execute();
+
 	if ($res) {
 		logMessage("Saldo atualizado na tabela financeiro para usuário $id: +$valor");
 		return true;
@@ -1447,13 +1463,14 @@ function insert_payment_adm($id, $email, $valor)
 function numero_total_dep($id)
 {
 	global $mysqli;
-	$qry = "SELECT COUNT(*) as total_count FROM transacoes WHERE usuario IN (SELECT id FROM usuarios WHERE invitation_code = '" . $id . "') AND tipo='deposito' AND status='pago'";
-	$result = mysqli_query($mysqli, $qry);
-	while ($row = mysqli_fetch_assoc($result)) {
+	$stmt = $mysqli->prepare("SELECT COUNT(*) as total_count FROM transacoes WHERE usuario IN (SELECT id FROM usuarios WHERE invitation_code = ?) AND tipo='deposito' AND status='pago'");
+	$stmt->bind_param("s", $id);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$total_count = 0;
+	while ($row = $result->fetch_assoc()) {
 		if ($row['total_count'] > 0) {
 			$total_count = $row['total_count'];
-		} else {
-			$total_count = 0;
 		}
 	}
 	return $total_count;
@@ -1549,15 +1566,15 @@ function busca_id_por_refer($token)
 {
 	global $mysqli;
 
-	$qry = "SELECT * FROM usuarios WHERE token_refer='" . $token . "'";
-	$res = mysqli_query($mysqli, $qry);
-	if (mysqli_num_rows($res) > 0) {
-		$data = mysqli_fetch_assoc($res);
-		$count = $data['id'];
-	} else {
-		$count = 0;
+	$stmt = $mysqli->prepare("SELECT id FROM usuarios WHERE token_refer = ?");
+	$stmt->bind_param("s", $token);
+	$stmt->execute();
+	$res = $stmt->get_result();
+	if ($res->num_rows > 0) {
+		$data = $res->fetch_assoc();
+		return $data['id'];
 	}
-	return $count;
+	return 0;
 }
 #=====================================================#
 function generateQRCode_pix($data)
@@ -1601,9 +1618,12 @@ function generateQRCode_pix($data)
 function busca_dep_pendentes($id)
 {
 	global $mysqli;
-	$qry = "SELECT * FROM transacoes WHERE usuario='" . $id . "' AND tipo='deposito' AND status='processamento'";
-	$res = mysqli_query($mysqli, $qry);
-	if (mysqli_num_rows($res) > 0) {
+	$safe_id = intval($id);
+	$stmt = $mysqli->prepare("SELECT id FROM transacoes WHERE usuario = ? AND tipo='deposito' AND status='processamento'");
+	$stmt->bind_param("i", $safe_id);
+	$stmt->execute();
+	$res = $stmt->get_result();
+	if ($res->num_rows > 0) {
 		$data = 1;
 	} else {
 		$data = 0;
@@ -1928,37 +1948,30 @@ function getCurrentUrl() {
 function adicionarSaldoUsuario($id_user, $valor) {
     global $mysqli;
     
-    // Primeiro, obter o saldo atual do usuário
-    $stmt = $mysqli->prepare("SELECT saldo FROM usuarios WHERE id = ?");
-    if (!$stmt) {
-        logMessage("Erro ao preparar query para obter saldo: " . $mysqli->error);
+    // Verificar se o usuário existe
+    $stmt_chk = $mysqli->prepare("SELECT id FROM usuarios WHERE id = ?");
+    if (!$stmt_chk) {
+        logMessage("Erro ao preparar query para verificar usuário: " . $mysqli->error);
         return false;
     }
-    
-    $stmt->bind_param("i", $id_user);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-    if ($result->num_rows === 0) {
+    $stmt_chk->bind_param("i", $id_user);
+    $stmt_chk->execute();
+    if ($stmt_chk->get_result()->num_rows === 0) {
         logMessage("Usuário não encontrado: $id_user");
         return false;
     }
-    
-    $row = $result->fetch_assoc();
-    $saldo_atual = $row['saldo'];
-    $novo_saldo = $saldo_atual + $valor;
-    
-    // Atualizar o saldo do usuário
-    $stmt = $mysqli->prepare("UPDATE usuarios SET saldo = ? WHERE id = ?");
+
+    // Atualizar o saldo atomicamente para evitar race condition
+    $stmt = $mysqli->prepare("UPDATE usuarios SET saldo = saldo + ? WHERE id = ?");
     if (!$stmt) {
         logMessage("Erro ao preparar query para atualizar saldo: " . $mysqli->error);
         return false;
     }
-    
-    $stmt->bind_param("di", $novo_saldo, $id_user);
-    
+
+    $stmt->bind_param("di", $valor, $id_user);
+
     if ($stmt->execute()) {
-        logMessage("Saldo adicionado com sucesso para usuário $id_user: +$valor (saldo anterior: $saldo_atual, novo saldo: $novo_saldo)");
+        logMessage("Saldo adicionado com sucesso para usuário $id_user: +$valor");
         
         // Registrar no log de adição de saldo (tabela adicao_saldo)
         $data_registro = date('Y-m-d H:i:s');

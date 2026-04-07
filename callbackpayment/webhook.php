@@ -10,10 +10,12 @@ global $mysqli;
 
 function busca_valor_ipn($transacao_id){
     global $mysqli;
-    $qry = "SELECT usuario, valor FROM transacoes WHERE transacao_id='" . $transacao_id . "'";
-    $res = mysqli_query($mysqli, $qry);
-    if (mysqli_num_rows($res) > 0) {
-        $data = mysqli_fetch_assoc($res);
+    $stmt = $mysqli->prepare("SELECT usuario, valor FROM transacoes WHERE transacao_id = ?");
+    $stmt->bind_param("s", $transacao_id);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    if ($res->num_rows > 0) {
+        $data = $res->fetch_assoc();
         $retorna_insert_saldo = adicionarSaldoUsuario($data['usuario'], $data['valor']);
         
         // Processar comissões de afiliação após creditar o saldo

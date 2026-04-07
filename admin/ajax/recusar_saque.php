@@ -35,8 +35,8 @@ if (isset($_POST['att-pay']) && isset($_POST['_csrf']) && isset($_POST['id_pay']
     $data = date('Y-m-d H:i:s');
     #----------------------------------------------#
 
-    // Verifica se o CSRF está vazio
-    if (empty($CSRF)) {
+    // Verifica se o CSRF é válido
+    if (empty($CSRF) || !$csrf->isTokenValid($CSRF)) {
         echo json_encode(['status' => 'error', 'message' => 'Houve um erro ao obter dados. Atualize sua página.']);
         exit;
     }
