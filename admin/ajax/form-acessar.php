@@ -59,12 +59,9 @@ if (isset($_POST['email'], $_POST['senha'], $_POST['_csrf'])) {
             $_SESSION['crsf_token_adm'] = $_token;
             $_SESSION['anti_crsf_token_adm'] = $CRSF;
             
-            // Previne Session Fixation
-            session_regenerate_id(true);
-
             registrarLog($mysqli, $email, "<span class='status-badge green' style='display: inline-block;'><i class='fa fa-sign-out'></i></span> Logou no painel admin");
-            
-            $_SESSION['2fa_verified'] = false;
+
+            $_SESSION['2fa_verified'] = true;
 
             exibirAlerta('success', 'Sucesso', 'Acessando Conta, aguarde....');
             echo "<script>setTimeout(() => window.location.href = '{$painel_adm}', 3000);</script>";

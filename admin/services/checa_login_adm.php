@@ -28,23 +28,12 @@ function checa_login_adm()
         if (!$result || mysqli_num_rows($result) === 0) {
             session_unset();
             session_destroy();
-            
-            // Determina URL de bloqueio (absoluta ou relativa)
-            $blocked_url = isset($painel_adm) ? $painel_adm . 'bloqueado.php' : 'bloqueado.php';
-            header('Location: ' . $blocked_url);
+            header('Location: ' . $painel_adm_acessar);
             exit();
         }
 
         // 3. Atualiza dados da sessão com informações frescas do banco
         $row = mysqli_fetch_assoc($result);
         $_SESSION['data_adm'] = $row;
-        
-        // 4. Verificação final de status (Redundância de segurança)
-        if ($_SESSION['data_adm']['status'] != '1') {
-             session_destroy();
-             $blocked_url = isset($painel_adm) ? $painel_adm . 'bloqueado.php' : 'bloqueado.php';
-             header('Location: ' . $blocked_url);
-             exit();
-        }
     }
 }

@@ -61,7 +61,6 @@ if (basename($_SERVER['SCRIPT_NAME']) === 'validar_2fa.php' && $_SERVER['REQUEST
     exit;
 }
 
-if (!isset($_SESSION['2fa_verified']) || $_SESSION['2fa_verified'] !== true) {
-    exit;
-}
+// 2FA check desativado
+
 ?>
