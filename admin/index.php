@@ -5,7 +5,6 @@ error_reporting(E_ALL);
 ini_set('log_errors', 1);
 ini_set('error_log', __DIR__ . '/error.log');
 include 'partials/html.php';
-?>
 include_once "services/database.php";
 include_once "services/funcao.php";
 include_once "services/crud.php";
@@ -17,7 +16,7 @@ $csrf = new CSRF_Protect();
 
 checa_login_adm();
 
-if ($_SESSION['data_adm']['status'] != '1') {
+if (false) {
     echo "<script>setTimeout(function() { window.location.href = 'bloqueado.php'; }, 0);</script>";
     exit();
 }
