@@ -1,0 +1,11 @@
+/* Sem alterar o fundo global para não apagar o front */
+.is-register-button {}
+.is-register-button-wrapper {}
+.btn-register-front, .front-register-trigger-wrapper, .register-context-front {}
+.btn-register-popup, .popup-register-submit-wrapper, .register-context-popup {}
+.apk-install-hidden {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

@@ -1,0 +1,12 @@
+[2026-02-24 00:03:52] Recebendo dados via POST.
+[2026-02-24 00:03:52] Dados recebidos: Array
+(
+    [user_id] => 728991276
+    [adicionar] => 2222222222
+    [remover] => 0
+)
+
+[2026-02-24 00:03:52] Saldo atual do usuário: 0.50
+[2026-02-24 00:03:53] Log de adição de saldo registrado para o usuário 728991276: 2222222222 em 2026-02-24 00:03:52
+[2026-02-24 00:03:53] Adicionando 2222222222 ao saldo do usuário 728991276. Novo saldo: 2222222222.5
+[2026-02-24 00:03:53] Saldo atualizado com sucesso para o usuário 728991276.

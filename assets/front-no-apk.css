@@ -1,0 +1,34 @@
+/* Hide APK/PWA/install overlays and force-download UI */
+#pwa-compulsory-modal,
+#pwa-re-domain-modal,
+#ios-pwa-guide,
+.facebook-tip-wrap,
+ion-modal[id*="pwa"],
+ion-modal[id*="install"],
+[id*="pwa-compulsory"],
+[id*="install-guide"],
+[class*="install-guide"],
+[class*="download-guide"],
+[class*="facebook-tip"],
+[class*="apk-task"],
+[class*="compulsory"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+a[href$=".apk"],
+a[href*=".apk?"],
+a[href*="apps.apple.com"],
+a[href*="play.google.com"] {
+  display: none !important;
+}
+
+.front-register-trigger-wrapper {
+  /* marker class for front register trigger */
+}
+
+.popup-register-submit-wrapper {
+  /* marker class for popup register submit */
+}

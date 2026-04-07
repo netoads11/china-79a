@@ -1,0 +1,28 @@
+[15-Feb-2026 18:15:20 Europe/Berlin] PHP Warning:  session_start(): open(C:\xampp\tmp\sess_lpnaed2fpcdogoao8varrunmb1, O_RDWR) failed: Permission denied (13) in C:\xampp\cliente33\public\admin\index.php on line 10
+[15-Feb-2026 18:15:20 Europe/Berlin] PHP Warning:  session_start(): Failed to read session data: files (path: C:\xampp\tmp) in C:\xampp\cliente33\public\admin\index.php on line 10
+[15-Feb-2026 14:15:20 America/Sao_Paulo] PHP Warning:  session_start(): open(C:\xampp\tmp\sess_lpnaed2fpcdogoao8varrunmb1, O_RDWR) failed: Permission denied (13) in C:\xampp\cliente33\public\admin\services\CSRF_Protect.php on line 29
+[15-Feb-2026 14:15:20 America/Sao_Paulo] PHP Warning:  session_start(): Failed to read session data: files (path: C:\xampp\tmp) in C:\xampp\cliente33\public\admin\services\CSRF_Protect.php on line 29
+[15-Feb-2026 14:15:20 America/Sao_Paulo] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in C:\xampp\cliente33\public\admin\services\checa_login_adm.php on line 8
+[15-Feb-2026 18:15:20 Europe/Berlin] PHP Warning:  session_start(): open(C:\xampp\tmp\sess_lpnaed2fpcdogoao8varrunmb1, O_RDWR) failed: Permission denied (13) in C:\xampp\cliente33\public\admin\index.php on line 10
+[15-Feb-2026 18:15:20 Europe/Berlin] PHP Warning:  session_start(): Failed to read session data: files (path: C:\xampp\tmp) in C:\xampp\cliente33\public\admin\index.php on line 10
+[15-Feb-2026 17:24:41 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\cliente33\public\admin\index.php on line 512
+[15-Feb-2026 17:24:52 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\cliente33\public\admin\index.php on line 512
+[15-Feb-2026 17:24:52 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\cliente33\public\admin\index.php on line 512
+[15-Feb-2026 17:25:08 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\cliente33\public\admin\index.php on line 512
+[15-Feb-2026 17:25:08 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\cliente33\public\admin\index.php on line 512
+[15-Feb-2026 20:53:32 America/Sao_Paulo] Database connection error: Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente
+[16-Feb-2026 21:02:24 Europe/Berlin] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in C:\xampp\cliente33\public\admin\temas.php on line 7
+[16-Feb-2026 17:02:24 America/Sao_Paulo] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in C:\xampp\cliente33\public\admin\validar_2fa.php on line 3
+[16-Feb-2026 21:03:40 Europe/Berlin] PHP Warning:  session_start(): open(C:\xampp\tmp\sess_mkf642n00qmf2s4vu60rmimmqb, O_RDWR) failed: No such file or directory (2) in C:\xampp\cliente33\public\admin\temas.php on line 6
+[16-Feb-2026 21:03:40 Europe/Berlin] PHP Warning:  session_start(): Failed to read session data: files (path: C:\xampp\tmp) in C:\xampp\cliente33\public\admin\temas.php on line 6
+[16-Feb-2026 17:03:40 America/Sao_Paulo] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in C:\xampp\cliente33\public\admin\validar_2fa.php on line 3
+[20-Feb-2026 15:33:39 America/Sao_Paulo] PHP Fatal error:  Uncaught Error: Call to undefined function admin_t() in C:\xampp\cliente33\public\admin\partials\topbar.php:301
+Stack trace:
+#0 C:\xampp\cliente33\public\admin\index.php(56): include()
+#1 {main}
+  thrown in C:\xampp\cliente33\public\admin\partials\topbar.php on line 301
+[20-Feb-2026 15:33:39 America/Sao_Paulo] PHP Fatal error:  Uncaught Error: Call to undefined function admin_t() in C:\xampp\cliente33\public\admin\partials\topbar.php:301
+Stack trace:
+#0 C:\xampp\cliente33\public\admin\index.php(56): include()
+#1 {main}
+  thrown in C:\xampp\cliente33\public\admin\partials\topbar.php on line 301

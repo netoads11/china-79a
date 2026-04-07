@@ -1,0 +1,1045 @@
+[2026-03-06 19:17:40] [PROD] ----------------------------------------------------------------
+[2026-03-06 19:17:40] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-06 19:17:40] [PROD] API: Usuario ID: 828952916 | Nome: Cliente
+[2026-03-06 19:17:40] [PROD] API: Valor (reais): 10
+[2026-03-06 19:17:40] [PROD] API: payTypeSubListId: 
+[2026-03-06 19:17:40] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-06 19:17:40] [PROD] Iniciando next_sistemas_qrcode. Valor: 10, ID: 828952916, PayTypeSubListId: , JoinBonus: 0
+[2026-03-06 19:17:40] [PROD] Gateways ativos: expfypay
+[2026-03-06 19:17:40] [PROD] Tentando gateway: expfypay
+[2026-03-06 19:17:40] [PROD] criarQrexpfypay: Entrada - Valor: 10, Nome: Cliente, ID: 828952916, Comissao: , AfiliadoID: 
+[2026-03-06 19:17:40] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 76306, Valor: 10, Nome: Cliente
+[2026-03-06 19:17:40] [PROD] [EXPFYPAY] Payload: {"amount":10,"description":"Dep\u00f3sito 76306","customer":{"name":"Cliente","document":"71554187656","email":"asf5_654489498@gmail.com"},"external_id":"76306","callback_url":"https:\/\/subwaysurfersgaming.com\/callbackpayment\/expfypay"}
+[2026-03-06 19:17:40] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"24c5ff5da5e21061656ef86576ddd272","external_id":"76306","qr_code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/0d2af0e3-e5bf-41b5-be2c-1d948de5fdad520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905256a60e6a0ea1c4cf4815e3dda063043B2E","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F0d2af0e3-e5bf-41b5-be2c-1d948de5fdad520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905256a60e6a0ea1c4cf4815e3dda063043B2E","amount":10,"status":"pending","created_at":"2026-03-06T19:17:40-03:00"}}
+[2026-03-06 19:17:40] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"24c5ff5da5e21061656ef86576ddd272","usuario":828952916,"valor":10,"tipo":"deposito","data_registro":"2026-03-06 19:17:40","qrcode":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/0d2af0e3-e5bf-41b5-be2c-1d948de5fdad520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905256a60e6a0ea1c4cf4815e3dda063043B2E","status":"processamento","code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/0d2af0e3-e5bf-41b5-be2c-1d948de5fdad520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905256a60e6a0ea1c4cf4815e3dda063043B2E","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-06 19:17:40] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-06 19:17:40] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-06 19:17:40] [PROD] [EXPFYPAY] Transação inserida com sucesso: 24c5ff5da5e21061656ef86576ddd272
+[2026-03-06 19:17:40] [PROD] Sucesso no gateway: expfypay
+[2026-03-06 19:17:40] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 24c5ff5da5e21061656ef86576ddd272
+    [transaction_id] => 24c5ff5da5e21061656ef86576ddd272
+    [external_id] => 76306
+    [qrcode] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F0d2af0e3-e5bf-41b5-be2c-1d948de5fdad520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905256a60e6a0ea1c4cf4815e3dda063043B2E
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F0d2af0e3-e5bf-41b5-be2c-1d948de5fdad520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905256a60e6a0ea1c4cf4815e3dda063043B2E
+    [amount] => 10
+    [status] => processamento
+    [code] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com/qr/v2/cob/0d2af0e3-e5bf-41b5-be2c-1d948de5fdad520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905256a60e6a0ea1c4cf4815e3dda063043B2E
+)
+
+[06-Mar-2026 19:18:17 -03] [EXPFYPAY WEBHOOK] Recebido: ID=24c5ff5da5e21061656ef86576ddd272, Status=completed, Valor=10
+[2026-03-06 22:53:22] [PROD] ----------------------------------------------------------------
+[2026-03-06 22:53:22] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-06 22:53:22] [PROD] API: Usuario ID: 375902378 | Nome: Cliente
+[2026-03-06 22:53:22] [PROD] API: Valor (reais): 10
+[2026-03-06 22:53:22] [PROD] API: payTypeSubListId: 
+[2026-03-06 22:53:22] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-06 22:53:22] [PROD] Iniciando next_sistemas_qrcode. Valor: 10, ID: 375902378, PayTypeSubListId: , JoinBonus: 0
+[2026-03-06 22:53:22] [PROD] Gateways ativos: expfypay
+[2026-03-06 22:53:22] [PROD] Tentando gateway: expfypay
+[2026-03-06 22:53:22] [PROD] criarQrexpfypay: Entrada - Valor: 10, Nome: Cliente, ID: 375902378, Comissao: , AfiliadoID: 
+[2026-03-06 22:53:22] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 27428, Valor: 10, Nome: Cliente
+[2026-03-06 22:53:22] [PROD] [EXPFYPAY] Payload: {"amount":10,"description":"Dep\u00f3sito 27428","customer":{"name":"Cliente","document":"02304251609","email":"asd4_6549498@gmail.com"},"external_id":"27428","callback_url":"https:\/\/79a1.com\/callbackpayment\/expfypay"}
+[2026-03-06 22:53:23] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"17b68ccbfcfd5803748d6a1eedfa98a9","external_id":"27428","qr_code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/cab6cbaa-ab17-46b1-a7c2-e59623bf3585520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525cb58e2579ee14a8d9096995a36304AB27","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2Fcab6cbaa-ab17-46b1-a7c2-e59623bf3585520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525cb58e2579ee14a8d9096995a36304AB27","amount":10,"status":"pending","created_at":"2026-03-06T22:53:23-03:00"}}
+[2026-03-06 22:53:23] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"17b68ccbfcfd5803748d6a1eedfa98a9","usuario":375902378,"valor":10,"tipo":"deposito","data_registro":"2026-03-06 22:53:23","qrcode":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/cab6cbaa-ab17-46b1-a7c2-e59623bf3585520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525cb58e2579ee14a8d9096995a36304AB27","status":"processamento","code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/cab6cbaa-ab17-46b1-a7c2-e59623bf3585520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525cb58e2579ee14a8d9096995a36304AB27","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-06 22:53:23] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-06 22:53:23] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-06 22:53:23] [PROD] [EXPFYPAY] Transação inserida com sucesso: 17b68ccbfcfd5803748d6a1eedfa98a9
+[2026-03-06 22:53:23] [PROD] Sucesso no gateway: expfypay
+[2026-03-06 22:53:23] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 17b68ccbfcfd5803748d6a1eedfa98a9
+    [transaction_id] => 17b68ccbfcfd5803748d6a1eedfa98a9
+    [external_id] => 27428
+    [qrcode] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2Fcab6cbaa-ab17-46b1-a7c2-e59623bf3585520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525cb58e2579ee14a8d9096995a36304AB27
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2Fcab6cbaa-ab17-46b1-a7c2-e59623bf3585520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525cb58e2579ee14a8d9096995a36304AB27
+    [amount] => 10
+    [status] => processamento
+    [code] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com/qr/v2/cob/cab6cbaa-ab17-46b1-a7c2-e59623bf3585520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525cb58e2579ee14a8d9096995a36304AB27
+)
+
+[06-Mar-2026 22:54:13 -03] [EXPFYPAY WEBHOOK] Recebido: ID=17b68ccbfcfd5803748d6a1eedfa98a9, Status=completed, Valor=10
+[2026-03-07 00:31:45] [PROD] ----------------------------------------------------------------
+[2026-03-07 00:31:45] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-07 00:31:45] [PROD] API: Usuario ID: 927412990 | Nome: Cliente
+[2026-03-07 00:31:45] [PROD] API: Valor (reais): 10
+[2026-03-07 00:31:45] [PROD] API: payTypeSubListId: 
+[2026-03-07 00:31:45] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-07 00:31:45] [PROD] Iniciando next_sistemas_qrcode. Valor: 10, ID: 927412990, PayTypeSubListId: , JoinBonus: 0
+[2026-03-07 00:31:45] [PROD] Gateways ativos: expfypay
+[2026-03-07 00:31:45] [PROD] Tentando gateway: expfypay
+[2026-03-07 00:31:45] [PROD] criarQrexpfypay: Entrada - Valor: 10, Nome: Cliente, ID: 927412990, Comissao: , AfiliadoID: 
+[2026-03-07 00:31:45] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 22131, Valor: 10, Nome: Cliente
+[2026-03-07 00:31:45] [PROD] [EXPFYPAY] Payload: {"amount":10,"description":"Dep\u00f3sito 22131","customer":{"name":"Cliente","document":"11705888321","email":"asd458_78@bol.com"},"external_id":"22131","callback_url":"https:\/\/79a1.com\/callbackpayment\/expfypay"}
+[2026-03-07 00:31:47] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"55016464e1d15da63aab89a1f1438675","external_id":"22131","qr_code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/5ffcebad-51e6-4712-8f70-c31488b84d8e5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304B01F","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F5ffcebad-51e6-4712-8f70-c31488b84d8e5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304B01F","amount":10,"status":"pending","created_at":"2026-03-07T00:31:47-03:00"}}
+[2026-03-07 00:31:47] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"55016464e1d15da63aab89a1f1438675","usuario":927412990,"valor":10,"tipo":"deposito","data_registro":"2026-03-07 00:31:47","qrcode":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/5ffcebad-51e6-4712-8f70-c31488b84d8e5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304B01F","status":"processamento","code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/5ffcebad-51e6-4712-8f70-c31488b84d8e5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304B01F","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-07 00:31:47] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-07 00:31:47] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-07 00:31:47] [PROD] [EXPFYPAY] Transação inserida com sucesso: 55016464e1d15da63aab89a1f1438675
+[2026-03-07 00:31:47] [PROD] Sucesso no gateway: expfypay
+[2026-03-07 00:31:47] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 55016464e1d15da63aab89a1f1438675
+    [transaction_id] => 55016464e1d15da63aab89a1f1438675
+    [external_id] => 22131
+    [qrcode] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F5ffcebad-51e6-4712-8f70-c31488b84d8e5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304B01F
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F5ffcebad-51e6-4712-8f70-c31488b84d8e5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304B01F
+    [amount] => 10
+    [status] => processamento
+    [code] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br/qr/v3/at/5ffcebad-51e6-4712-8f70-c31488b84d8e5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304B01F
+)
+
+[07-Mar-2026 00:32:29 -03] [EXPFYPAY WEBHOOK] Recebido: ID=55016464e1d15da63aab89a1f1438675, Status=completed, Valor=10
+[2026-03-07 00:33:11] [PROD] ----------------------------------------------------------------
+[2026-03-07 00:33:11] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-07 00:33:11] [PROD] API: Usuario ID: 927412990 | Nome: Cliente
+[2026-03-07 00:33:11] [PROD] API: Valor (reais): 10
+[2026-03-07 00:33:11] [PROD] API: payTypeSubListId: 
+[2026-03-07 00:33:11] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-07 00:33:11] [PROD] Iniciando next_sistemas_qrcode. Valor: 10, ID: 927412990, PayTypeSubListId: , JoinBonus: 0
+[2026-03-07 00:33:11] [PROD] Gateways ativos: expfypay
+[2026-03-07 00:33:11] [PROD] Tentando gateway: expfypay
+[2026-03-07 00:33:11] [PROD] criarQrexpfypay: Entrada - Valor: 10, Nome: Cliente, ID: 927412990, Comissao: , AfiliadoID: 
+[2026-03-07 00:33:11] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 18734, Valor: 10, Nome: Cliente
+[2026-03-07 00:33:11] [PROD] [EXPFYPAY] Payload: {"amount":10,"description":"Dep\u00f3sito 18734","customer":{"name":"Cliente","document":"70191387487","email":"asd4_659749498@gmail.com"},"external_id":"18734","callback_url":"https:\/\/79a1.com\/callbackpayment\/expfypay"}
+[2026-03-07 00:33:13] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"76868d9892caaa1ee97790b4a422d936","external_id":"18734","qr_code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/6f3aa167-8461-4946-bf0f-1dac0ff9d5375204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63046780","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F6f3aa167-8461-4946-bf0f-1dac0ff9d5375204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A63046780","amount":10,"status":"pending","created_at":"2026-03-07T00:33:13-03:00"}}
+[2026-03-07 00:33:13] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"76868d9892caaa1ee97790b4a422d936","usuario":927412990,"valor":10,"tipo":"deposito","data_registro":"2026-03-07 00:33:13","qrcode":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/6f3aa167-8461-4946-bf0f-1dac0ff9d5375204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63046780","status":"processamento","code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/6f3aa167-8461-4946-bf0f-1dac0ff9d5375204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63046780","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-07 00:33:13] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-07 00:33:13] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-07 00:33:13] [PROD] [EXPFYPAY] Transação inserida com sucesso: 76868d9892caaa1ee97790b4a422d936
+[2026-03-07 00:33:13] [PROD] Sucesso no gateway: expfypay
+[2026-03-07 00:33:13] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 76868d9892caaa1ee97790b4a422d936
+    [transaction_id] => 76868d9892caaa1ee97790b4a422d936
+    [external_id] => 18734
+    [qrcode] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F6f3aa167-8461-4946-bf0f-1dac0ff9d5375204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A63046780
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F6f3aa167-8461-4946-bf0f-1dac0ff9d5375204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A63046780
+    [amount] => 10
+    [status] => processamento
+    [code] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br/qr/v3/at/6f3aa167-8461-4946-bf0f-1dac0ff9d5375204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63046780
+)
+
+[2026-03-12 20:28:59] [PROD] ----------------------------------------------------------------
+[2026-03-12 20:28:59] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-12 20:28:59] [PROD] API: Usuario ID: 523533996 | Nome: Cliente
+[2026-03-12 20:28:59] [PROD] API: Valor (reais): 10
+[2026-03-12 20:28:59] [PROD] API: payTypeSubListId: 
+[2026-03-12 20:28:59] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-12 20:28:59] [PROD] Iniciando next_sistemas_qrcode. Valor: 10, ID: 523533996, PayTypeSubListId: , JoinBonus: 0
+[2026-03-12 20:28:59] [PROD] Gateways ativos: expfypay
+[2026-03-12 20:28:59] [PROD] Tentando gateway: expfypay
+[2026-03-12 20:28:59] [PROD] criarQrexpfypay: Entrada - Valor: 10, Nome: Cliente, ID: 523533996, Comissao: , AfiliadoID: 
+[2026-03-12 20:28:59] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 75288, Valor: 10, Nome: Cliente
+[2026-03-12 20:28:59] [PROD] [EXPFYPAY] Payload: {"amount":10,"description":"Dep\u00f3sito 75288","customer":{"name":"Cliente","document":"80111926980","email":"asd4_659749498@gmail.com"},"external_id":"75288","callback_url":"https:\/\/kplus.asia\/callbackpayment\/expfypay"}
+[2026-03-12 20:29:01] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"6d6b1e8b4ca28840c15fa7b572774706","external_id":"75288","qr_code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/06bc3be9-c77a-450c-9bac-f5911dbcc31d5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304C3BF","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F06bc3be9-c77a-450c-9bac-f5911dbcc31d5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304C3BF","amount":10,"status":"pending","created_at":"2026-03-12T20:29:01-03:00"}}
+[2026-03-12 20:29:01] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"6d6b1e8b4ca28840c15fa7b572774706","usuario":523533996,"valor":10,"tipo":"deposito","data_registro":"2026-03-12 20:29:01","qrcode":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/06bc3be9-c77a-450c-9bac-f5911dbcc31d5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304C3BF","status":"processamento","code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/06bc3be9-c77a-450c-9bac-f5911dbcc31d5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304C3BF","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-12 20:29:01] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-12 20:29:01] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-12 20:29:01] [PROD] [EXPFYPAY] Transação inserida com sucesso: 6d6b1e8b4ca28840c15fa7b572774706
+[2026-03-12 20:29:01] [PROD] Sucesso no gateway: expfypay
+[2026-03-12 20:29:01] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 6d6b1e8b4ca28840c15fa7b572774706
+    [transaction_id] => 6d6b1e8b4ca28840c15fa7b572774706
+    [external_id] => 75288
+    [qrcode] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F06bc3be9-c77a-450c-9bac-f5911dbcc31d5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304C3BF
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F06bc3be9-c77a-450c-9bac-f5911dbcc31d5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304C3BF
+    [amount] => 10
+    [status] => processamento
+    [code] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br/qr/v3/at/06bc3be9-c77a-450c-9bac-f5911dbcc31d5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304C3BF
+)
+
+[2026-03-13 19:50:19] [PROD] ----------------------------------------------------------------
+[2026-03-13 19:50:19] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-13 19:50:19] [PROD] API: Usuario ID: 447219193 | Nome: Cliente
+[2026-03-13 19:50:19] [PROD] API: Valor (reais): 20
+[2026-03-13 19:50:19] [PROD] API: payTypeSubListId: 
+[2026-03-13 19:50:19] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-13 19:50:19] [PROD] Iniciando next_sistemas_qrcode. Valor: 20, ID: 447219193, PayTypeSubListId: , JoinBonus: 0
+[2026-03-13 19:50:19] [PROD] Gateways ativos: expfypay
+[2026-03-13 19:50:19] [PROD] Tentando gateway: expfypay
+[2026-03-13 19:50:19] [PROD] criarQrexpfypay: Entrada - Valor: 20, Nome: Cliente, ID: 447219193, Comissao: , AfiliadoID: 
+[2026-03-13 19:50:19] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 22572, Valor: 20, Nome: Cliente
+[2026-03-13 19:50:19] [PROD] [EXPFYPAY] Payload: {"amount":20,"description":"Dep\u00f3sito 22572","customer":{"name":"Cliente","document":"58679919039","email":"ab11_2589@gmail.com"},"external_id":"22572","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-13 19:50:21] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"dbaef3f5d5c96bf4715cc73978107248","external_id":"22572","qr_code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/99ed3fcf-e822-44d4-a1d5-b4ea4f7aac475204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***630454E1","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F99ed3fcf-e822-44d4-a1d5-b4ea4f7aac475204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A630454E1","amount":20,"status":"pending","created_at":"2026-03-13T19:50:21-03:00"}}
+[2026-03-13 19:50:21] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"dbaef3f5d5c96bf4715cc73978107248","usuario":447219193,"valor":20,"tipo":"deposito","data_registro":"2026-03-13 19:50:21","qrcode":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/99ed3fcf-e822-44d4-a1d5-b4ea4f7aac475204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***630454E1","status":"processamento","code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/99ed3fcf-e822-44d4-a1d5-b4ea4f7aac475204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***630454E1","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-13 19:50:21] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-13 19:50:21] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-13 19:50:21] [PROD] [EXPFYPAY] Transação inserida com sucesso: dbaef3f5d5c96bf4715cc73978107248
+[2026-03-13 19:50:21] [PROD] Sucesso no gateway: expfypay
+[2026-03-13 19:50:21] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => dbaef3f5d5c96bf4715cc73978107248
+    [transaction_id] => dbaef3f5d5c96bf4715cc73978107248
+    [external_id] => 22572
+    [qrcode] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F99ed3fcf-e822-44d4-a1d5-b4ea4f7aac475204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A630454E1
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F99ed3fcf-e822-44d4-a1d5-b4ea4f7aac475204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A630454E1
+    [amount] => 20
+    [status] => processamento
+    [code] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br/qr/v3/at/99ed3fcf-e822-44d4-a1d5-b4ea4f7aac475204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***630454E1
+)
+
+[2026-03-13 19:51:36] [PROD] ----------------------------------------------------------------
+[2026-03-13 19:51:36] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-13 19:51:36] [PROD] API: Usuario ID: 447219193 | Nome: Cliente
+[2026-03-13 19:51:36] [PROD] API: Valor (reais): 20
+[2026-03-13 19:51:36] [PROD] API: payTypeSubListId: 
+[2026-03-13 19:51:36] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-13 19:51:36] [PROD] Iniciando next_sistemas_qrcode. Valor: 20, ID: 447219193, PayTypeSubListId: , JoinBonus: 0
+[2026-03-13 19:51:36] [PROD] Gateways ativos: expfypay
+[2026-03-13 19:51:36] [PROD] Tentando gateway: expfypay
+[2026-03-13 19:51:36] [PROD] criarQrexpfypay: Entrada - Valor: 20, Nome: Cliente, ID: 447219193, Comissao: , AfiliadoID: 
+[2026-03-13 19:51:36] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 11291, Valor: 20, Nome: Cliente
+[2026-03-13 19:51:36] [PROD] [EXPFYPAY] Payload: {"amount":20,"description":"Dep\u00f3sito 11291","customer":{"name":"Cliente","document":"39434485177","email":"ab11_2589@gmail.com"},"external_id":"11291","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-13 19:51:38] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"465fe8f614c03e94929eb1987209613d","external_id":"11291","qr_code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/2546240d-6a64-444a-b857-d83c1ad9c5965204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63046DEC","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F2546240d-6a64-444a-b857-d83c1ad9c5965204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A63046DEC","amount":20,"status":"pending","created_at":"2026-03-13T19:51:38-03:00"}}
+[2026-03-13 19:51:38] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"465fe8f614c03e94929eb1987209613d","usuario":447219193,"valor":20,"tipo":"deposito","data_registro":"2026-03-13 19:51:38","qrcode":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/2546240d-6a64-444a-b857-d83c1ad9c5965204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63046DEC","status":"processamento","code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/2546240d-6a64-444a-b857-d83c1ad9c5965204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63046DEC","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-13 19:51:38] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-13 19:51:38] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-13 19:51:38] [PROD] [EXPFYPAY] Transação inserida com sucesso: 465fe8f614c03e94929eb1987209613d
+[2026-03-13 19:51:38] [PROD] Sucesso no gateway: expfypay
+[2026-03-13 19:51:38] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 465fe8f614c03e94929eb1987209613d
+    [transaction_id] => 465fe8f614c03e94929eb1987209613d
+    [external_id] => 11291
+    [qrcode] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F2546240d-6a64-444a-b857-d83c1ad9c5965204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A63046DEC
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F2546240d-6a64-444a-b857-d83c1ad9c5965204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A63046DEC
+    [amount] => 20
+    [status] => processamento
+    [code] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br/qr/v3/at/2546240d-6a64-444a-b857-d83c1ad9c5965204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63046DEC
+)
+
+[13-Mar-2026 19:52:17 -03] [EXPFYPAY WEBHOOK] Recebido: ID=465fe8f614c03e94929eb1987209613d, Status=completed, Valor=20
+[2026-03-13 22:26:16] [PROD] ----------------------------------------------------------------
+[2026-03-13 22:26:16] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-13 22:26:16] [PROD] API: Usuario ID: 450102026 | Nome: Cliente
+[2026-03-13 22:26:16] [PROD] API: Valor (reais): 10
+[2026-03-13 22:26:16] [PROD] API: payTypeSubListId: 
+[2026-03-13 22:26:16] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-13 22:26:16] [PROD] Iniciando next_sistemas_qrcode. Valor: 10, ID: 450102026, PayTypeSubListId: , JoinBonus: 0
+[2026-03-13 22:26:16] [PROD] Gateways ativos: expfypay
+[2026-03-13 22:26:16] [PROD] Tentando gateway: expfypay
+[2026-03-13 22:26:16] [PROD] criarQrexpfypay: Entrada - Valor: 10, Nome: Cliente, ID: 450102026, Comissao: , AfiliadoID: 
+[2026-03-13 22:26:16] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 52632, Valor: 10, Nome: Cliente
+[2026-03-13 22:26:16] [PROD] [EXPFYPAY] Payload: {"amount":10,"description":"Dep\u00f3sito 52632","customer":{"name":"Cliente","document":"02939095043","email":"asd4_6549498@gmail.com"},"external_id":"52632","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-13 22:26:18] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"59ec1e821e4df2d8a8dc65f3fb832b19","external_id":"52632","qr_code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/f71717e2-e27e-4f3e-8930-268d9d5b7f1a5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304B852","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Ff71717e2-e27e-4f3e-8930-268d9d5b7f1a5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304B852","amount":10,"status":"pending","created_at":"2026-03-13T22:26:18-03:00"}}
+[2026-03-13 22:26:18] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"59ec1e821e4df2d8a8dc65f3fb832b19","usuario":450102026,"valor":10,"tipo":"deposito","data_registro":"2026-03-13 22:26:18","qrcode":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/f71717e2-e27e-4f3e-8930-268d9d5b7f1a5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304B852","status":"processamento","code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/f71717e2-e27e-4f3e-8930-268d9d5b7f1a5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304B852","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-13 22:26:18] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-13 22:26:18] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-13 22:26:18] [PROD] [EXPFYPAY] Transação inserida com sucesso: 59ec1e821e4df2d8a8dc65f3fb832b19
+[2026-03-13 22:26:18] [PROD] Sucesso no gateway: expfypay
+[2026-03-13 22:26:18] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 59ec1e821e4df2d8a8dc65f3fb832b19
+    [transaction_id] => 59ec1e821e4df2d8a8dc65f3fb832b19
+    [external_id] => 52632
+    [qrcode] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Ff71717e2-e27e-4f3e-8930-268d9d5b7f1a5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304B852
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Ff71717e2-e27e-4f3e-8930-268d9d5b7f1a5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304B852
+    [amount] => 10
+    [status] => processamento
+    [code] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br/qr/v3/at/f71717e2-e27e-4f3e-8930-268d9d5b7f1a5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304B852
+)
+
+[13-Mar-2026 22:27:27 -03] [EXPFYPAY WEBHOOK] Recebido: ID=59ec1e821e4df2d8a8dc65f3fb832b19, Status=completed, Valor=10
+[2026-03-13 22:41:42] [PROD] ----------------------------------------------------------------
+[2026-03-13 22:41:42] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-13 22:41:42] [PROD] API: Usuario ID: 692173020 | Nome: Cliente
+[2026-03-13 22:41:42] [PROD] API: Valor (reais): 10
+[2026-03-13 22:41:42] [PROD] API: payTypeSubListId: 
+[2026-03-13 22:41:42] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-13 22:41:42] [PROD] Iniciando next_sistemas_qrcode. Valor: 10, ID: 692173020, PayTypeSubListId: , JoinBonus: 0
+[2026-03-13 22:41:42] [PROD] Gateways ativos: expfypay
+[2026-03-13 22:41:42] [PROD] Tentando gateway: expfypay
+[2026-03-13 22:41:42] [PROD] criarQrexpfypay: Entrada - Valor: 10, Nome: Cliente, ID: 692173020, Comissao: , AfiliadoID: 
+[2026-03-13 22:41:42] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 85122, Valor: 10, Nome: Cliente
+[2026-03-13 22:41:42] [PROD] [EXPFYPAY] Payload: {"amount":10,"description":"Dep\u00f3sito 85122","customer":{"name":"Cliente","document":"15506143630","email":"asf5_654489498@gmail.com"},"external_id":"85122","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-13 22:41:44] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"19efb6c4ff89d0e7d9ec7db5c419a02a","external_id":"85122","qr_code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/0c692e45-1377-4dc9-98ee-37447d38d47e5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63049240","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F0c692e45-1377-4dc9-98ee-37447d38d47e5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A63049240","amount":10,"status":"pending","created_at":"2026-03-13T22:41:44-03:00"}}
+[2026-03-13 22:41:44] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"19efb6c4ff89d0e7d9ec7db5c419a02a","usuario":692173020,"valor":10,"tipo":"deposito","data_registro":"2026-03-13 22:41:44","qrcode":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/0c692e45-1377-4dc9-98ee-37447d38d47e5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63049240","status":"processamento","code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/0c692e45-1377-4dc9-98ee-37447d38d47e5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63049240","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-13 22:41:44] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-13 22:41:44] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-13 22:41:44] [PROD] [EXPFYPAY] Transação inserida com sucesso: 19efb6c4ff89d0e7d9ec7db5c419a02a
+[2026-03-13 22:41:44] [PROD] Sucesso no gateway: expfypay
+[2026-03-13 22:41:44] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 19efb6c4ff89d0e7d9ec7db5c419a02a
+    [transaction_id] => 19efb6c4ff89d0e7d9ec7db5c419a02a
+    [external_id] => 85122
+    [qrcode] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F0c692e45-1377-4dc9-98ee-37447d38d47e5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A63049240
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F0c692e45-1377-4dc9-98ee-37447d38d47e5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A63049240
+    [amount] => 10
+    [status] => processamento
+    [code] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br/qr/v3/at/0c692e45-1377-4dc9-98ee-37447d38d47e5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63049240
+)
+
+[13-Mar-2026 22:42:10 -03] [EXPFYPAY WEBHOOK] Recebido: ID=19efb6c4ff89d0e7d9ec7db5c419a02a, Status=completed, Valor=10
+[2026-03-14 01:01:50] [PROD] ----------------------------------------------------------------
+[2026-03-14 01:01:50] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-14 01:01:50] [PROD] API: Usuario ID: 603132917 | Nome: Cliente
+[2026-03-14 01:01:50] [PROD] API: Valor (reais): 15
+[2026-03-14 01:01:50] [PROD] API: payTypeSubListId: 
+[2026-03-14 01:01:50] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-14 01:01:50] [PROD] Iniciando next_sistemas_qrcode. Valor: 15, ID: 603132917, PayTypeSubListId: , JoinBonus: 0
+[2026-03-14 01:01:50] [PROD] Gateways ativos: expfypay
+[2026-03-14 01:01:50] [PROD] Tentando gateway: expfypay
+[2026-03-14 01:01:50] [PROD] criarQrexpfypay: Entrada - Valor: 15, Nome: Cliente, ID: 603132917, Comissao: , AfiliadoID: 
+[2026-03-14 01:01:50] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 17863, Valor: 15, Nome: Cliente
+[2026-03-14 01:01:50] [PROD] [EXPFYPAY] Payload: {"amount":15,"description":"Dep\u00f3sito 17863","customer":{"name":"Cliente","document":"52854334523","email":"asd4_yasmin@gmail.com"},"external_id":"17863","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-14 01:01:52] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"c1a5ffcd3dd69380fda42c07c24681f9","external_id":"17863","qr_code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/af85822e-0088-49a6-93cb-269d00f198735204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63045CC3","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Faf85822e-0088-49a6-93cb-269d00f198735204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A63045CC3","amount":15,"status":"pending","created_at":"2026-03-14T01:01:52-03:00"}}
+[2026-03-14 01:01:52] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"c1a5ffcd3dd69380fda42c07c24681f9","usuario":603132917,"valor":15,"tipo":"deposito","data_registro":"2026-03-14 01:01:52","qrcode":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/af85822e-0088-49a6-93cb-269d00f198735204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63045CC3","status":"processamento","code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/af85822e-0088-49a6-93cb-269d00f198735204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63045CC3","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-14 01:01:52] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-14 01:01:52] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-14 01:01:52] [PROD] [EXPFYPAY] Transação inserida com sucesso: c1a5ffcd3dd69380fda42c07c24681f9
+[2026-03-14 01:01:52] [PROD] Sucesso no gateway: expfypay
+[2026-03-14 01:01:52] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => c1a5ffcd3dd69380fda42c07c24681f9
+    [transaction_id] => c1a5ffcd3dd69380fda42c07c24681f9
+    [external_id] => 17863
+    [qrcode] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Faf85822e-0088-49a6-93cb-269d00f198735204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A63045CC3
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Faf85822e-0088-49a6-93cb-269d00f198735204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A63045CC3
+    [amount] => 15
+    [status] => processamento
+    [code] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br/qr/v3/at/af85822e-0088-49a6-93cb-269d00f198735204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63045CC3
+)
+
+[14-Mar-2026 01:03:29 -03] [EXPFYPAY WEBHOOK] Recebido: ID=c1a5ffcd3dd69380fda42c07c24681f9, Status=completed, Valor=15
+[2026-03-14 01:11:06] [PROD] ----------------------------------------------------------------
+[2026-03-14 01:11:06] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-14 01:11:06] [PROD] API: Usuario ID: 603132917 | Nome: Cliente
+[2026-03-14 01:11:06] [PROD] API: Valor (reais): 25
+[2026-03-14 01:11:06] [PROD] API: payTypeSubListId: 
+[2026-03-14 01:11:06] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-14 01:11:06] [PROD] Iniciando next_sistemas_qrcode. Valor: 25, ID: 603132917, PayTypeSubListId: , JoinBonus: 0
+[2026-03-14 01:11:06] [PROD] Gateways ativos: expfypay
+[2026-03-14 01:11:06] [PROD] Tentando gateway: expfypay
+[2026-03-14 01:11:06] [PROD] criarQrexpfypay: Entrada - Valor: 25, Nome: Cliente, ID: 603132917, Comissao: , AfiliadoID: 
+[2026-03-14 01:11:06] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 98254, Valor: 25, Nome: Cliente
+[2026-03-14 01:11:06] [PROD] [EXPFYPAY] Payload: {"amount":25,"description":"Dep\u00f3sito 98254","customer":{"name":"Cliente","document":"51524876321","email":"asd458_78@bol.com"},"external_id":"98254","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-14 01:11:08] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"490d0b1b2915caa23b1e4472ad35fa08","external_id":"98254","qr_code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/5462d2a2-823f-4be6-a1ff-df8840be74185204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63045FCC","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F5462d2a2-823f-4be6-a1ff-df8840be74185204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A63045FCC","amount":25,"status":"pending","created_at":"2026-03-14T01:11:08-03:00"}}
+[2026-03-14 01:11:08] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"490d0b1b2915caa23b1e4472ad35fa08","usuario":603132917,"valor":25,"tipo":"deposito","data_registro":"2026-03-14 01:11:08","qrcode":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/5462d2a2-823f-4be6-a1ff-df8840be74185204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63045FCC","status":"processamento","code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/5462d2a2-823f-4be6-a1ff-df8840be74185204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63045FCC","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-14 01:11:08] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-14 01:11:08] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-14 01:11:08] [PROD] [EXPFYPAY] Transação inserida com sucesso: 490d0b1b2915caa23b1e4472ad35fa08
+[2026-03-14 01:11:08] [PROD] Sucesso no gateway: expfypay
+[2026-03-14 01:11:08] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 490d0b1b2915caa23b1e4472ad35fa08
+    [transaction_id] => 490d0b1b2915caa23b1e4472ad35fa08
+    [external_id] => 98254
+    [qrcode] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F5462d2a2-823f-4be6-a1ff-df8840be74185204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A63045FCC
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F5462d2a2-823f-4be6-a1ff-df8840be74185204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A63045FCC
+    [amount] => 25
+    [status] => processamento
+    [code] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br/qr/v3/at/5462d2a2-823f-4be6-a1ff-df8840be74185204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63045FCC
+)
+
+[2026-03-14 01:11:17] [PROD] ----------------------------------------------------------------
+[2026-03-14 01:11:17] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-14 01:11:17] [PROD] API: Usuario ID: 603132917 | Nome: Cliente
+[2026-03-14 01:11:17] [PROD] API: Valor (reais): 35
+[2026-03-14 01:11:17] [PROD] API: payTypeSubListId: 
+[2026-03-14 01:11:17] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-14 01:11:17] [PROD] Iniciando next_sistemas_qrcode. Valor: 35, ID: 603132917, PayTypeSubListId: , JoinBonus: 0
+[2026-03-14 01:11:17] [PROD] Gateways ativos: expfypay
+[2026-03-14 01:11:17] [PROD] Tentando gateway: expfypay
+[2026-03-14 01:11:17] [PROD] criarQrexpfypay: Entrada - Valor: 35, Nome: Cliente, ID: 603132917, Comissao: , AfiliadoID: 
+[2026-03-14 01:11:17] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 28782, Valor: 35, Nome: Cliente
+[2026-03-14 01:11:17] [PROD] [EXPFYPAY] Payload: {"amount":35,"description":"Dep\u00f3sito 28782","customer":{"name":"Cliente","document":"44859593928","email":"asd4_yasmin@gmail.com"},"external_id":"28782","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-14 01:11:19] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"a0b11fefaa52520f165fea254d39f995","external_id":"28782","qr_code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/c294e931-703f-4e41-8f12-57c3f74514425204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63040CB1","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Fc294e931-703f-4e41-8f12-57c3f74514425204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A63040CB1","amount":35,"status":"pending","created_at":"2026-03-14T01:11:19-03:00"}}
+[2026-03-14 01:11:19] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"a0b11fefaa52520f165fea254d39f995","usuario":603132917,"valor":35,"tipo":"deposito","data_registro":"2026-03-14 01:11:19","qrcode":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/c294e931-703f-4e41-8f12-57c3f74514425204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63040CB1","status":"processamento","code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/c294e931-703f-4e41-8f12-57c3f74514425204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63040CB1","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-14 01:11:19] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-14 01:11:19] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-14 01:11:19] [PROD] [EXPFYPAY] Transação inserida com sucesso: a0b11fefaa52520f165fea254d39f995
+[2026-03-14 01:11:19] [PROD] Sucesso no gateway: expfypay
+[2026-03-14 01:11:19] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => a0b11fefaa52520f165fea254d39f995
+    [transaction_id] => a0b11fefaa52520f165fea254d39f995
+    [external_id] => 28782
+    [qrcode] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Fc294e931-703f-4e41-8f12-57c3f74514425204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A63040CB1
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Fc294e931-703f-4e41-8f12-57c3f74514425204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A63040CB1
+    [amount] => 35
+    [status] => processamento
+    [code] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br/qr/v3/at/c294e931-703f-4e41-8f12-57c3f74514425204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63040CB1
+)
+
+[2026-03-14 11:56:36] [PROD] ----------------------------------------------------------------
+[2026-03-14 11:56:36] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-14 11:56:36] [PROD] API: Usuario ID: 294690365 | Nome: Cliente
+[2026-03-14 11:56:36] [PROD] API: Valor (reais): 15
+[2026-03-14 11:56:36] [PROD] API: payTypeSubListId: 
+[2026-03-14 11:56:36] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-14 11:56:36] [PROD] Iniciando next_sistemas_qrcode. Valor: 15, ID: 294690365, PayTypeSubListId: , JoinBonus: 0
+[2026-03-14 11:56:36] [PROD] Gateways ativos: expfypay
+[2026-03-14 11:56:36] [PROD] Tentando gateway: expfypay
+[2026-03-14 11:56:36] [PROD] criarQrexpfypay: Entrada - Valor: 15, Nome: Cliente, ID: 294690365, Comissao: , AfiliadoID: 
+[2026-03-14 11:56:36] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 24857, Valor: 15, Nome: Cliente
+[2026-03-14 11:56:36] [PROD] [EXPFYPAY] Payload: {"amount":15,"description":"Dep\u00f3sito 24857","customer":{"name":"Cliente","document":"16851291029","email":"asd458_78@bol.com"},"external_id":"24857","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-14 11:56:36] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"de34c8354a611bf80009d85d78711947","external_id":"24857","qr_code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/5f5b842c-c3d6-4b6f-822a-39fc71488db1520400005303986540515.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052590ae7ad4179a46068b065c8a46304AF53","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F5f5b842c-c3d6-4b6f-822a-39fc71488db1520400005303986540515.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052590ae7ad4179a46068b065c8a46304AF53","amount":15,"status":"pending","created_at":"2026-03-14T11:56:36-03:00"}}
+[2026-03-14 11:56:36] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"de34c8354a611bf80009d85d78711947","usuario":294690365,"valor":15,"tipo":"deposito","data_registro":"2026-03-14 11:56:36","qrcode":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/5f5b842c-c3d6-4b6f-822a-39fc71488db1520400005303986540515.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052590ae7ad4179a46068b065c8a46304AF53","status":"processamento","code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/5f5b842c-c3d6-4b6f-822a-39fc71488db1520400005303986540515.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052590ae7ad4179a46068b065c8a46304AF53","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-14 11:56:36] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-14 11:56:36] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-14 11:56:36] [PROD] [EXPFYPAY] Transação inserida com sucesso: de34c8354a611bf80009d85d78711947
+[2026-03-14 11:56:36] [PROD] Sucesso no gateway: expfypay
+[2026-03-14 11:56:36] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => de34c8354a611bf80009d85d78711947
+    [transaction_id] => de34c8354a611bf80009d85d78711947
+    [external_id] => 24857
+    [qrcode] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F5f5b842c-c3d6-4b6f-822a-39fc71488db1520400005303986540515.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052590ae7ad4179a46068b065c8a46304AF53
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F5f5b842c-c3d6-4b6f-822a-39fc71488db1520400005303986540515.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052590ae7ad4179a46068b065c8a46304AF53
+    [amount] => 15
+    [status] => processamento
+    [code] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com/qr/v2/cob/5f5b842c-c3d6-4b6f-822a-39fc71488db1520400005303986540515.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052590ae7ad4179a46068b065c8a46304AF53
+)
+
+[2026-03-14 12:55:16] [PROD] ----------------------------------------------------------------
+[2026-03-14 12:55:16] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-14 12:55:16] [PROD] API: Usuario ID: 484179656 | Nome: Cliente
+[2026-03-14 12:55:16] [PROD] API: Valor (reais): 100
+[2026-03-14 12:55:16] [PROD] API: payTypeSubListId: 
+[2026-03-14 12:55:16] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-14 12:55:16] [PROD] Iniciando next_sistemas_qrcode. Valor: 100, ID: 484179656, PayTypeSubListId: , JoinBonus: 0
+[2026-03-14 12:55:16] [PROD] Gateways ativos: expfypay
+[2026-03-14 12:55:16] [PROD] Tentando gateway: expfypay
+[2026-03-14 12:55:16] [PROD] criarQrexpfypay: Entrada - Valor: 100, Nome: Cliente, ID: 484179656, Comissao: , AfiliadoID: 
+[2026-03-14 12:55:16] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 77654, Valor: 100, Nome: Cliente
+[2026-03-14 12:55:16] [PROD] [EXPFYPAY] Payload: {"amount":100,"description":"Dep\u00f3sito 77654","customer":{"name":"Cliente","document":"54853329781","email":"asd43_5874@gmail.com"},"external_id":"77654","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-14 12:55:17] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"d053315bb3b2364e8de2f47635d3b332","external_id":"77654","qr_code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/a66d82eb-6bcd-4960-823b-43b8e5f6e4a25204000053039865406100.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052569cd08ffa8e840bd83781803c6304C260","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2Fa66d82eb-6bcd-4960-823b-43b8e5f6e4a25204000053039865406100.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052569cd08ffa8e840bd83781803c6304C260","amount":100,"status":"pending","created_at":"2026-03-14T12:55:17-03:00"}}
+[2026-03-14 12:55:17] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"d053315bb3b2364e8de2f47635d3b332","usuario":484179656,"valor":100,"tipo":"deposito","data_registro":"2026-03-14 12:55:17","qrcode":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/a66d82eb-6bcd-4960-823b-43b8e5f6e4a25204000053039865406100.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052569cd08ffa8e840bd83781803c6304C260","status":"processamento","code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/a66d82eb-6bcd-4960-823b-43b8e5f6e4a25204000053039865406100.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052569cd08ffa8e840bd83781803c6304C260","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-14 12:55:17] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-14 12:55:17] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-14 12:55:17] [PROD] [EXPFYPAY] Transação inserida com sucesso: d053315bb3b2364e8de2f47635d3b332
+[2026-03-14 12:55:17] [PROD] Sucesso no gateway: expfypay
+[2026-03-14 12:55:17] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => d053315bb3b2364e8de2f47635d3b332
+    [transaction_id] => d053315bb3b2364e8de2f47635d3b332
+    [external_id] => 77654
+    [qrcode] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2Fa66d82eb-6bcd-4960-823b-43b8e5f6e4a25204000053039865406100.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052569cd08ffa8e840bd83781803c6304C260
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2Fa66d82eb-6bcd-4960-823b-43b8e5f6e4a25204000053039865406100.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052569cd08ffa8e840bd83781803c6304C260
+    [amount] => 100
+    [status] => processamento
+    [code] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com/qr/v2/cob/a66d82eb-6bcd-4960-823b-43b8e5f6e4a25204000053039865406100.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052569cd08ffa8e840bd83781803c6304C260
+)
+
+[14-Mar-2026 12:56:11 -03] [EXPFYPAY WEBHOOK] Recebido: ID=d053315bb3b2364e8de2f47635d3b332, Status=completed, Valor=100
+[2026-03-14 13:27:49] [PROD] ----------------------------------------------------------------
+[2026-03-14 13:27:49] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-14 13:27:49] [PROD] API: Usuario ID: 496049599 | Nome: Cliente
+[2026-03-14 13:27:49] [PROD] API: Valor (reais): 13
+[2026-03-14 13:27:49] [PROD] API: payTypeSubListId: 
+[2026-03-14 13:27:49] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-14 13:27:49] [PROD] Iniciando next_sistemas_qrcode. Valor: 13, ID: 496049599, PayTypeSubListId: , JoinBonus: 0
+[2026-03-14 13:27:49] [PROD] Gateways ativos: expfypay
+[2026-03-14 13:27:49] [PROD] Tentando gateway: expfypay
+[2026-03-14 13:27:49] [PROD] criarQrexpfypay: Entrada - Valor: 13, Nome: Cliente, ID: 496049599, Comissao: , AfiliadoID: 
+[2026-03-14 13:27:49] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 14753, Valor: 13, Nome: Cliente
+[2026-03-14 13:27:49] [PROD] [EXPFYPAY] Payload: {"amount":13,"description":"Dep\u00f3sito 14753","customer":{"name":"Cliente","document":"28260643634","email":"asd4_659749498@gmail.com"},"external_id":"14753","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-14 13:27:50] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"41ca921651ef21e3cd0d4a8c0b688262","external_id":"14753","qr_code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/64cb5cdc-562f-43ab-814e-a32e4c1a1c01520400005303986540513.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905256271a78170c9451582ea9ee9163041B4D","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F64cb5cdc-562f-43ab-814e-a32e4c1a1c01520400005303986540513.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905256271a78170c9451582ea9ee9163041B4D","amount":13,"status":"pending","created_at":"2026-03-14T13:27:50-03:00"}}
+[2026-03-14 13:27:50] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"41ca921651ef21e3cd0d4a8c0b688262","usuario":496049599,"valor":13,"tipo":"deposito","data_registro":"2026-03-14 13:27:50","qrcode":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/64cb5cdc-562f-43ab-814e-a32e4c1a1c01520400005303986540513.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905256271a78170c9451582ea9ee9163041B4D","status":"processamento","code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/64cb5cdc-562f-43ab-814e-a32e4c1a1c01520400005303986540513.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905256271a78170c9451582ea9ee9163041B4D","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-14 13:27:50] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-14 13:27:50] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-14 13:27:50] [PROD] [EXPFYPAY] Transação inserida com sucesso: 41ca921651ef21e3cd0d4a8c0b688262
+[2026-03-14 13:27:50] [PROD] Sucesso no gateway: expfypay
+[2026-03-14 13:27:50] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 41ca921651ef21e3cd0d4a8c0b688262
+    [transaction_id] => 41ca921651ef21e3cd0d4a8c0b688262
+    [external_id] => 14753
+    [qrcode] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F64cb5cdc-562f-43ab-814e-a32e4c1a1c01520400005303986540513.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905256271a78170c9451582ea9ee9163041B4D
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F64cb5cdc-562f-43ab-814e-a32e4c1a1c01520400005303986540513.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905256271a78170c9451582ea9ee9163041B4D
+    [amount] => 13
+    [status] => processamento
+    [code] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com/qr/v2/cob/64cb5cdc-562f-43ab-814e-a32e4c1a1c01520400005303986540513.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905256271a78170c9451582ea9ee9163041B4D
+)
+
+[14-Mar-2026 13:28:19 -03] [EXPFYPAY WEBHOOK] Recebido: ID=41ca921651ef21e3cd0d4a8c0b688262, Status=completed, Valor=13
+[2026-03-14 14:09:55] [PROD] ----------------------------------------------------------------
+[2026-03-14 14:09:55] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-14 14:09:55] [PROD] API: Usuario ID: 447219193 | Nome: Cliente
+[2026-03-14 14:09:55] [PROD] API: Valor (reais): 10
+[2026-03-14 14:09:55] [PROD] API: payTypeSubListId: 
+[2026-03-14 14:09:55] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-14 14:09:55] [PROD] Iniciando next_sistemas_qrcode. Valor: 10, ID: 447219193, PayTypeSubListId: , JoinBonus: 0
+[2026-03-14 14:09:55] [PROD] Gateways ativos: expfypay
+[2026-03-14 14:09:55] [PROD] Tentando gateway: expfypay
+[2026-03-14 14:09:55] [PROD] criarQrexpfypay: Entrada - Valor: 10, Nome: Cliente, ID: 447219193, Comissao: , AfiliadoID: 
+[2026-03-14 14:09:55] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 40484, Valor: 10, Nome: Cliente
+[2026-03-14 14:09:55] [PROD] [EXPFYPAY] Payload: {"amount":10,"description":"Dep\u00f3sito 40484","customer":{"name":"Cliente","document":"48338727229","email":"asd458_78@bol.com"},"external_id":"40484","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-14 14:09:56] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"328bb5b6c2bb35feccbad3acccaaeab4","external_id":"40484","qr_code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/3cfe2450-32b6-4859-b7ee-22c92c0bb731520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052554532c6f815b41c9834a87f6463045BC6","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F3cfe2450-32b6-4859-b7ee-22c92c0bb731520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052554532c6f815b41c9834a87f6463045BC6","amount":10,"status":"pending","created_at":"2026-03-14T14:09:56-03:00"}}
+[2026-03-14 14:09:56] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"328bb5b6c2bb35feccbad3acccaaeab4","usuario":447219193,"valor":10,"tipo":"deposito","data_registro":"2026-03-14 14:09:56","qrcode":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/3cfe2450-32b6-4859-b7ee-22c92c0bb731520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052554532c6f815b41c9834a87f6463045BC6","status":"processamento","code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/3cfe2450-32b6-4859-b7ee-22c92c0bb731520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052554532c6f815b41c9834a87f6463045BC6","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-14 14:09:56] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-14 14:09:56] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-14 14:09:56] [PROD] [EXPFYPAY] Transação inserida com sucesso: 328bb5b6c2bb35feccbad3acccaaeab4
+[2026-03-14 14:09:56] [PROD] Sucesso no gateway: expfypay
+[2026-03-14 14:09:56] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 328bb5b6c2bb35feccbad3acccaaeab4
+    [transaction_id] => 328bb5b6c2bb35feccbad3acccaaeab4
+    [external_id] => 40484
+    [qrcode] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F3cfe2450-32b6-4859-b7ee-22c92c0bb731520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052554532c6f815b41c9834a87f6463045BC6
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F3cfe2450-32b6-4859-b7ee-22c92c0bb731520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052554532c6f815b41c9834a87f6463045BC6
+    [amount] => 10
+    [status] => processamento
+    [code] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com/qr/v2/cob/3cfe2450-32b6-4859-b7ee-22c92c0bb731520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052554532c6f815b41c9834a87f6463045BC6
+)
+
+[14-Mar-2026 14:10:33 -03] [EXPFYPAY WEBHOOK] Recebido: ID=328bb5b6c2bb35feccbad3acccaaeab4, Status=completed, Valor=10
+[2026-03-14 14:48:23] [PROD] ----------------------------------------------------------------
+[2026-03-14 14:48:23] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-14 14:48:23] [PROD] API: Usuario ID: 811161567 | Nome: Cliente
+[2026-03-14 14:48:23] [PROD] API: Valor (reais): 10
+[2026-03-14 14:48:23] [PROD] API: payTypeSubListId: 
+[2026-03-14 14:48:23] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-14 14:48:23] [PROD] Iniciando next_sistemas_qrcode. Valor: 10, ID: 811161567, PayTypeSubListId: , JoinBonus: 0
+[2026-03-14 14:48:23] [PROD] Gateways ativos: expfypay
+[2026-03-14 14:48:23] [PROD] Tentando gateway: expfypay
+[2026-03-14 14:48:23] [PROD] criarQrexpfypay: Entrada - Valor: 10, Nome: Cliente, ID: 811161567, Comissao: , AfiliadoID: 
+[2026-03-14 14:48:23] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 61715, Valor: 10, Nome: Cliente
+[2026-03-14 14:48:23] [PROD] [EXPFYPAY] Payload: {"amount":10,"description":"Dep\u00f3sito 61715","customer":{"name":"Cliente","document":"04814054610","email":"asd43_5874@gmail.com"},"external_id":"61715","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-14 14:48:23] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"fa51aacd0e146dd1d8020dcbc6192260","external_id":"61715","qr_code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/8ea82bc0-1581-4a0d-ae5b-55cffa7bb7a4520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052568d392db4add4570bf0126c1263043C01","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F8ea82bc0-1581-4a0d-ae5b-55cffa7bb7a4520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052568d392db4add4570bf0126c1263043C01","amount":10,"status":"pending","created_at":"2026-03-14T14:48:23-03:00"}}
+[2026-03-14 14:48:23] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"fa51aacd0e146dd1d8020dcbc6192260","usuario":811161567,"valor":10,"tipo":"deposito","data_registro":"2026-03-14 14:48:23","qrcode":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/8ea82bc0-1581-4a0d-ae5b-55cffa7bb7a4520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052568d392db4add4570bf0126c1263043C01","status":"processamento","code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/8ea82bc0-1581-4a0d-ae5b-55cffa7bb7a4520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052568d392db4add4570bf0126c1263043C01","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-14 14:48:23] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-14 14:48:23] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-14 14:48:23] [PROD] [EXPFYPAY] Transação inserida com sucesso: fa51aacd0e146dd1d8020dcbc6192260
+[2026-03-14 14:48:23] [PROD] Sucesso no gateway: expfypay
+[2026-03-14 14:48:23] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => fa51aacd0e146dd1d8020dcbc6192260
+    [transaction_id] => fa51aacd0e146dd1d8020dcbc6192260
+    [external_id] => 61715
+    [qrcode] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F8ea82bc0-1581-4a0d-ae5b-55cffa7bb7a4520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052568d392db4add4570bf0126c1263043C01
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F8ea82bc0-1581-4a0d-ae5b-55cffa7bb7a4520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052568d392db4add4570bf0126c1263043C01
+    [amount] => 10
+    [status] => processamento
+    [code] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com/qr/v2/cob/8ea82bc0-1581-4a0d-ae5b-55cffa7bb7a4520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052568d392db4add4570bf0126c1263043C01
+)
+
+[14-Mar-2026 14:49:12 -03] [EXPFYPAY WEBHOOK] Recebido: ID=fa51aacd0e146dd1d8020dcbc6192260, Status=completed, Valor=10
+[2026-03-14 15:53:13] [PROD] ----------------------------------------------------------------
+[2026-03-14 15:53:13] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-14 15:53:13] [PROD] API: Usuario ID: 603132917 | Nome: Cliente
+[2026-03-14 15:53:13] [PROD] API: Valor (reais): 20
+[2026-03-14 15:53:13] [PROD] API: payTypeSubListId: 
+[2026-03-14 15:53:13] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-14 15:53:13] [PROD] Iniciando next_sistemas_qrcode. Valor: 20, ID: 603132917, PayTypeSubListId: , JoinBonus: 0
+[2026-03-14 15:53:13] [PROD] Gateways ativos: expfypay
+[2026-03-14 15:53:13] [PROD] Tentando gateway: expfypay
+[2026-03-14 15:53:13] [PROD] criarQrexpfypay: Entrada - Valor: 20, Nome: Cliente, ID: 603132917, Comissao: , AfiliadoID: 
+[2026-03-14 15:53:13] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 79553, Valor: 20, Nome: Cliente
+[2026-03-14 15:53:13] [PROD] [EXPFYPAY] Payload: {"amount":20,"description":"Dep\u00f3sito 79553","customer":{"name":"Cliente","document":"65271074714","email":"asd4_659749498@gmail.com"},"external_id":"79553","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-14 15:53:14] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"b28d6f3f893fa3e329cd97e2bf3d63a3","external_id":"79553","qr_code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/873dee12-d653-40b4-b694-d1449225edc6520400005303986540520.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525add1360b38ed4f7caa2a0b9da63040931","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F873dee12-d653-40b4-b694-d1449225edc6520400005303986540520.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525add1360b38ed4f7caa2a0b9da63040931","amount":20,"status":"pending","created_at":"2026-03-14T15:53:14-03:00"}}
+[2026-03-14 15:53:14] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"b28d6f3f893fa3e329cd97e2bf3d63a3","usuario":603132917,"valor":20,"tipo":"deposito","data_registro":"2026-03-14 15:53:14","qrcode":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/873dee12-d653-40b4-b694-d1449225edc6520400005303986540520.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525add1360b38ed4f7caa2a0b9da63040931","status":"processamento","code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/873dee12-d653-40b4-b694-d1449225edc6520400005303986540520.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525add1360b38ed4f7caa2a0b9da63040931","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-14 15:53:14] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-14 15:53:14] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-14 15:53:14] [PROD] [EXPFYPAY] Transação inserida com sucesso: b28d6f3f893fa3e329cd97e2bf3d63a3
+[2026-03-14 15:53:14] [PROD] Sucesso no gateway: expfypay
+[2026-03-14 15:53:14] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => b28d6f3f893fa3e329cd97e2bf3d63a3
+    [transaction_id] => b28d6f3f893fa3e329cd97e2bf3d63a3
+    [external_id] => 79553
+    [qrcode] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F873dee12-d653-40b4-b694-d1449225edc6520400005303986540520.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525add1360b38ed4f7caa2a0b9da63040931
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F873dee12-d653-40b4-b694-d1449225edc6520400005303986540520.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525add1360b38ed4f7caa2a0b9da63040931
+    [amount] => 20
+    [status] => processamento
+    [code] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com/qr/v2/cob/873dee12-d653-40b4-b694-d1449225edc6520400005303986540520.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525add1360b38ed4f7caa2a0b9da63040931
+)
+
+[2026-03-14 19:34:10] [PROD] ----------------------------------------------------------------
+[2026-03-14 19:34:10] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-14 19:34:10] [PROD] API: Usuario ID: 795785817 | Nome: Cliente
+[2026-03-14 19:34:10] [PROD] API: Valor (reais): 20
+[2026-03-14 19:34:10] [PROD] API: payTypeSubListId: 
+[2026-03-14 19:34:10] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-14 19:34:10] [PROD] Iniciando next_sistemas_qrcode. Valor: 20, ID: 795785817, PayTypeSubListId: , JoinBonus: 0
+[2026-03-14 19:34:10] [PROD] Gateways ativos: expfypay
+[2026-03-14 19:34:10] [PROD] Tentando gateway: expfypay
+[2026-03-14 19:34:10] [PROD] criarQrexpfypay: Entrada - Valor: 20, Nome: Cliente, ID: 795785817, Comissao: , AfiliadoID: 
+[2026-03-14 19:34:10] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 60516, Valor: 20, Nome: Cliente
+[2026-03-14 19:34:10] [PROD] [EXPFYPAY] Payload: {"amount":20,"description":"Dep\u00f3sito 60516","customer":{"name":"Cliente","document":"99281539578","email":"asd4_6549498@gmail.com"},"external_id":"60516","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-14 19:34:12] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"99c2e624457a984d83634a95b6f6bdd4","external_id":"60516","qr_code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/b0c470c6-6489-4739-a71c-1c0f695a049a5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304BD83","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Fb0c470c6-6489-4739-a71c-1c0f695a049a5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304BD83","amount":20,"status":"pending","created_at":"2026-03-14T19:34:12-03:00"}}
+[2026-03-14 19:34:12] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"99c2e624457a984d83634a95b6f6bdd4","usuario":795785817,"valor":20,"tipo":"deposito","data_registro":"2026-03-14 19:34:12","qrcode":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/b0c470c6-6489-4739-a71c-1c0f695a049a5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304BD83","status":"processamento","code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/b0c470c6-6489-4739-a71c-1c0f695a049a5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304BD83","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-14 19:34:12] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-14 19:34:12] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-14 19:34:12] [PROD] [EXPFYPAY] Transação inserida com sucesso: 99c2e624457a984d83634a95b6f6bdd4
+[2026-03-14 19:34:12] [PROD] Sucesso no gateway: expfypay
+[2026-03-14 19:34:12] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 99c2e624457a984d83634a95b6f6bdd4
+    [transaction_id] => 99c2e624457a984d83634a95b6f6bdd4
+    [external_id] => 60516
+    [qrcode] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Fb0c470c6-6489-4739-a71c-1c0f695a049a5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304BD83
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Fb0c470c6-6489-4739-a71c-1c0f695a049a5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304BD83
+    [amount] => 20
+    [status] => processamento
+    [code] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br/qr/v3/at/b0c470c6-6489-4739-a71c-1c0f695a049a5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304BD83
+)
+
+[14-Mar-2026 19:35:51 -03] [EXPFYPAY WEBHOOK] Recebido: ID=99c2e624457a984d83634a95b6f6bdd4, Status=completed, Valor=20
+[2026-03-14 23:17:46] [PROD] ----------------------------------------------------------------
+[2026-03-14 23:17:46] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-14 23:17:46] [PROD] API: Usuario ID: 143577231 | Nome: Cliente
+[2026-03-14 23:17:46] [PROD] API: Valor (reais): 10
+[2026-03-14 23:17:46] [PROD] API: payTypeSubListId: 
+[2026-03-14 23:17:46] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-14 23:17:46] [PROD] Iniciando next_sistemas_qrcode. Valor: 10, ID: 143577231, PayTypeSubListId: , JoinBonus: 0
+[2026-03-14 23:17:46] [PROD] Gateways ativos: expfypay
+[2026-03-14 23:17:46] [PROD] Tentando gateway: expfypay
+[2026-03-14 23:17:46] [PROD] criarQrexpfypay: Entrada - Valor: 10, Nome: Cliente, ID: 143577231, Comissao: , AfiliadoID: 
+[2026-03-14 23:17:46] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 96749, Valor: 10, Nome: Cliente
+[2026-03-14 23:17:46] [PROD] [EXPFYPAY] Payload: {"amount":10,"description":"Dep\u00f3sito 96749","customer":{"name":"Cliente","document":"23869480483","email":"asd43_5874@gmail.com"},"external_id":"96749","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-14 23:17:48] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"cd841515a5f6e44c94c95f1fe318d34c","external_id":"96749","qr_code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/aca92c05-e30b-4c7a-a633-fd24e8cb15255204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304D8E8","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Faca92c05-e30b-4c7a-a633-fd24e8cb15255204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304D8E8","amount":10,"status":"pending","created_at":"2026-03-14T23:17:48-03:00"}}
+[2026-03-14 23:17:48] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"cd841515a5f6e44c94c95f1fe318d34c","usuario":143577231,"valor":10,"tipo":"deposito","data_registro":"2026-03-14 23:17:48","qrcode":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/aca92c05-e30b-4c7a-a633-fd24e8cb15255204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304D8E8","status":"processamento","code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/aca92c05-e30b-4c7a-a633-fd24e8cb15255204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304D8E8","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-14 23:17:48] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-14 23:17:48] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-14 23:17:48] [PROD] [EXPFYPAY] Transação inserida com sucesso: cd841515a5f6e44c94c95f1fe318d34c
+[2026-03-14 23:17:48] [PROD] Sucesso no gateway: expfypay
+[2026-03-14 23:17:48] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => cd841515a5f6e44c94c95f1fe318d34c
+    [transaction_id] => cd841515a5f6e44c94c95f1fe318d34c
+    [external_id] => 96749
+    [qrcode] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Faca92c05-e30b-4c7a-a633-fd24e8cb15255204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304D8E8
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Faca92c05-e30b-4c7a-a633-fd24e8cb15255204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304D8E8
+    [amount] => 10
+    [status] => processamento
+    [code] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br/qr/v3/at/aca92c05-e30b-4c7a-a633-fd24e8cb15255204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304D8E8
+)
+
+[14-Mar-2026 23:20:10 -03] [EXPFYPAY WEBHOOK] Recebido: ID=cd841515a5f6e44c94c95f1fe318d34c, Status=completed, Valor=10
+[2026-03-15 00:16:06] [PROD] ----------------------------------------------------------------
+[2026-03-15 00:16:06] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-15 00:16:06] [PROD] API: Usuario ID: 670219336 | Nome: Cliente
+[2026-03-15 00:16:06] [PROD] API: Valor (reais): 10
+[2026-03-15 00:16:06] [PROD] API: payTypeSubListId: 
+[2026-03-15 00:16:06] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-15 00:16:06] [PROD] Iniciando next_sistemas_qrcode. Valor: 10, ID: 670219336, PayTypeSubListId: , JoinBonus: 0
+[2026-03-15 00:16:06] [PROD] Gateways ativos: expfypay
+[2026-03-15 00:16:06] [PROD] Tentando gateway: expfypay
+[2026-03-15 00:16:06] [PROD] criarQrexpfypay: Entrada - Valor: 10, Nome: Cliente, ID: 670219336, Comissao: , AfiliadoID: 
+[2026-03-15 00:16:06] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 33654, Valor: 10, Nome: Cliente
+[2026-03-15 00:16:06] [PROD] [EXPFYPAY] Payload: {"amount":10,"description":"Dep\u00f3sito 33654","customer":{"name":"Cliente","document":"89554411006","email":"asd4_yasmin@gmail.com"},"external_id":"33654","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-15 00:16:08] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"ecaddb80e668e7f2fd60016a37495045","external_id":"33654","qr_code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/844750b3-5744-4792-abab-70a174a05b765204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304EBB4","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F844750b3-5744-4792-abab-70a174a05b765204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304EBB4","amount":10,"status":"pending","created_at":"2026-03-15T00:16:08-03:00"}}
+[2026-03-15 00:16:08] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"ecaddb80e668e7f2fd60016a37495045","usuario":670219336,"valor":10,"tipo":"deposito","data_registro":"2026-03-15 00:16:08","qrcode":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/844750b3-5744-4792-abab-70a174a05b765204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304EBB4","status":"processamento","code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/844750b3-5744-4792-abab-70a174a05b765204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304EBB4","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-15 00:16:08] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-15 00:16:08] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-15 00:16:08] [PROD] [EXPFYPAY] Transação inserida com sucesso: ecaddb80e668e7f2fd60016a37495045
+[2026-03-15 00:16:08] [PROD] Sucesso no gateway: expfypay
+[2026-03-15 00:16:08] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => ecaddb80e668e7f2fd60016a37495045
+    [transaction_id] => ecaddb80e668e7f2fd60016a37495045
+    [external_id] => 33654
+    [qrcode] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F844750b3-5744-4792-abab-70a174a05b765204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304EBB4
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F844750b3-5744-4792-abab-70a174a05b765204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304EBB4
+    [amount] => 10
+    [status] => processamento
+    [code] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br/qr/v3/at/844750b3-5744-4792-abab-70a174a05b765204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304EBB4
+)
+
+[2026-03-15 05:29:36] [PROD] ----------------------------------------------------------------
+[2026-03-15 05:29:36] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-15 05:29:36] [PROD] API: Usuario ID: 100863321 | Nome: Cliente
+[2026-03-15 05:29:36] [PROD] API: Valor (reais): 20
+[2026-03-15 05:29:36] [PROD] API: payTypeSubListId: 
+[2026-03-15 05:29:36] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-15 05:29:36] [PROD] Iniciando next_sistemas_qrcode. Valor: 20, ID: 100863321, PayTypeSubListId: , JoinBonus: 0
+[2026-03-15 05:29:36] [PROD] Gateways ativos: expfypay
+[2026-03-15 05:29:36] [PROD] Tentando gateway: expfypay
+[2026-03-15 05:29:36] [PROD] criarQrexpfypay: Entrada - Valor: 20, Nome: Cliente, ID: 100863321, Comissao: , AfiliadoID: 
+[2026-03-15 05:29:36] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 34798, Valor: 20, Nome: Cliente
+[2026-03-15 05:29:36] [PROD] [EXPFYPAY] Payload: {"amount":20,"description":"Dep\u00f3sito 34798","customer":{"name":"Cliente","document":"01150946288","email":"asd4_yasmin@gmail.com"},"external_id":"34798","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-15 05:29:36] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"99a2bda526a42f605db5aa0c48cb22ce","external_id":"34798","qr_code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/706dcea1-31c8-47fa-b203-23c712522983520400005303986540520.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052538e9ea4f3c5e4439b2e00b5b66304A3EE","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F706dcea1-31c8-47fa-b203-23c712522983520400005303986540520.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052538e9ea4f3c5e4439b2e00b5b66304A3EE","amount":20,"status":"pending","created_at":"2026-03-15T05:29:36-03:00"}}
+[2026-03-15 05:29:36] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"99a2bda526a42f605db5aa0c48cb22ce","usuario":100863321,"valor":20,"tipo":"deposito","data_registro":"2026-03-15 05:29:36","qrcode":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/706dcea1-31c8-47fa-b203-23c712522983520400005303986540520.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052538e9ea4f3c5e4439b2e00b5b66304A3EE","status":"processamento","code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/706dcea1-31c8-47fa-b203-23c712522983520400005303986540520.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052538e9ea4f3c5e4439b2e00b5b66304A3EE","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-15 05:29:36] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-15 05:29:36] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-15 05:29:36] [PROD] [EXPFYPAY] Transação inserida com sucesso: 99a2bda526a42f605db5aa0c48cb22ce
+[2026-03-15 05:29:36] [PROD] Sucesso no gateway: expfypay
+[2026-03-15 05:29:36] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 99a2bda526a42f605db5aa0c48cb22ce
+    [transaction_id] => 99a2bda526a42f605db5aa0c48cb22ce
+    [external_id] => 34798
+    [qrcode] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F706dcea1-31c8-47fa-b203-23c712522983520400005303986540520.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052538e9ea4f3c5e4439b2e00b5b66304A3EE
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F706dcea1-31c8-47fa-b203-23c712522983520400005303986540520.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052538e9ea4f3c5e4439b2e00b5b66304A3EE
+    [amount] => 20
+    [status] => processamento
+    [code] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com/qr/v2/cob/706dcea1-31c8-47fa-b203-23c712522983520400005303986540520.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052538e9ea4f3c5e4439b2e00b5b66304A3EE
+)
+
+[15-Mar-2026 05:30:57 -03] [EXPFYPAY WEBHOOK] Recebido: ID=99a2bda526a42f605db5aa0c48cb22ce, Status=completed, Valor=20
+[2026-03-15 08:26:27] [PROD] ----------------------------------------------------------------
+[2026-03-15 08:26:27] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-15 08:26:27] [PROD] API: Usuario ID: 484179656 | Nome: Cliente
+[2026-03-15 08:26:27] [PROD] API: Valor (reais): 100
+[2026-03-15 08:26:27] [PROD] API: payTypeSubListId: 
+[2026-03-15 08:26:27] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-15 08:26:27] [PROD] Iniciando next_sistemas_qrcode. Valor: 100, ID: 484179656, PayTypeSubListId: , JoinBonus: 0
+[2026-03-15 08:26:27] [PROD] Gateways ativos: expfypay
+[2026-03-15 08:26:27] [PROD] Tentando gateway: expfypay
+[2026-03-15 08:26:27] [PROD] criarQrexpfypay: Entrada - Valor: 100, Nome: Cliente, ID: 484179656, Comissao: , AfiliadoID: 
+[2026-03-15 08:26:27] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 61944, Valor: 100, Nome: Cliente
+[2026-03-15 08:26:27] [PROD] [EXPFYPAY] Payload: {"amount":100,"description":"Dep\u00f3sito 61944","customer":{"name":"Cliente","document":"82510919008","email":"asd14_652549498@gmail.com"},"external_id":"61944","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-15 08:26:28] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"20cc2bb26891e0946b2f1857e9b931c5","external_id":"61944","qr_code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/e20ce04a-ba08-4118-809d-81e04d926d295204000053039865406100.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905252096e772d284417a847bdcb7b63042F4C","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2Fe20ce04a-ba08-4118-809d-81e04d926d295204000053039865406100.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905252096e772d284417a847bdcb7b63042F4C","amount":100,"status":"pending","created_at":"2026-03-15T08:26:28-03:00"}}
+[2026-03-15 08:26:28] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"20cc2bb26891e0946b2f1857e9b931c5","usuario":484179656,"valor":100,"tipo":"deposito","data_registro":"2026-03-15 08:26:28","qrcode":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/e20ce04a-ba08-4118-809d-81e04d926d295204000053039865406100.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905252096e772d284417a847bdcb7b63042F4C","status":"processamento","code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/e20ce04a-ba08-4118-809d-81e04d926d295204000053039865406100.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905252096e772d284417a847bdcb7b63042F4C","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-15 08:26:28] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-15 08:26:28] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-15 08:26:28] [PROD] [EXPFYPAY] Transação inserida com sucesso: 20cc2bb26891e0946b2f1857e9b931c5
+[2026-03-15 08:26:28] [PROD] Sucesso no gateway: expfypay
+[2026-03-15 08:26:28] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 20cc2bb26891e0946b2f1857e9b931c5
+    [transaction_id] => 20cc2bb26891e0946b2f1857e9b931c5
+    [external_id] => 61944
+    [qrcode] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2Fe20ce04a-ba08-4118-809d-81e04d926d295204000053039865406100.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905252096e772d284417a847bdcb7b63042F4C
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2Fe20ce04a-ba08-4118-809d-81e04d926d295204000053039865406100.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905252096e772d284417a847bdcb7b63042F4C
+    [amount] => 100
+    [status] => processamento
+    [code] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com/qr/v2/cob/e20ce04a-ba08-4118-809d-81e04d926d295204000053039865406100.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905252096e772d284417a847bdcb7b63042F4C
+)
+
+[15-Mar-2026 08:27:13 -03] [EXPFYPAY WEBHOOK] Recebido: ID=20cc2bb26891e0946b2f1857e9b931c5, Status=completed, Valor=100
+[2026-03-15 09:28:25] [PROD] ----------------------------------------------------------------
+[2026-03-15 09:28:25] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-15 09:28:25] [PROD] API: Usuario ID: 464046773 | Nome: Cliente
+[2026-03-15 09:28:25] [PROD] API: Valor (reais): 14
+[2026-03-15 09:28:25] [PROD] API: payTypeSubListId: 
+[2026-03-15 09:28:25] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-15 09:28:25] [PROD] Iniciando next_sistemas_qrcode. Valor: 14, ID: 464046773, PayTypeSubListId: , JoinBonus: 0
+[2026-03-15 09:28:25] [PROD] Gateways ativos: expfypay
+[2026-03-15 09:28:25] [PROD] Tentando gateway: expfypay
+[2026-03-15 09:28:25] [PROD] criarQrexpfypay: Entrada - Valor: 14, Nome: Cliente, ID: 464046773, Comissao: , AfiliadoID: 
+[2026-03-15 09:28:25] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 98905, Valor: 14, Nome: Cliente
+[2026-03-15 09:28:25] [PROD] [EXPFYPAY] Payload: {"amount":14,"description":"Dep\u00f3sito 98905","customer":{"name":"Cliente","document":"94560534586","email":"asd458_78@bol.com"},"external_id":"98905","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-15 09:28:26] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"92fde6ee313a70c0788c0f0409446240","external_id":"98905","qr_code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/704e92f0-f06d-408c-8b7f-ec260b80fe13520400005303986540514.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525a0ff9b0bc5aa4b6a8706a2c966304B5F5","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F704e92f0-f06d-408c-8b7f-ec260b80fe13520400005303986540514.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525a0ff9b0bc5aa4b6a8706a2c966304B5F5","amount":14,"status":"pending","created_at":"2026-03-15T09:28:26-03:00"}}
+[2026-03-15 09:28:26] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"92fde6ee313a70c0788c0f0409446240","usuario":464046773,"valor":14,"tipo":"deposito","data_registro":"2026-03-15 09:28:26","qrcode":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/704e92f0-f06d-408c-8b7f-ec260b80fe13520400005303986540514.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525a0ff9b0bc5aa4b6a8706a2c966304B5F5","status":"processamento","code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/704e92f0-f06d-408c-8b7f-ec260b80fe13520400005303986540514.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525a0ff9b0bc5aa4b6a8706a2c966304B5F5","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-15 09:28:26] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-15 09:28:26] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-15 09:28:26] [PROD] [EXPFYPAY] Transação inserida com sucesso: 92fde6ee313a70c0788c0f0409446240
+[2026-03-15 09:28:26] [PROD] Sucesso no gateway: expfypay
+[2026-03-15 09:28:26] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 92fde6ee313a70c0788c0f0409446240
+    [transaction_id] => 92fde6ee313a70c0788c0f0409446240
+    [external_id] => 98905
+    [qrcode] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F704e92f0-f06d-408c-8b7f-ec260b80fe13520400005303986540514.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525a0ff9b0bc5aa4b6a8706a2c966304B5F5
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F704e92f0-f06d-408c-8b7f-ec260b80fe13520400005303986540514.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525a0ff9b0bc5aa4b6a8706a2c966304B5F5
+    [amount] => 14
+    [status] => processamento
+    [code] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com/qr/v2/cob/704e92f0-f06d-408c-8b7f-ec260b80fe13520400005303986540514.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525a0ff9b0bc5aa4b6a8706a2c966304B5F5
+)
+
+[15-Mar-2026 09:29:19 -03] [EXPFYPAY WEBHOOK] Recebido: ID=92fde6ee313a70c0788c0f0409446240, Status=completed, Valor=14
+[2026-03-15 13:12:49] [PROD] ----------------------------------------------------------------
+[2026-03-15 13:12:49] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-15 13:12:49] [PROD] API: Usuario ID: 594177007 | Nome: Cliente
+[2026-03-15 13:12:49] [PROD] API: Valor (reais): 15
+[2026-03-15 13:12:49] [PROD] API: payTypeSubListId: 
+[2026-03-15 13:12:49] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-15 13:12:49] [PROD] Iniciando next_sistemas_qrcode. Valor: 15, ID: 594177007, PayTypeSubListId: , JoinBonus: 0
+[2026-03-15 13:12:49] [PROD] Gateways ativos: expfypay
+[2026-03-15 13:12:49] [PROD] Tentando gateway: expfypay
+[2026-03-15 13:12:49] [PROD] criarQrexpfypay: Entrada - Valor: 15, Nome: Cliente, ID: 594177007, Comissao: , AfiliadoID: 
+[2026-03-15 13:12:49] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 60724, Valor: 15, Nome: Cliente
+[2026-03-15 13:12:49] [PROD] [EXPFYPAY] Payload: {"amount":15,"description":"Dep\u00f3sito 60724","customer":{"name":"Cliente","document":"89146252576","email":"asd43_5874@gmail.com"},"external_id":"60724","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-15 13:12:51] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"918ec9d540b51fd1596cad6532b44c47","external_id":"60724","qr_code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/da545ff0-0e05-45c4-9bdd-52eb21fec6185204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63048186","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Fda545ff0-0e05-45c4-9bdd-52eb21fec6185204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A63048186","amount":15,"status":"pending","created_at":"2026-03-15T13:12:51-03:00"}}
+[2026-03-15 13:12:51] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"918ec9d540b51fd1596cad6532b44c47","usuario":594177007,"valor":15,"tipo":"deposito","data_registro":"2026-03-15 13:12:51","qrcode":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/da545ff0-0e05-45c4-9bdd-52eb21fec6185204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63048186","status":"processamento","code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/da545ff0-0e05-45c4-9bdd-52eb21fec6185204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63048186","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-15 13:12:51] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-15 13:12:51] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-15 13:12:51] [PROD] [EXPFYPAY] Transação inserida com sucesso: 918ec9d540b51fd1596cad6532b44c47
+[2026-03-15 13:12:51] [PROD] Sucesso no gateway: expfypay
+[2026-03-15 13:12:51] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 918ec9d540b51fd1596cad6532b44c47
+    [transaction_id] => 918ec9d540b51fd1596cad6532b44c47
+    [external_id] => 60724
+    [qrcode] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Fda545ff0-0e05-45c4-9bdd-52eb21fec6185204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A63048186
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Fda545ff0-0e05-45c4-9bdd-52eb21fec6185204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A63048186
+    [amount] => 15
+    [status] => processamento
+    [code] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br/qr/v3/at/da545ff0-0e05-45c4-9bdd-52eb21fec6185204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***63048186
+)
+
+[15-Mar-2026 13:13:09 -03] [EXPFYPAY WEBHOOK] Recebido: ID=918ec9d540b51fd1596cad6532b44c47, Status=completed, Valor=15
+[2026-03-15 15:33:17] [PROD] ----------------------------------------------------------------
+[2026-03-15 15:33:17] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-15 15:33:17] [PROD] API: Usuario ID: 831745805 | Nome: Cliente
+[2026-03-15 15:33:17] [PROD] API: Valor (reais): 20
+[2026-03-15 15:33:17] [PROD] API: payTypeSubListId: 
+[2026-03-15 15:33:17] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-15 15:33:17] [PROD] Iniciando next_sistemas_qrcode. Valor: 20, ID: 831745805, PayTypeSubListId: , JoinBonus: 0
+[2026-03-15 15:33:17] [PROD] Gateways ativos: expfypay
+[2026-03-15 15:33:17] [PROD] Tentando gateway: expfypay
+[2026-03-15 15:33:17] [PROD] criarQrexpfypay: Entrada - Valor: 20, Nome: Cliente, ID: 831745805, Comissao: , AfiliadoID: 
+[2026-03-15 15:33:17] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 42455, Valor: 20, Nome: Cliente
+[2026-03-15 15:33:17] [PROD] [EXPFYPAY] Payload: {"amount":20,"description":"Dep\u00f3sito 42455","customer":{"name":"Cliente","document":"50496648535","email":"asd43_5874@gmail.com"},"external_id":"42455","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-15 15:33:17] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"045076b68605bd26f80d41657fbe0370","external_id":"42455","qr_code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/d728ba80-8e1f-487a-b800-4f27b56bc455520400005303986540520.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052515235152e5d34105b42aa432b6304288C","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2Fd728ba80-8e1f-487a-b800-4f27b56bc455520400005303986540520.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052515235152e5d34105b42aa432b6304288C","amount":20,"status":"pending","created_at":"2026-03-15T15:33:17-03:00"}}
+[2026-03-15 15:33:17] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"045076b68605bd26f80d41657fbe0370","usuario":831745805,"valor":20,"tipo":"deposito","data_registro":"2026-03-15 15:33:17","qrcode":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/d728ba80-8e1f-487a-b800-4f27b56bc455520400005303986540520.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052515235152e5d34105b42aa432b6304288C","status":"processamento","code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/d728ba80-8e1f-487a-b800-4f27b56bc455520400005303986540520.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052515235152e5d34105b42aa432b6304288C","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-15 15:33:17] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-15 15:33:17] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-15 15:33:17] [PROD] [EXPFYPAY] Transação inserida com sucesso: 045076b68605bd26f80d41657fbe0370
+[2026-03-15 15:33:17] [PROD] Sucesso no gateway: expfypay
+[2026-03-15 15:33:17] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 045076b68605bd26f80d41657fbe0370
+    [transaction_id] => 045076b68605bd26f80d41657fbe0370
+    [external_id] => 42455
+    [qrcode] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2Fd728ba80-8e1f-487a-b800-4f27b56bc455520400005303986540520.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052515235152e5d34105b42aa432b6304288C
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2Fd728ba80-8e1f-487a-b800-4f27b56bc455520400005303986540520.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052515235152e5d34105b42aa432b6304288C
+    [amount] => 20
+    [status] => processamento
+    [code] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com/qr/v2/cob/d728ba80-8e1f-487a-b800-4f27b56bc455520400005303986540520.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS6229052515235152e5d34105b42aa432b6304288C
+)
+
+[15-Mar-2026 15:34:09 -03] [EXPFYPAY WEBHOOK] Recebido: ID=045076b68605bd26f80d41657fbe0370, Status=completed, Valor=20
+[2026-03-15 19:12:44] [PROD] ----------------------------------------------------------------
+[2026-03-15 19:12:44] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-15 19:12:44] [PROD] API: Usuario ID: 796028855 | Nome: Cliente
+[2026-03-15 19:12:44] [PROD] API: Valor (reais): 10
+[2026-03-15 19:12:44] [PROD] API: payTypeSubListId: 
+[2026-03-15 19:12:44] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-15 19:12:44] [PROD] Iniciando next_sistemas_qrcode. Valor: 10, ID: 796028855, PayTypeSubListId: , JoinBonus: 0
+[2026-03-15 19:12:44] [PROD] Gateways ativos: expfypay
+[2026-03-15 19:12:44] [PROD] Tentando gateway: expfypay
+[2026-03-15 19:12:44] [PROD] criarQrexpfypay: Entrada - Valor: 10, Nome: Cliente, ID: 796028855, Comissao: , AfiliadoID: 
+[2026-03-15 19:12:44] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 32978, Valor: 10, Nome: Cliente
+[2026-03-15 19:12:44] [PROD] [EXPFYPAY] Payload: {"amount":10,"description":"Dep\u00f3sito 32978","customer":{"name":"Cliente","document":"50444657800","email":"asd4_6549498@gmail.com"},"external_id":"32978","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-15 19:12:45] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"7868488a9c6d9b74da0cfd4881bd7d21","external_id":"32978","qr_code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/2544f29d-9dbf-492f-ad0f-9e78558ecbca520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525ed2de0e9722f490f9210791636304CCAC","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F2544f29d-9dbf-492f-ad0f-9e78558ecbca520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525ed2de0e9722f490f9210791636304CCAC","amount":10,"status":"pending","created_at":"2026-03-15T19:12:45-03:00"}}
+[2026-03-15 19:12:45] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"7868488a9c6d9b74da0cfd4881bd7d21","usuario":796028855,"valor":10,"tipo":"deposito","data_registro":"2026-03-15 19:12:45","qrcode":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/2544f29d-9dbf-492f-ad0f-9e78558ecbca520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525ed2de0e9722f490f9210791636304CCAC","status":"processamento","code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/2544f29d-9dbf-492f-ad0f-9e78558ecbca520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525ed2de0e9722f490f9210791636304CCAC","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-15 19:12:45] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-15 19:12:45] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-15 19:12:45] [PROD] [EXPFYPAY] Transação inserida com sucesso: 7868488a9c6d9b74da0cfd4881bd7d21
+[2026-03-15 19:12:45] [PROD] Sucesso no gateway: expfypay
+[2026-03-15 19:12:45] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 7868488a9c6d9b74da0cfd4881bd7d21
+    [transaction_id] => 7868488a9c6d9b74da0cfd4881bd7d21
+    [external_id] => 32978
+    [qrcode] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F2544f29d-9dbf-492f-ad0f-9e78558ecbca520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525ed2de0e9722f490f9210791636304CCAC
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2F2544f29d-9dbf-492f-ad0f-9e78558ecbca520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525ed2de0e9722f490f9210791636304CCAC
+    [amount] => 10
+    [status] => processamento
+    [code] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com/qr/v2/cob/2544f29d-9dbf-492f-ad0f-9e78558ecbca520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525ed2de0e9722f490f9210791636304CCAC
+)
+
+[15-Mar-2026 19:14:35 -03] [EXPFYPAY WEBHOOK] Recebido: ID=7868488a9c6d9b74da0cfd4881bd7d21, Status=completed, Valor=10
+[2026-03-15 21:01:59] [PROD] ----------------------------------------------------------------
+[2026-03-15 21:01:59] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-15 21:01:59] [PROD] API: Usuario ID: 348826307 | Nome: Cliente
+[2026-03-15 21:01:59] [PROD] API: Valor (reais): 10
+[2026-03-15 21:01:59] [PROD] API: payTypeSubListId: 
+[2026-03-15 21:01:59] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-15 21:01:59] [PROD] Iniciando next_sistemas_qrcode. Valor: 10, ID: 348826307, PayTypeSubListId: , JoinBonus: 0
+[2026-03-15 21:01:59] [PROD] Gateways ativos: expfypay
+[2026-03-15 21:01:59] [PROD] Tentando gateway: expfypay
+[2026-03-15 21:01:59] [PROD] criarQrexpfypay: Entrada - Valor: 10, Nome: Cliente, ID: 348826307, Comissao: , AfiliadoID: 
+[2026-03-15 21:01:59] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 24363, Valor: 10, Nome: Cliente
+[2026-03-15 21:01:59] [PROD] [EXPFYPAY] Payload: {"amount":10,"description":"Dep\u00f3sito 24363","customer":{"name":"Cliente","document":"65107717217","email":"asd43_5874@gmail.com"},"external_id":"24363","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-15 21:01:59] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"6f3330e4c7d801446d1d6dfd1df7dc3f","external_id":"24363","qr_code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/e67dcede-a33e-4d15-a566-d8d9fd86e4b8520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905258e9b130ce6024d7dac4714316630439A2","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2Fe67dcede-a33e-4d15-a566-d8d9fd86e4b8520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905258e9b130ce6024d7dac4714316630439A2","amount":10,"status":"pending","created_at":"2026-03-15T21:01:59-03:00"}}
+[2026-03-15 21:01:59] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"6f3330e4c7d801446d1d6dfd1df7dc3f","usuario":348826307,"valor":10,"tipo":"deposito","data_registro":"2026-03-15 21:01:59","qrcode":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/e67dcede-a33e-4d15-a566-d8d9fd86e4b8520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905258e9b130ce6024d7dac4714316630439A2","status":"processamento","code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/e67dcede-a33e-4d15-a566-d8d9fd86e4b8520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905258e9b130ce6024d7dac4714316630439A2","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-15 21:01:59] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-15 21:01:59] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-15 21:01:59] [PROD] [EXPFYPAY] Transação inserida com sucesso: 6f3330e4c7d801446d1d6dfd1df7dc3f
+[2026-03-15 21:01:59] [PROD] Sucesso no gateway: expfypay
+[2026-03-15 21:01:59] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 6f3330e4c7d801446d1d6dfd1df7dc3f
+    [transaction_id] => 6f3330e4c7d801446d1d6dfd1df7dc3f
+    [external_id] => 24363
+    [qrcode] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2Fe67dcede-a33e-4d15-a566-d8d9fd86e4b8520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905258e9b130ce6024d7dac4714316630439A2
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2Fe67dcede-a33e-4d15-a566-d8d9fd86e4b8520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905258e9b130ce6024d7dac4714316630439A2
+    [amount] => 10
+    [status] => processamento
+    [code] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com/qr/v2/cob/e67dcede-a33e-4d15-a566-d8d9fd86e4b8520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS622905258e9b130ce6024d7dac4714316630439A2
+)
+
+[15-Mar-2026 21:02:49 -03] [EXPFYPAY WEBHOOK] Recebido: ID=6f3330e4c7d801446d1d6dfd1df7dc3f, Status=completed, Valor=10
+[2026-03-15 21:23:08] [PROD] ----------------------------------------------------------------
+[2026-03-15 21:23:08] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-15 21:23:08] [PROD] API: Usuario ID: 254769466 | Nome: Cliente
+[2026-03-15 21:23:08] [PROD] API: Valor (reais): 10
+[2026-03-15 21:23:08] [PROD] API: payTypeSubListId: 
+[2026-03-15 21:23:08] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-15 21:23:08] [PROD] Iniciando next_sistemas_qrcode. Valor: 10, ID: 254769466, PayTypeSubListId: , JoinBonus: 0
+[2026-03-15 21:23:08] [PROD] Gateways ativos: expfypay
+[2026-03-15 21:23:08] [PROD] Tentando gateway: expfypay
+[2026-03-15 21:23:08] [PROD] criarQrexpfypay: Entrada - Valor: 10, Nome: Cliente, ID: 254769466, Comissao: , AfiliadoID: 
+[2026-03-15 21:23:08] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 49717, Valor: 10, Nome: Cliente
+[2026-03-15 21:23:08] [PROD] [EXPFYPAY] Payload: {"amount":10,"description":"Dep\u00f3sito 49717","customer":{"name":"Cliente","document":"31313411140","email":"asd458_78@bol.com"},"external_id":"49717","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-15 21:23:09] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"c8d4521c9e65d0ab2a9e3eb9ca58fd94","external_id":"49717","qr_code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/dfe0daa8-6c83-4fd3-8368-0cc8b2aa523c520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525b2176dcc6ce842179d6e69d156304EA2A","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2Fdfe0daa8-6c83-4fd3-8368-0cc8b2aa523c520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525b2176dcc6ce842179d6e69d156304EA2A","amount":10,"status":"pending","created_at":"2026-03-15T21:23:09-03:00"}}
+[2026-03-15 21:23:09] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"c8d4521c9e65d0ab2a9e3eb9ca58fd94","usuario":254769466,"valor":10,"tipo":"deposito","data_registro":"2026-03-15 21:23:09","qrcode":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/dfe0daa8-6c83-4fd3-8368-0cc8b2aa523c520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525b2176dcc6ce842179d6e69d156304EA2A","status":"processamento","code":"00020101021226810014br.gov.bcb.pix2559qr.woovi.com\/qr\/v2\/cob\/dfe0daa8-6c83-4fd3-8368-0cc8b2aa523c520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525b2176dcc6ce842179d6e69d156304EA2A","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-15 21:23:09] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-15 21:23:09] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-15 21:23:09] [PROD] [EXPFYPAY] Transação inserida com sucesso: c8d4521c9e65d0ab2a9e3eb9ca58fd94
+[2026-03-15 21:23:09] [PROD] Sucesso no gateway: expfypay
+[2026-03-15 21:23:09] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => c8d4521c9e65d0ab2a9e3eb9ca58fd94
+    [transaction_id] => c8d4521c9e65d0ab2a9e3eb9ca58fd94
+    [external_id] => 49717
+    [qrcode] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2Fdfe0daa8-6c83-4fd3-8368-0cc8b2aa523c520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525b2176dcc6ce842179d6e69d156304EA2A
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020101021226810014br.gov.bcb.pix2559qr.woovi.com%2Fqr%2Fv2%2Fcob%2Fdfe0daa8-6c83-4fd3-8368-0cc8b2aa523c520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525b2176dcc6ce842179d6e69d156304EA2A
+    [amount] => 10
+    [status] => processamento
+    [code] => 00020101021226810014br.gov.bcb.pix2559qr.woovi.com/qr/v2/cob/dfe0daa8-6c83-4fd3-8368-0cc8b2aa523c520400005303986540510.005802BR5925PINEPAY_SOLUTIONS_EM_PAGA6007COLINAS62290525b2176dcc6ce842179d6e69d156304EA2A
+)
+
+[15-Mar-2026 21:24:20 -03] [EXPFYPAY WEBHOOK] Recebido: ID=c8d4521c9e65d0ab2a9e3eb9ca58fd94, Status=completed, Valor=10
+[2026-03-15 21:42:28] [PROD] ----------------------------------------------------------------
+[2026-03-15 21:42:28] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-15 21:42:28] [PROD] API: Usuario ID: 926457487 | Nome: Cliente
+[2026-03-15 21:42:28] [PROD] API: Valor (reais): 20
+[2026-03-15 21:42:28] [PROD] API: payTypeSubListId: 
+[2026-03-15 21:42:28] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-15 21:42:28] [PROD] Iniciando next_sistemas_qrcode. Valor: 20, ID: 926457487, PayTypeSubListId: , JoinBonus: 0
+[2026-03-15 21:42:28] [PROD] Gateways ativos: expfypay
+[2026-03-15 21:42:28] [PROD] Tentando gateway: expfypay
+[2026-03-15 21:42:28] [PROD] criarQrexpfypay: Entrada - Valor: 20, Nome: Cliente, ID: 926457487, Comissao: , AfiliadoID: 
+[2026-03-15 21:42:28] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 29791, Valor: 20, Nome: Cliente
+[2026-03-15 21:42:28] [PROD] [EXPFYPAY] Payload: {"amount":20,"description":"Dep\u00f3sito 29791","customer":{"name":"Cliente","document":"97056057853","email":"asd458_78@bol.com"},"external_id":"29791","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-15 21:42:30] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"c867a8e03ca37233eb02c8545d60e070","external_id":"29791","qr_code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/e5ee8407-9672-4b40-b1c9-143d672caadc5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***630438B1","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Fe5ee8407-9672-4b40-b1c9-143d672caadc5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A630438B1","amount":20,"status":"pending","created_at":"2026-03-15T21:42:30-03:00"}}
+[2026-03-15 21:42:30] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"c867a8e03ca37233eb02c8545d60e070","usuario":926457487,"valor":20,"tipo":"deposito","data_registro":"2026-03-15 21:42:30","qrcode":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/e5ee8407-9672-4b40-b1c9-143d672caadc5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***630438B1","status":"processamento","code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/e5ee8407-9672-4b40-b1c9-143d672caadc5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***630438B1","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-15 21:42:30] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-15 21:42:30] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-15 21:42:30] [PROD] [EXPFYPAY] Transação inserida com sucesso: c867a8e03ca37233eb02c8545d60e070
+[2026-03-15 21:42:30] [PROD] Sucesso no gateway: expfypay
+[2026-03-15 21:42:30] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => c867a8e03ca37233eb02c8545d60e070
+    [transaction_id] => c867a8e03ca37233eb02c8545d60e070
+    [external_id] => 29791
+    [qrcode] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Fe5ee8407-9672-4b40-b1c9-143d672caadc5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A630438B1
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Fe5ee8407-9672-4b40-b1c9-143d672caadc5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A630438B1
+    [amount] => 20
+    [status] => processamento
+    [code] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br/qr/v3/at/e5ee8407-9672-4b40-b1c9-143d672caadc5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***630438B1
+)
+
+[15-Mar-2026 21:43:12 -03] [EXPFYPAY WEBHOOK] Recebido: ID=c867a8e03ca37233eb02c8545d60e070, Status=completed, Valor=20
+[2026-03-15 21:58:26] [PROD] ----------------------------------------------------------------
+[2026-03-15 21:58:26] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-15 21:58:26] [PROD] API: Usuario ID: 558408613 | Nome: Cliente
+[2026-03-15 21:58:26] [PROD] API: Valor (reais): 10
+[2026-03-15 21:58:26] [PROD] API: payTypeSubListId: 
+[2026-03-15 21:58:26] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-15 21:58:26] [PROD] Iniciando next_sistemas_qrcode. Valor: 10, ID: 558408613, PayTypeSubListId: , JoinBonus: 0
+[2026-03-15 21:58:26] [PROD] Gateways ativos: expfypay
+[2026-03-15 21:58:26] [PROD] Tentando gateway: expfypay
+[2026-03-15 21:58:26] [PROD] criarQrexpfypay: Entrada - Valor: 10, Nome: Cliente, ID: 558408613, Comissao: , AfiliadoID: 
+[2026-03-15 21:58:26] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 63163, Valor: 10, Nome: Cliente
+[2026-03-15 21:58:26] [PROD] [EXPFYPAY] Payload: {"amount":10,"description":"Dep\u00f3sito 63163","customer":{"name":"Cliente","document":"25317073529","email":"ab11_2589@gmail.com"},"external_id":"63163","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-15 21:58:28] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"09caccfdcee5f4f691f9ba018e0bef68","external_id":"63163","qr_code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/5269262e-22bd-4261-9cb4-988a6b5c12225204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304FB0C","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F5269262e-22bd-4261-9cb4-988a6b5c12225204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304FB0C","amount":10,"status":"pending","created_at":"2026-03-15T21:58:28-03:00"}}
+[2026-03-15 21:58:28] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"09caccfdcee5f4f691f9ba018e0bef68","usuario":558408613,"valor":10,"tipo":"deposito","data_registro":"2026-03-15 21:58:28","qrcode":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/5269262e-22bd-4261-9cb4-988a6b5c12225204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304FB0C","status":"processamento","code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/5269262e-22bd-4261-9cb4-988a6b5c12225204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304FB0C","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-15 21:58:28] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-15 21:58:28] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-15 21:58:28] [PROD] [EXPFYPAY] Transação inserida com sucesso: 09caccfdcee5f4f691f9ba018e0bef68
+[2026-03-15 21:58:28] [PROD] Sucesso no gateway: expfypay
+[2026-03-15 21:58:28] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 09caccfdcee5f4f691f9ba018e0bef68
+    [transaction_id] => 09caccfdcee5f4f691f9ba018e0bef68
+    [external_id] => 63163
+    [qrcode] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F5269262e-22bd-4261-9cb4-988a6b5c12225204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304FB0C
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F5269262e-22bd-4261-9cb4-988a6b5c12225204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304FB0C
+    [amount] => 10
+    [status] => processamento
+    [code] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br/qr/v3/at/5269262e-22bd-4261-9cb4-988a6b5c12225204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304FB0C
+)
+
+[15-Mar-2026 21:59:10 -03] [EXPFYPAY WEBHOOK] Recebido: ID=09caccfdcee5f4f691f9ba018e0bef68, Status=completed, Valor=10
+[2026-03-15 22:01:46] [PROD] ----------------------------------------------------------------
+[2026-03-15 22:01:46] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-15 22:01:46] [PROD] API: Usuario ID: 592931807 | Nome: Cliente
+[2026-03-15 22:01:46] [PROD] API: Valor (reais): 20
+[2026-03-15 22:01:46] [PROD] API: payTypeSubListId: 
+[2026-03-15 22:01:46] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-15 22:01:46] [PROD] Iniciando next_sistemas_qrcode. Valor: 20, ID: 592931807, PayTypeSubListId: , JoinBonus: 0
+[2026-03-15 22:01:46] [PROD] Gateways ativos: expfypay
+[2026-03-15 22:01:46] [PROD] Tentando gateway: expfypay
+[2026-03-15 22:01:46] [PROD] criarQrexpfypay: Entrada - Valor: 20, Nome: Cliente, ID: 592931807, Comissao: , AfiliadoID: 
+[2026-03-15 22:01:46] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 97151, Valor: 20, Nome: Cliente
+[2026-03-15 22:01:46] [PROD] [EXPFYPAY] Payload: {"amount":20,"description":"Dep\u00f3sito 97151","customer":{"name":"Cliente","document":"81455637203","email":"asd14_652549498@gmail.com"},"external_id":"97151","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-15 22:01:48] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"3a77864cd40da40486d8f337e04d78fd","external_id":"97151","qr_code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/eabb9590-c1fa-439b-8a66-4aa06fc7bd115204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***630423FB","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Feabb9590-c1fa-439b-8a66-4aa06fc7bd115204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A630423FB","amount":20,"status":"pending","created_at":"2026-03-15T22:01:48-03:00"}}
+[2026-03-15 22:01:48] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"3a77864cd40da40486d8f337e04d78fd","usuario":592931807,"valor":20,"tipo":"deposito","data_registro":"2026-03-15 22:01:48","qrcode":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/eabb9590-c1fa-439b-8a66-4aa06fc7bd115204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***630423FB","status":"processamento","code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/eabb9590-c1fa-439b-8a66-4aa06fc7bd115204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***630423FB","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-15 22:01:48] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-15 22:01:48] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-15 22:01:48] [PROD] [EXPFYPAY] Transação inserida com sucesso: 3a77864cd40da40486d8f337e04d78fd
+[2026-03-15 22:01:48] [PROD] Sucesso no gateway: expfypay
+[2026-03-15 22:01:48] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 3a77864cd40da40486d8f337e04d78fd
+    [transaction_id] => 3a77864cd40da40486d8f337e04d78fd
+    [external_id] => 97151
+    [qrcode] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Feabb9590-c1fa-439b-8a66-4aa06fc7bd115204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A630423FB
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2Feabb9590-c1fa-439b-8a66-4aa06fc7bd115204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A630423FB
+    [amount] => 20
+    [status] => processamento
+    [code] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br/qr/v3/at/eabb9590-c1fa-439b-8a66-4aa06fc7bd115204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***630423FB
+)
+
+[15-Mar-2026 22:02:24 -03] [EXPFYPAY WEBHOOK] Recebido: ID=3a77864cd40da40486d8f337e04d78fd, Status=completed, Valor=20
+[2026-03-16 09:02:04] [PROD] ----------------------------------------------------------------
+[2026-03-16 09:02:04] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-16 09:02:04] [PROD] API: Usuario ID: 171354609 | Nome: Cliente
+[2026-03-16 09:02:04] [PROD] API: Valor (reais): 100
+[2026-03-16 09:02:04] [PROD] API: payTypeSubListId: 
+[2026-03-16 09:02:04] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-16 09:02:04] [PROD] Iniciando next_sistemas_qrcode. Valor: 100, ID: 171354609, PayTypeSubListId: , JoinBonus: 0
+[2026-03-16 09:02:04] [PROD] Gateways ativos: expfypay
+[2026-03-16 09:02:04] [PROD] Tentando gateway: expfypay
+[2026-03-16 09:02:04] [PROD] criarQrexpfypay: Entrada - Valor: 100, Nome: Cliente, ID: 171354609, Comissao: , AfiliadoID: 
+[2026-03-16 09:02:04] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 22731, Valor: 100, Nome: Cliente
+[2026-03-16 09:02:04] [PROD] [EXPFYPAY] Payload: {"amount":100,"description":"Dep\u00f3sito 22731","customer":{"name":"Cliente","document":"14557334318","email":"asf5_654489498@gmail.com"},"external_id":"22731","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-16 09:02:06] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"ad9e0a335012692f10e782bd7d07059d","external_id":"22731","qr_code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/3347bf2f-43a2-4ffb-9ff8-0284bf646a5c5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304FAEF","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F3347bf2f-43a2-4ffb-9ff8-0284bf646a5c5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304FAEF","amount":100,"status":"pending","created_at":"2026-03-16T09:02:06-03:00"}}
+[2026-03-16 09:02:06] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"ad9e0a335012692f10e782bd7d07059d","usuario":171354609,"valor":100,"tipo":"deposito","data_registro":"2026-03-16 09:02:06","qrcode":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/3347bf2f-43a2-4ffb-9ff8-0284bf646a5c5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304FAEF","status":"processamento","code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/3347bf2f-43a2-4ffb-9ff8-0284bf646a5c5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304FAEF","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-16 09:02:06] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-16 09:02:06] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-16 09:02:06] [PROD] [EXPFYPAY] Transação inserida com sucesso: ad9e0a335012692f10e782bd7d07059d
+[2026-03-16 09:02:06] [PROD] Sucesso no gateway: expfypay
+[2026-03-16 09:02:06] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => ad9e0a335012692f10e782bd7d07059d
+    [transaction_id] => ad9e0a335012692f10e782bd7d07059d
+    [external_id] => 22731
+    [qrcode] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F3347bf2f-43a2-4ffb-9ff8-0284bf646a5c5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304FAEF
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F3347bf2f-43a2-4ffb-9ff8-0284bf646a5c5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304FAEF
+    [amount] => 100
+    [status] => processamento
+    [code] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br/qr/v3/at/3347bf2f-43a2-4ffb-9ff8-0284bf646a5c5204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304FAEF
+)
+
+[16-Mar-2026 09:02:33 -03] [EXPFYPAY WEBHOOK] Recebido: ID=ad9e0a335012692f10e782bd7d07059d, Status=completed, Valor=100
+[2026-03-16 12:12:57] [PROD] ----------------------------------------------------------------
+[2026-03-16 12:12:57] [PROD] API: Iniciando solicitacao de deposito (pay.create/deposit.create)
+[2026-03-16 12:12:57] [PROD] API: Usuario ID: 828952916 | Nome: Cliente
+[2026-03-16 12:12:57] [PROD] API: Valor (reais): 10
+[2026-03-16 12:12:57] [PROD] API: payTypeSubListId: 
+[2026-03-16 12:12:57] [PROD] API: Chamando next_sistemas_qrcode...
+[2026-03-16 12:12:57] [PROD] Iniciando next_sistemas_qrcode. Valor: 10, ID: 828952916, PayTypeSubListId: , JoinBonus: 0
+[2026-03-16 12:12:57] [PROD] Gateways ativos: expfypay
+[2026-03-16 12:12:57] [PROD] Tentando gateway: expfypay
+[2026-03-16 12:12:57] [PROD] criarQrexpfypay: Entrada - Valor: 10, Nome: Cliente, ID: 828952916, Comissao: , AfiliadoID: 
+[2026-03-16 12:12:57] [PROD] [EXPFYPAY] Enviando requisição - Order ID: 11384, Valor: 10, Nome: Cliente
+[2026-03-16 12:12:57] [PROD] [EXPFYPAY] Payload: {"amount":10,"description":"Dep\u00f3sito 11384","customer":{"name":"Cliente","document":"85215661820","email":"asd43_5874@gmail.com"},"external_id":"11384","callback_url":"https:\/\/79a2.com\/callbackpayment\/expfypay"}
+[2026-03-16 12:12:59] [PROD] [EXPFYPAY] Response HTTP 201: {"success":true,"data":{"transaction_id":"732f31b6bed865e74b23d11ab19cebf2","external_id":"11384","qr_code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/68453957-3e8d-4cfe-b992-556fc7bba1345204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304DA3F","qr_code_image":"https:\/\/api.qrserver.com\/v1\/create-qr-code\/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F68453957-3e8d-4cfe-b992-556fc7bba1345204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304DA3F","amount":10,"status":"pending","created_at":"2026-03-16T12:12:59-03:00"}}
+[2026-03-16 12:12:59] [PROD] insert_payment: Iniciando inserção. Dados: {"transacao_id":"732f31b6bed865e74b23d11ab19cebf2","usuario":828952916,"valor":10,"tipo":"deposito","data_registro":"2026-03-16 12:12:59","qrcode":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/68453957-3e8d-4cfe-b992-556fc7bba1345204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304DA3F","status":"processamento","code":"00020126850014br.gov.bcb.pix2563pix.onlyup.com.br\/qr\/v3\/at\/68453957-3e8d-4cfe-b992-556fc7bba1345204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304DA3F","comissao":null,"afiliado_id":null,"pay_type_sub_list_id":null,"join_bonus":0}
+[2026-03-16 12:12:59] [PROD] insert_payment: SQL: INSERT INTO transacoes (transacao_id,usuario,valor,tipo,data_registro,qrcode,code,status,join_bonus) VALUES (?,?,?,?,?,?,?,?,?)
+[2026-03-16 12:12:59] [PROD] insert_payment: Sucesso na inserção.
+[2026-03-16 12:12:59] [PROD] [EXPFYPAY] Transação inserida com sucesso: 732f31b6bed865e74b23d11ab19cebf2
+[2026-03-16 12:12:59] [PROD] Sucesso no gateway: expfypay
+[2026-03-16 12:12:59] [PROD] API: Retorno de next_sistemas_qrcode: Array
+(
+    [transacao_id] => 732f31b6bed865e74b23d11ab19cebf2
+    [transaction_id] => 732f31b6bed865e74b23d11ab19cebf2
+    [external_id] => 11384
+    [qrcode] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F68453957-3e8d-4cfe-b992-556fc7bba1345204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304DA3F
+    [qr_code_image] => https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020126850014br.gov.bcb.pix2563pix.onlyup.com.br%2Fqr%2Fv3%2Fat%2F68453957-3e8d-4cfe-b992-556fc7bba1345204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503%2A%2A%2A6304DA3F
+    [amount] => 10
+    [status] => processamento
+    [code] => 00020126850014br.gov.bcb.pix2563pix.onlyup.com.br/qr/v3/at/68453957-3e8d-4cfe-b992-556fc7bba1345204000053039865802BR5913HP_RECEBIVEIS6009SAO_PAULO62070503***6304DA3F
+)
+

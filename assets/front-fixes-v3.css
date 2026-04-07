@@ -1,0 +1,28 @@
+/* Safe front hotfixes v3: no global background overrides */
+.pwa-header-wrap,
+.download-pwa,
+.btn-download,
+ion-modal#modal-download-loading,
+ion-modal[id*="download-loading"],
+img[src*="/gif/download-btn"],
+img[src*="download-btn.gif"] {
+  display: none !important;
+}
+
+.front-register-trigger-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+ion-menu .primaryBtn .front-register-trigger-wrapper {
+  flex: 1;
+}
+
+.front-register-trigger-button {
+  width: 100%;
+}
+
+.popup-register-submit-wrapper {
+  position: relative;
+}

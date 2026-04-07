@@ -1,0 +1,17 @@
+/* Não escurecer o front; apenas esconder CTA/APK e permitir estilos separados de registro */
+.front-register-trigger-wrapper {}
+.popup-register-submit-wrapper {}
+/* Esconde atalhos/download APK/PWA mais comuns no front */
+[data-entry="download"],
+.quick-entry-download,
+.download-entry,
+.download-btn,
+.install-btn,
+.install-guide,
+.apk-download,
+.pwa-download,
+a[href*=".apk"],
+a[href*="download"]:has(svg[src*="download"]),
+ion-button[aria-label*="download" i] {
+  display: none !important;
+}

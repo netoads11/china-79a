@@ -1,0 +1,18 @@
+# Adicione no server { } do domínio
+
+location ^~ /api/frontend/ {
+    rewrite ^/api/frontend/(.*)$ /api/v1/api.php last;
+}
+
+location / {
+    try_files $uri $uri/ /index.php?$query_string;
+}
+
+# bloco PHP padrão
+location ~ \.php$ {
+    try_files $uri =404;
+    include fastcgi_params;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    fastcgi_pass unix:/run/php/php8.2-fpm.sock;
+    fastcgi_index index.php;
+}
