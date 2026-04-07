@@ -32,6 +32,13 @@ html[data-bs-theme=dark] {
   --a-shadow-sm: 0 1px 8px rgba(0,0,0,.4);
   --a-shadow: 0 4px 24px rgba(0,0,0,.55);
   --a-shadow-lg: 0 12px 40px rgba(0,0,0,.75);
+  /* Bootstrap 5 overrides */
+  --bs-body-bg: #080810;
+  --bs-body-color: #e2e8f0;
+  --bs-border-color: rgba(255,255,255,.07);
+  --bs-secondary-bg: #141422;
+  --bs-tertiary-bg: #0f0f1a;
+  color-scheme: dark;
 }
 
 /* ——— Scrollbar ——— */
