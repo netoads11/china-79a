@@ -9,8 +9,9 @@ RUN apt-get update && apt-get install -y \
     unzip \
     && docker-php-ext-install mysqli pdo pdo_mysql gd zip
 
-RUN a2enmod rewrite
+RUN a2enmod rewrite headers
 
+COPY apache.conf /etc/apache2/sites-available/000-default.conf
 COPY . /var/www/html/
 
 RUN chown -R www-data:www-data /var/www/html \
