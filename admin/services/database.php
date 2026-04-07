@@ -9,7 +9,7 @@ if (!defined('SITE_URL')) {
 
 if (!defined('DATABASE_LOADED')) {
     $bd = array(
-        'local' => 'localhost',
+        'local' => 'mysql-database',
         'usuario' => '79a2',
         'senha' => '79a279a279a2',
         'banco' => '79a2'
