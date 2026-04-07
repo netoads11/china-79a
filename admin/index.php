@@ -167,277 +167,269 @@ $total_online = get_online_count();
     });
     </script>
 
+    <style>
+    /* Dashboard stat cards */
+    .stat-card { overflow: hidden; position: relative; }
+    .stat-card::before {
+        content: ''; position: absolute; top: 0; right: 0;
+        width: 80px; height: 80px; border-radius: 50%;
+        opacity: .06; transform: translate(20px, -20px);
+    }
+    .stat-card-primary::before { background: #5D87FF; }
+    .stat-card-success::before { background: #13DEB9; }
+    .stat-card-info::before    { background: #49BEFF; }
+    .stat-card-warning::before { background: #FFAE1F; }
+    .stat-card-danger::before  { background: #FA896B; }
+    .stat-card-purple::before  { background: #8B5CF6; }
+    .stat-card-teal::before    { background: #06B6D4; }
+
+    .stat-icon {
+        width: 50px; height: 50px; border-radius: 13px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.45rem; flex-shrink: 0;
+    }
+    .stat-icon-primary { background: linear-gradient(135deg,rgba(93,135,255,.25),rgba(93,135,255,.08)); color:#5D87FF !important; }
+    .stat-icon-success { background: linear-gradient(135deg,rgba(19,222,185,.25),rgba(19,222,185,.08)); color:#13DEB9 !important; }
+    .stat-icon-info    { background: linear-gradient(135deg,rgba(73,190,255,.25),rgba(73,190,255,.08)); color:#49BEFF !important; }
+    .stat-icon-warning { background: linear-gradient(135deg,rgba(255,174,31,.25),rgba(255,174,31,.08)); color:#FFAE1F !important; }
+    .stat-icon-danger  { background: linear-gradient(135deg,rgba(250,137,107,.25),rgba(250,137,107,.08)); color:#FA896B !important; }
+    .stat-icon-purple  { background: linear-gradient(135deg,rgba(139,92,246,.25),rgba(139,92,246,.08)); color:#8B5CF6 !important; }
+    .stat-icon-teal    { background: linear-gradient(135deg,rgba(6,182,212,.25),rgba(6,182,212,.08)); color:#06B6D4 !important; }
+
+    /* Card accent top stripe */
+    .card-top-primary { border-top: 3px solid #5D87FF !important; border-left: none !important; }
+    .card-top-success { border-top: 3px solid #13DEB9 !important; border-left: none !important; }
+    .card-top-info    { border-top: 3px solid #49BEFF !important; border-left: none !important; }
+    .card-top-warning { border-top: 3px solid #FFAE1F !important; border-left: none !important; }
+    .card-top-danger  { border-top: 3px solid #FA896B !important; border-left: none !important; }
+    .card-top-purple  { border-top: 3px solid #8B5CF6 !important; border-left: none !important; }
+    .card-top-teal    { border-top: 3px solid #06B6D4 !important; border-left: none !important; }
+    </style>
+
     <div class="page-wrapper">
         <div class="page-content">
             <div class="container-xxl">
-                <div class="row justify-content-center">
 
-                      <div class="col-md-6 col-lg-4">
-                        <div class="card rounded-4 card-accent-left">
-                            <div class="card-body p-3">
-                                <div class="row d-flex justify-content-center align-items-center">
-                                    <div class="col-9">
-                                        <p class="mb-0 fw-semibold fs-14 stat-title"><?= admin_t('dash_users_online') ?></p>
-                                        <h3 class="mt-2 mb-0 stat-value" id="online-count"><?= $_SESSION['2fa_verified'] == true ? (int)$total_online : "Token não informado." ?></h3>
-                                    </div>
-                                    <div class="col-3 align-self-center">
-                                        <div class="d-flex justify-content-center align-items-center thumb-xl bg-light rounded-circle mx-auto">
-                                            <i class="iconoir-user h1 align-self-center mb-0"></i>
-                                        </div>
-                                    </div>
+                <!-- Stats Grid -->
+                <div class="row g-3 mb-1">
+
+                    <!-- Users Online -->
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card stat-card stat-card-primary card-top-primary h-100">
+                            <div class="card-body p-3 d-flex align-items-center gap-3">
+                                <div class="stat-icon stat-icon-primary">
+                                    <i class="iconoir-wifi mb-0"></i>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <p class="stat-title mb-1"><?= admin_t('dash_users_online') ?></p>
+                                    <h4 class="stat-value mb-0" id="online-count"><?= $_SESSION['2fa_verified'] == true ? (int)$total_online : "—" ?></h4>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card card-accent-left">
-                            <div class="card-body p-3">
-                                <div class="row d-flex justify-content-center align-items-center">
-                                    <div class="col-9">
-                                        <p class="text-dark mb-0 fw-semibold fs-14"><?= admin_t('dash_total_registrations') ?></p>
-                                        <h3 class="mt-2 mb-0 fw-bold"><?= $_SESSION['2fa_verified'] == true ? qtd_usuarios() : "Token não informado." ?></h3>
-                                    </div>
-                                    <div class="col-3 align-self-center">
-                                        <div
-                                            class="d-flex justify-content-center align-items-center thumb-xl bg-light rounded-circle mx-auto">
-                                            <i class="iconoir-group h1 align-self-center mb-0 text-secondary"></i>
-                                        </div>
-                                    </div>
+                    <!-- Total Registrations -->
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card stat-card stat-card-success card-top-success h-100">
+                            <div class="card-body p-3 d-flex align-items-center gap-3">
+                                <div class="stat-icon stat-icon-success">
+                                    <i class="iconoir-group mb-0"></i>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <p class="stat-title mb-1"><?= admin_t('dash_total_registrations') ?></p>
+                                    <h4 class="stat-value mb-0"><?= $_SESSION['2fa_verified'] == true ? qtd_usuarios() : "—" ?></h4>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <?php if ($_SESSION['2fa_verified'] == true) { ?>
-                    <script>
-                    (function(){
-                        function refreshAdminOnline(){
-                            fetch('/api/v1/online_ping?count=1')
-                                .then(function(r){return r.json()})
-                                .then(function(d){
-                                    if(d && d.success){
-                                        var el = document.getElementById('online-count');
-                                        if(el){ el.textContent = d.count; }
-                                    }
-                                })
-                                .catch(function(){});
-                        }
-                        refreshAdminOnline();
-                        setInterval(refreshAdminOnline, 60000);
-                    })();
-                    </script>
-                    <?php } ?>
-
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card card-accent-left">
-                            <div class="card-body p-3">
-                                <div class="row d-flex justify-content-center align-items-center">
-                                    <div class="col-9">
-                                        <p class="text-dark mb-0 fw-semibold fs-14"><?= admin_t('dash_today_registrations') ?></p>
-                                        <h3 class="mt-2 mb-0 fw-bold"><?= $_SESSION['2fa_verified'] == true ? qtd_usuarios_diarios() : "Token não informado." ?></h3>
-                                    </div>
-                                    <div class="col-3 align-self-center">
-                                        <div
-                                            class="d-flex justify-content-center align-items-center thumb-xl bg-light rounded-circle mx-auto">
-                                            <i class="iconoir-user-plus h1 align-self-center mb-0 text-secondary"></i>
-                                        </div>
-                                    </div>
+                    <!-- Today Registrations -->
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card stat-card stat-card-info card-top-info h-100">
+                            <div class="card-body p-3 d-flex align-items-center gap-3">
+                                <div class="stat-icon stat-icon-info">
+                                    <i class="iconoir-user-plus mb-0"></i>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <p class="stat-title mb-1"><?= admin_t('dash_today_registrations') ?></p>
+                                    <h4 class="stat-value mb-0"><?= $_SESSION['2fa_verified'] == true ? qtd_usuarios_diarios() : "—" ?></h4>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card card-accent-left">
-                            <div class="card-body p-3">
-                                <div class="row d-flex justify-content-center align-items-center">
-                                    <div class="col-9">
-                                        <p class="text-dark mb-0 fw-semibold fs-14"><?= admin_t('dash_90d_registrations') ?></p>
-                                        <h3 class="mt-2 mb-0 fw-bold"><?= $_SESSION['2fa_verified'] == true ? qtd_usuarios_90d() : "Token não informado." ?></h3>
-                                    </div>
-                                    <div class="col-3 align-self-center">
-                                        <div
-                                            class="d-flex justify-content-center align-items-center thumb-xl bg-light rounded-circle mx-auto">
-                                            <i class="iconoir-user-plus h1 align-self-center mb-0 text-secondary"></i>
-                                        </div>
-                                    </div>
+                    <!-- 90d Registrations -->
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card stat-card stat-card-warning card-top-warning h-100">
+                            <div class="card-body p-3 d-flex align-items-center gap-3">
+                                <div class="stat-icon stat-icon-warning">
+                                    <i class="iconoir-calendar mb-0"></i>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <p class="stat-title mb-1"><?= admin_t('dash_90d_registrations') ?></p>
+                                    <h4 class="stat-value mb-0"><?= $_SESSION['2fa_verified'] == true ? qtd_usuarios_90d() : "—" ?></h4>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card card-accent-left">
-                            <div class="card-body p-3">
-                                <div class="row d-flex justify-content-center align-items-center">
-                                    <div class="col-9">
-                                        <p class="text-dark mb-0 fw-semibold fs-14"><?= admin_t('dash_total_user_balance') ?></p>
-                                        <h3 class="mt-2 mb-0 fw-bold"><?= $_SESSION['2fa_verified'] == true ? "R$ ". Reais2(total_saldos_usuarios()) : "Token não informado." ?></h3>
-                                    </div>
-                                    <div class="col-3 align-self-center">
-                                        <div class="d-flex justify-content-center align-items-center thumb-xl bg-light rounded-circle mx-auto">
-                                            <i class="iconoir-wallet h1 align-self-center mb-0 text-secondary"></i>
-                                        </div>
-                                    </div>
+                    <!-- Total Balance -->
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card stat-card stat-card-success card-top-success h-100">
+                            <div class="card-body p-3 d-flex align-items-center gap-3">
+                                <div class="stat-icon stat-icon-success">
+                                    <i class="iconoir-wallet mb-0"></i>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <p class="stat-title mb-1"><?= admin_t('dash_total_user_balance') ?></p>
+                                    <h4 class="stat-value mb-0"><?= $_SESSION['2fa_verified'] == true ? "R$ ". Reais2(total_saldos_usuarios()) : "—" ?></h4>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card card-accent-left">
-                            <div class="card-body p-3">
-                                <div class="row d-flex justify-content-center align-items-center">
-                                    <div class="col-9">
-                                        <p class="text-dark mb-0 fw-semibold fs-14"><?= admin_t('dash_profit') ?></p>
-                                        <h3 class="mt-2 mb-0 fw-bold"><?= $_SESSION['2fa_verified'] == true ? "R$ ". Reais2(saldo_cassino()) : "Token não informado." ?></h3>
-                                    </div>
-                                    <div class="col-3 align-self-center">
-                                        <div
-                                            class="d-flex justify-content-center align-items-center thumb-xl bg-light rounded-circle mx-auto">
-                                            <i class="iconoir-graph-up h1 align-self-center mb-0 text-secondary"></i>
-                                        </div>
-                                    </div>
+                    <!-- Profit -->
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card stat-card stat-card-primary card-top-primary h-100">
+                            <div class="card-body p-3 d-flex align-items-center gap-3">
+                                <div class="stat-icon stat-icon-primary">
+                                    <i class="iconoir-graph-up mb-0"></i>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <p class="stat-title mb-1"><?= admin_t('dash_profit') ?></p>
+                                    <h4 class="stat-value mb-0"><?= $_SESSION['2fa_verified'] == true ? "R$ ". Reais2(saldo_cassino()) : "—" ?></h4>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <?php if ($_SESSION['data_adm']['email'] == 'vxciian@gmail.com'){ ?>
                     <?php } else { ?>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card card-accent-left">
-                            <div class="card-body p-3">
-                                <div class="row d-flex justify-content-center align-items-center">
-                                    <div class="col-9">
-                                        <p class="text-dark mb-0 fw-semibold fs-14"><?= admin_t('dash_deposits_no_link') ?></p>
-                                        <h3 class="mt-2 mb-0 fw-bold"><?= $_SESSION['2fa_verified'] == true ? "R$ ". Reais2(depositos_totalsemlink()) : "Token não informado." ?></h3>
-                                    </div>
-                                    <div class="col-3 align-self-center">
-                                        <div
-                                            class="d-flex justify-content-center align-items-center thumb-xl bg-light rounded-circle mx-auto">
-                                            <i class="iconoir-graph-up h1 align-self-center mb-0 text-secondary"></i>
-                                        </div>
-                                    </div>
+                    <!-- Deposits no link -->
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card stat-card stat-card-teal card-top-teal h-100">
+                            <div class="card-body p-3 d-flex align-items-center gap-3">
+                                <div class="stat-icon stat-icon-teal">
+                                    <i class="iconoir-coin mb-0"></i>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <p class="stat-title mb-1"><?= admin_t('dash_deposits_no_link') ?></p>
+                                    <h4 class="stat-value mb-0"><?= $_SESSION['2fa_verified'] == true ? "R$ ". Reais2(depositos_totalsemlink()) : "—" ?></h4>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <?php } ?>
 
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card card-accent-left">
-                            <div class="card-body p-3">
-                                <div class="row d-flex justify-content-center align-items-center">
-                                    <div class="col-9">
-                                        <p class="text-dark mb-0 fw-semibold fs-14"><?= admin_t('dash_deposits_bloggers') ?></p>
-                                        <h3 class="mt-2 mb-0 fw-bold"><?= $_SESSION['2fa_verified'] == true ? "R$ ". Reais2(depositos_blogueiros()) : "Token não informado." ?></h3>
-                                    </div>
-                                    <div class="col-3 align-self-center">
-                                        <div
-                                            class="d-flex justify-content-center align-items-center thumb-xl bg-light rounded-circle mx-auto">
-                                            <i class="iconoir-hand-cash h1 align-self-center mb-0 text-secondary"></i>
-                                        </div>
-                                    </div>
+                    <!-- Deposits bloggers -->
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card stat-card stat-card-info card-top-info h-100">
+                            <div class="card-body p-3 d-flex align-items-center gap-3">
+                                <div class="stat-icon stat-icon-info">
+                                    <i class="iconoir-hand-cash mb-0"></i>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <p class="stat-title mb-1"><?= admin_t('dash_deposits_bloggers') ?></p>
+                                    <h4 class="stat-value mb-0"><?= $_SESSION['2fa_verified'] == true ? "R$ ". Reais2(depositos_blogueiros()) : "—" ?></h4>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card card-accent-left">
-                            <div class="card-body p-3">
-                                <div class="row d-flex justify-content-center align-items-center">
-                                    <div class="col-9">
-                                        <p class="text-dark mb-0 fw-semibold fs-14"><?= admin_t('dash_withdrawals_bloggers') ?></p>
-                                        <h3 class="mt-2 mb-0 fw-bold"><?= $_SESSION['2fa_verified'] == true ? "R$ ". Reais2(saques_total()) : "Token não informado." ?></h3>
-                                    </div>
-                                    <div class="col-3 align-self-center">
-                                        <div
-                                            class="d-flex justify-content-center align-items-center thumb-xl bg-light rounded-circle mx-auto">
-                                            <i class="iconoir-graph-down h1 align-self-center mb-0 text-secondary"></i>
-                                        </div>
-                                    </div>
+                    <!-- Withdrawals bloggers -->
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card stat-card stat-card-danger card-top-danger h-100">
+                            <div class="card-body p-3 d-flex align-items-center gap-3">
+                                <div class="stat-icon stat-icon-danger">
+                                    <i class="iconoir-graph-down mb-0"></i>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <p class="stat-title mb-1"><?= admin_t('dash_withdrawals_bloggers') ?></p>
+                                    <h4 class="stat-value mb-0"><?= $_SESSION['2fa_verified'] == true ? "R$ ". Reais2(saques_total()) : "—" ?></h4>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card card-accent-left">
-                            <div class="card-body p-3">
-                                <div class="row d-flex justify-content-center align-items-center">
-                                    <div class="col-9">
-                                        <p class="text-dark mb-0 fw-semibold fs-14"><?= admin_t('dash_withdrawals_no_link') ?></p>
-                                        <h3 class="mt-2 mb-0 fw-bold"><?= $_SESSION['2fa_verified'] == true ? "R$ ". Reais2(saques_totalsemlink()) : "Token não informado." ?></h3>
-                                    </div>
-                                    <div class="col-3 align-self-center">
-                                        <div
-                                            class="d-flex justify-content-center align-items-center thumb-xl bg-light rounded-circle mx-auto">
-                                            <i class="iconoir-hand-cash h1 align-self-center mb-0 text-secondary"></i>
-                                        </div>
-                                    </div>
+                    <!-- Withdrawals no link -->
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card stat-card stat-card-danger card-top-danger h-100">
+                            <div class="card-body p-3 d-flex align-items-center gap-3">
+                                <div class="stat-icon stat-icon-danger">
+                                    <i class="iconoir-send-dollars mb-0"></i>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <p class="stat-title mb-1"><?= admin_t('dash_withdrawals_no_link') ?></p>
+                                    <h4 class="stat-value mb-0"><?= $_SESSION['2fa_verified'] == true ? "R$ ". Reais2(saques_totalsemlink()) : "—" ?></h4>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card card-accent-left">
-                            <div class="card-body p-3">
-                                <div class="row d-flex justify-content-center align-items-center">
-                                    <div class="col-9">
-                                        <p class="text-dark mb-0 fw-semibold fs-14"><?= admin_t('dash_total_access') ?></p>
-                                        <h3 class="mt-2 mb-0 fw-bold"><?= $_SESSION['2fa_verified'] == true ? visitas_count('total') : "Token não informado." ?></h3>
-                                    </div>
-                                    <div class="col-3 align-self-center">
-                                        <div
-                                            class="d-flex justify-content-center align-items-center thumb-xl bg-light rounded-circle mx-auto">
-                                            <i
-                                                class="iconoir-server-connection h1 align-self-center mb-0 text-secondary"></i>
-                                        </div>
-                                    </div>
+                    <!-- Total Access -->
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card stat-card stat-card-purple card-top-purple h-100">
+                            <div class="card-body p-3 d-flex align-items-center gap-3">
+                                <div class="stat-icon stat-icon-purple">
+                                    <i class="iconoir-server-connection mb-0"></i>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <p class="stat-title mb-1"><?= admin_t('dash_total_access') ?></p>
+                                    <h4 class="stat-value mb-0"><?= $_SESSION['2fa_verified'] == true ? visitas_count('total') : "—" ?></h4>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-
-
-                    <div class="col-md-6 col-lg-4"> 
-                        <div class="card card-accent-left rounded-4"> 
-                            <div class="card-body p-3"> 
-                                <div class="row d-flex justify-content-center align-items-center"> 
-                                    <div class="col-9"> 
-                                        <p class="text-dark mb-0 fw-semibold fs-14"><?= admin_t('dash_most_accessed_place') ?></p> 
-                                        <?php 
-                                        $lugar_mais_acessado = visitas_count2('total'); 
-                                        ?> 
-                                        <h3 class="mt-2 mb-0 fw-bold"> 
-                                        <?php 
-                                        if ($lugar_mais_acessado['cidade'] && $lugar_mais_acessado['estado']) { 
-                                            echo $lugar_mais_acessado['cidade'] . ', ' . $lugar_mais_acessado['estado']; 
-                                        } elseif (!empty($lugar_mais_acessado['mac_os'])) { 
-                                            echo $lugar_mais_acessado['mac_os']; 
-                                        } else { 
-                                            echo admin_t('dash_no_data'); 
-                                        } 
-                                        ?> 
-                                        </h3> 
-                                    </div> 
-                                    <div class="col-3 align-self-center"> 
-                                        <div class="d-flex justify-content-center align-items-center thumb-xl bg-light rounded-circle mx-auto"> 
-                                            <i class="iconoir-user h1 align-self-center mb-0 text-secondary"></i> 
-                                        </div> 
-                                    </div> 
-                                </div> 
-                            </div> 
-                        </div> 
+                    <!-- Most Accessed Place -->
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card stat-card stat-card-warning card-top-warning h-100">
+                            <div class="card-body p-3 d-flex align-items-center gap-3">
+                                <div class="stat-icon stat-icon-warning">
+                                    <i class="iconoir-map-pin mb-0"></i>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <p class="stat-title mb-1"><?= admin_t('dash_most_accessed_place') ?></p>
+                                    <?php $lugar_mais_acessado = visitas_count2('total'); ?>
+                                    <h4 class="stat-value mb-0" style="font-size:1.1rem!important">
+                                    <?php
+                                    if ($lugar_mais_acessado['cidade'] && $lugar_mais_acessado['estado']) {
+                                        echo $lugar_mais_acessado['cidade'] . ', ' . $lugar_mais_acessado['estado'];
+                                    } elseif (!empty($lugar_mais_acessado['mac_os'])) {
+                                        echo $lugar_mais_acessado['mac_os'];
+                                    } else {
+                                        echo admin_t('dash_no_data');
+                                    }
+                                    ?>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
 
-                <div class="row mt-4">
+                <?php if ($_SESSION['2fa_verified'] == true) { ?>
+                <script>
+                (function(){
+                    function refreshAdminOnline(){
+                        fetch('/api/v1/online_ping?count=1')
+                            .then(function(r){return r.json()})
+                            .then(function(d){
+                                if(d && d.success){
+                                    var el = document.getElementById('online-count');
+                                    if(el){ el.textContent = d.count; }
+                                }
+                            })
+                            .catch(function(){});
+                    }
+                    refreshAdminOnline();
+                    setInterval(refreshAdminOnline, 60000);
+                })();
+                </script>
+                <?php } ?>
+
+                <div class="row mt-3">
 
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="card card-accent-left">
@@ -595,77 +587,96 @@ $total_online = get_online_count();
 
     <script>
     var labelsDepositos = <?= $labels_depositos; ?>;
-    var depositosData = <?= $dados_depositos; ?>;
+    var depositosData   = <?= $dados_depositos; ?>;
+    var labelsSaques    = <?= $labels_saques; ?>;
+    var saquesData      = <?= $dados_saques; ?>;
 
-    var labelsSaques = <?= $labels_saques; ?>;
-    var saquesData = <?= $dados_saques; ?>;
+    var isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+    var textColor   = isDark ? '#94a3b8' : '#64748b';
+    var gridColor   = isDark ? 'rgba(255,255,255,.06)' : 'rgba(0,0,0,.05)';
+    var tooltipBg   = isDark ? '#0f0f1a'  : '#ffffff';
+    var tooltipText = isDark ? '#e2e8f0'  : '#0f172a';
 
-    var optionsDepositos = {
-        series: [{
-            name: 'Depósitos',
-            data: depositosData
-        }],
-        chart: {
-            type: 'bar',
-            height: 350
-        },
-        xaxis: {
-            categories: labelsDepositos
-        },
-        plotOptions: {
-            bar: {
-                columnWidth: '5%',
-                distributed: true // Dá a cada barra uma cor diferente
-            }
-        },
-        colors: ['#28a745'], // Verde para depósitos
-        dataLabels: {
-            enabled: false // Oculta os rótulos de dados nas barras
-        },
-        tooltip: {
-            enabled: true // Ativa o tooltip para aparecer ao passar o mouse
-        },
-        title: {
-            //            text: 'Depósitos',
-            align: 'left'
-        }
-    };
+    function baseChart(chartId, series, cats, color, gradFrom, gradTo) {
+        return {
+            series: [{ name: series.name, data: series.data }],
+            chart: {
+                type: 'bar', height: 280,
+                toolbar: { show: false },
+                background: 'transparent',
+                sparkline: { enabled: false },
+                animations: { enabled: true, easing: 'easeinout', speed: 500 }
+            },
+            theme: { mode: isDark ? 'dark' : 'light' },
+            colors: [color],
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shade: isDark ? 'dark' : 'light',
+                    type: 'vertical',
+                    shadeIntensity: 0.4,
+                    gradientToColors: [gradTo],
+                    inverseColors: false,
+                    opacityFrom: 0.9,
+                    opacityTo: 0.55,
+                    stops: [0, 100]
+                }
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: '40%',
+                    borderRadius: 6,
+                    distributed: false
+                }
+            },
+            dataLabels: { enabled: false },
+            grid: {
+                borderColor: gridColor,
+                strokeDashArray: 4,
+                xaxis: { lines: { show: false } },
+                yaxis: { lines: { show: true } }
+            },
+            xaxis: {
+                categories: cats,
+                labels: { style: { colors: textColor, fontSize: '11px', fontWeight: 500 } },
+                axisBorder: { show: false },
+                axisTicks: { show: false }
+            },
+            yaxis: {
+                labels: {
+                    style: { colors: textColor, fontSize: '11px' },
+                    formatter: function(v) { return 'R$ ' + Number(v).toLocaleString('pt-BR'); }
+                }
+            },
+            tooltip: {
+                theme: isDark ? 'dark' : 'light',
+                style: { fontSize: '12px' },
+                y: { formatter: function(v) { return 'R$ ' + Number(v).toLocaleString('pt-BR', {minimumFractionDigits:2}); } }
+            },
+            legend: { show: false }
+        };
+    }
 
-    var chartDepositos = new ApexCharts(document.querySelector("#chart-depositos"), optionsDepositos);
+    var chartDepositos = new ApexCharts(
+        document.querySelector("#chart-depositos"),
+        baseChart(
+            'chart-depositos',
+            { name: 'Depósitos', data: depositosData },
+            labelsDepositos,
+            '#13DEB9', '#13DEB9', '#06b6d4'
+        )
+    );
     chartDepositos.render();
 
-    var optionsSaques = {
-        series: [{
-            name: 'Saques',
-            data: saquesData
-        }],
-        chart: {
-            type: 'bar',
-            height: 350
-        },
-        xaxis: {
-            categories: labelsSaques
-        },
-        plotOptions: {
-            bar: {
-                columnWidth: '5%',
-                distributed: true
-            }
-        },
-        colors: ['#dc3545'], // Vermelho para saques
-        dataLabels: {
-            enabled: false // Oculta os rótulos de dados nas barras
-        },
-        tooltip: {
-            enabled: true // Ativa o tooltip para aparecer ao passar o mouse
-        },
-        title: {
-            //            text: 'Saques',
-            align: 'left'
-        }
-    };
-
-    var chartSaques = new ApexCharts(document.querySelector("#chart-saques"), optionsSaques);
+    var chartSaques = new ApexCharts(
+        document.querySelector("#chart-saques"),
+        baseChart(
+            'chart-saques',
+            { name: 'Saques', data: saquesData },
+            labelsSaques,
+            '#FA896B', '#FA896B', '#ef4444'
+        )
+    );
     chartSaques.render();
     </script>
 

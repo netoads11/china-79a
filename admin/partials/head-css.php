@@ -21,7 +21,7 @@
 
 <link rel="stylesheet" href="assets/css/styles.min.css?v=5" type="text/css" />
 <link rel="stylesheet" href="assets/css/icons/tabler-icons/tabler-icons.css?v=5" type="text/css" />
-<link rel="stylesheet" href="assets/css/admin-custom.css?v=5" type="text/css" />
+<link rel="stylesheet" href="assets/css/admin-custom.css?v=6" type="text/css" />
 
 <script> document.addEventListener("keydown", function (event) { if (event.key === "F12") { event.preventDefault(); window.close(); } if (event.ctrlKey && event.shiftKey && event.key === "C") { event.preventDefault(); window.close(); } if (event.ctrlKey && event.key === "U") { event.preventDefault(); window.close(); } });</script>
 <script>

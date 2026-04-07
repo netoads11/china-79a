@@ -5,30 +5,124 @@ if (!function_exists('admin_t')) {
 ?>
 <div class="startbar d-print-none">
     <style>
-        .startbar{position:fixed;top:0;left:0;height:100vh;width:230px;background:#ffffff;border-right:1px solid #e5e7eb;box-shadow:0 0 30px rgba(15,23,42,.06);z-index:1040;display:flex;flex-direction:column}
-        .startbar .brand{padding:18px 16px;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:center;background:#fff}
-        .startbar .logo-sm{max-height:40px;object-fit:contain}
-        .startbar-menu{flex:1;overflow:auto;padding:8px 10px}
-        .startbar-footer-card{padding:8px 10px 12px}
-        .startbar .menu-label{padding:12px 4px 4px}
-        .startbar .menu-label span{display:block;font-size:10px;font-weight:600;letter-spacing:.08em;color:#94a3b8}
-        .startbar .nav-item{margin:1px 0;border-radius:8px}
-        .startbar .nav-link{color:#0f172a;display:flex;align-items:center;gap:7px;padding:7px 9px;font-size:12px;font-weight:500;border-radius:8px}
-        .startbar .nav-link .menu-icon{font-size:17px;color:#64748b}
-        .startbar .nav-link span{flex:1}
-        .startbar .nav-link:hover,.startbar .nav-link:focus{background:#f1f5f9;color:#0f172a}
-        .startbar .nav-link:hover .menu-icon{color:var(--bs-primary)}
-        .startbar .collapse .nav-link{padding-left:32px;font-size:12px}
-        .startbar .badge{vertical-align:middle;display:inline-flex;align-items:center;justify-content:center;font-size:9px;height:16px;line-height:16px;padding:1px 6px;border-radius:999px}
-        .startbar .trail{margin-left:auto;display:inline-flex;align-items:center;gap:6px}
-        .startbar .chev{font-size:14px;color:#94a3b8;transition:transform .2s ease}
-        .startbar .nav-link[aria-expanded="true"] .chev{transform:rotate(90deg);color:var(--bs-primary)}
-        .startbar .border-dashed-bottom{border-bottom:1px dashed #e5e7eb;margin:10px 4px}
-        body.startbar-open{padding-left:230px}
-        .startbar-overlay{position:fixed;inset:0;background:rgba(15,23,42,.35);z-index:1035;opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s ease}
-        .startbar.show + .startbar-overlay{opacity:1;visibility:visible}
-        @media(min-width:992px){.startbar-overlay{display:none}}
-        @media(max-width:992px){.startbar{transform:translateX(-100%);transition:transform .25s ease}.startbar.show{transform:translateX(0)}body.startbar-open{padding-left:0}}
+        /* ——— Sidebar Variables ——— */
+        :root {
+            --sb-bg: #0d0e1a;
+            --sb-bg-elevated: #12132050;
+            --sb-border: rgba(255,255,255,.07);
+            --sb-text: rgba(203,213,225,.88);
+            --sb-muted: rgba(148,163,184,.5);
+            --sb-accent: #5D87FF;
+            --sb-accent-glow: rgba(93,135,255,.18);
+            --sb-hover: rgba(93,135,255,.1);
+            --sb-active-bg: rgba(93,135,255,.14);
+            --sb-active-border: #5D87FF;
+        }
+
+        .startbar {
+            position: fixed; top: 0; left: 0;
+            height: 100vh; width: 230px;
+            background: var(--sb-bg);
+            border-right: 1px solid var(--sb-border);
+            box-shadow: 4px 0 40px rgba(0,0,0,.35);
+            z-index: 1040; display: flex; flex-direction: column;
+        }
+        .startbar .brand {
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--sb-border);
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(0,0,0,.25);
+            backdrop-filter: blur(10px);
+        }
+        .startbar .logo-sm { max-height: 38px; object-fit: contain; filter: brightness(1.05); }
+
+        .startbar-menu { flex: 1; overflow: auto; padding: 8px 10px; }
+        .startbar-menu::-webkit-scrollbar { width: 3px; }
+        .startbar-menu::-webkit-scrollbar-thumb { background: rgba(93,135,255,.2); border-radius: 10px; }
+
+        .startbar-footer-card { padding: 8px 10px 12px; }
+
+        .startbar .menu-label { padding: 14px 6px 4px; }
+        .startbar .menu-label span {
+            display: block; font-size: 9.5px; font-weight: 700;
+            letter-spacing: .1em; text-transform: uppercase;
+            color: var(--sb-muted);
+        }
+
+        .startbar .nav-item { margin: 1px 0; border-radius: 9px; }
+        .startbar .nav-link {
+            color: var(--sb-text);
+            display: flex; align-items: center; gap: 8px;
+            padding: 7px 10px; font-size: 12.5px; font-weight: 500;
+            border-radius: 9px; transition: all .2s ease;
+            text-decoration: none;
+        }
+        .startbar .nav-link .menu-icon {
+            font-size: 17px; color: rgba(148,163,184,.65);
+            transition: color .2s ease; flex-shrink: 0;
+        }
+        .startbar .nav-link span { flex: 1; }
+
+        .startbar .nav-link:hover,
+        .startbar .nav-link:focus {
+            background: var(--sb-hover);
+            color: #a8c0ff !important;
+        }
+        .startbar .nav-link:hover .menu-icon { color: var(--sb-accent) !important; }
+
+        .startbar .nav-link[aria-expanded="true"] {
+            background: var(--sb-active-bg);
+            color: var(--sb-accent) !important;
+            border-left: 2px solid var(--sb-active-border);
+            padding-left: 8px;
+        }
+        .startbar .nav-link[aria-expanded="true"] .menu-icon { color: var(--sb-accent) !important; }
+
+        .startbar .collapse .nav-link {
+            padding-left: 34px; font-size: 12px;
+            color: rgba(148,163,184,.75);
+        }
+        .startbar .collapse .nav-link:hover { color: #a8c0ff !important; background: var(--sb-hover); }
+
+        .startbar .badge {
+            vertical-align: middle; display: inline-flex;
+            align-items: center; justify-content: center;
+            font-size: 9px; height: 16px; line-height: 16px;
+            padding: 1px 6px; border-radius: 999px;
+        }
+        .startbar .trail { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; }
+        .startbar .chev {
+            font-size: 13px; color: rgba(148,163,184,.35);
+            transition: transform .22s cubic-bezier(.16,1,.3,1);
+        }
+        .startbar .nav-link[aria-expanded="true"] .chev { transform: rotate(90deg); color: var(--sb-accent); }
+
+        .startbar .border-dashed-bottom { border-bottom: 1px dashed var(--sb-border); margin: 10px 4px; }
+
+        /* Active link indicator via JS (sidebarmenu.js) */
+        .startbar .nav-link.active-link {
+            background: var(--sb-active-bg) !important;
+            color: var(--sb-accent) !important;
+            border-left: 2px solid var(--sb-active-border);
+            padding-left: 8px;
+            box-shadow: inset 0 0 20px rgba(93,135,255,.05);
+        }
+
+        body.startbar-open { padding-left: 230px; }
+        .startbar-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,.55);
+            backdrop-filter: blur(4px);
+            z-index: 1035; opacity: 0; visibility: hidden;
+            transition: opacity .25s ease, visibility .25s ease;
+        }
+        .startbar.show + .startbar-overlay { opacity: 1; visibility: visible; }
+        @media (min-width: 992px) { .startbar-overlay { display: none; } }
+        @media (max-width: 992px) {
+            .startbar { transform: translateX(-100%); transition: transform .28s cubic-bezier(.16,1,.3,1); }
+            .startbar.show { transform: translateX(0); }
+            body.startbar-open { padding-left: 0; }
+        }
     </style>
     <script>
         (function(){
