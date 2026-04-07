@@ -30,19 +30,15 @@ function busca_valor_ipn($transacao_id){
 
 function att_paymentpix($transacao_id){
     global $mysqli;
-    $sql = $mysqli->prepare("UPDATE transacoes SET status='1' WHERE transacao_id=?");
+    // Só atualiza se ainda estiver em processamento — evita duplo crédito em reenvios do webhook
+    $sql = $mysqli->prepare("UPDATE transacoes SET status='pago' WHERE transacao_id=? AND status='processamento'");
     $sql->bind_param("s", $transacao_id);
-    if ($sql->execute()) {
+    $sql->execute();
+    if ($sql->affected_rows === 1) {
         $buscar = busca_valor_ipn($transacao_id);
-        if ($buscar) {
-            $rf = 1;
-        } else {
-            $rf = 0;
-        }
-    } else {
-        $rf = 0;
+        return $buscar ? 1 : 0;
     }
-    return $rf;
+    return 0;
 }
 
 function webhook() {

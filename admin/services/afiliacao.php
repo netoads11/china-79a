@@ -153,17 +153,16 @@ function creditarComissaoAfiliado($user_id, $valor, $nivel, $depositante_id, $va
 
     $data_registro = date('Y-m-d H:i:s');
     $tipo = "comissao_cpa_nivel_{$nivel}";
-    $valor_centavos = intval($valor * 100);
-    
+
     $qry = "INSERT INTO adicao_saldo (id_user, valor, tipo, data_registro) VALUES (?, ?, ?, ?)";
     $stmt = $mysqli->prepare($qry);
-    
+
     if (!$stmt) {
         logAfiliacao("ERRO Prepare Insert AdicaoSaldo: " . $mysqli->error);
         return false;
     }
-    
-    $stmt->bind_param("iiss", $user_id, $valor_centavos, $tipo, $data_registro);
+
+    $stmt->bind_param("idss", $user_id, $valor, $tipo, $data_registro);
     
     if (!$stmt->execute()) {
         logAfiliacao("ERRO Execute Insert AdicaoSaldo: " . $stmt->error);
