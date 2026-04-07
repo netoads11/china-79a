@@ -25,15 +25,16 @@
 
 <script> document.addEventListener("keydown", function (event) { if (event.key === "F12") { event.preventDefault(); window.close(); } if (event.ctrlKey && event.shiftKey && event.key === "C") { event.preventDefault(); window.close(); } if (event.ctrlKey && event.key === "U") { event.preventDefault(); window.close(); } });</script>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var spinner = document.getElementById("loadingSpinner");
-
-        window.onload = function () {
-            setTimeout(function () {
-                spinner.style.display = 'none';
-            }, 500);
-        };
-    });
+(function(){
+    function hideSpinner(){
+        var s=document.getElementById('loadingSpinner');
+        if(s) s.style.display='none';
+    }
+    // Esconde assim que DOM estiver pronto
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(hideSpinner, 300); });
+    // Fallback: esconde após 2s no máximo
+    setTimeout(hideSpinner, 2000);
+})();
 </script>
 
  
