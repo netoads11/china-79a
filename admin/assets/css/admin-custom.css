@@ -47,8 +47,6 @@ html[data-bs-theme=dark] {
 ::-webkit-scrollbar-thumb { background: rgba(93,135,255,.3); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(93,135,255,.55); }
 
-/* ——— Loading Spinner ——— */
-#loadingSpinner { background-color: var(--a-bg) !important; }
 
 /* ——— Page Layout ——— */
 html { min-height: 100vh; background: #f0f4f8; background: var(--a-bg); }

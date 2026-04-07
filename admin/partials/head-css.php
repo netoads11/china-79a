@@ -18,24 +18,7 @@
 }
 </style>
 
-<div id="loadingSpinner"
-    style="position: fixed; inset: 0; z-index: 1051; display: flex; justify-content: center; align-items: center;">
-    <div class="spinner-border text-primary" role="status" aria-hidden="true"></div>
-</div>
-
 <script> document.addEventListener("keydown", function (event) { if (event.key === "F12") { event.preventDefault(); window.close(); } if (event.ctrlKey && event.shiftKey && event.key === "C") { event.preventDefault(); window.close(); } if (event.ctrlKey && event.key === "U") { event.preventDefault(); window.close(); } });</script>
-<script>
-(function(){
-    function hideSpinner(){
-        var s=document.getElementById('loadingSpinner');
-        if(s) s.style.display='none';
-    }
-    // Esconde assim que DOM estiver pronto
-    document.addEventListener('DOMContentLoaded', function(){ setTimeout(hideSpinner, 300); });
-    // Fallback: esconde após 2s no máximo
-    setTimeout(hideSpinner, 2000);
-})();
-</script>
 
  
 
