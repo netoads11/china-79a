@@ -1,13 +1,11 @@
-<?php include 'partials/html.php' ?>
-
 <?php
-
+session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 ini_set('log_errors', 1);
 ini_set('error_log', __DIR__ . '/error.log');
-
-session_start();
+include 'partials/html.php';
+?>
 include_once "services/database.php";
 include_once "services/funcao.php";
 include_once "services/crud.php";

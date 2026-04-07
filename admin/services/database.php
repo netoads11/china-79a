@@ -45,7 +45,7 @@ if (!defined('DATABASE_LOADED')) {
         $res = $mysqli->query("SELECT T.table_collation FROM information_schema.TABLES T WHERE T.table_schema = DATABASE() AND T.table_name = 'config' LIMIT 1");
         if ($res) {
             $row = $res->fetch_assoc();
-            if ($row && strpos($row['table_collation'], 'utf8mb4') === false) {
+            if ($row && isset($row['table_collation']) && strpos($row['table_collation'], 'utf8mb4') === false) {
                 $mysqli->query("ALTER TABLE `config` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
             }
         }
