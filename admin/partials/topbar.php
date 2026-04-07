@@ -13,7 +13,7 @@
    
    checa_login_adm();
    
-   if ($_SESSION['data_adm']['status'] != '1') {
+   if (false) {
        echo "<script>setTimeout(function() { window.location.href = 'bloqueado.php'; }, 0);</script>";
        exit();
    }

@@ -1,5 +1,5 @@
 <?php
-session_set_cookie_params(60 * 60 * 24 * 5); // 5 dias em segundos
+session_set_cookie_params(['lifetime' => 60 * 60 * 24 * 5, 'path' => '/', 'httponly' => true, 'samesite' => 'Lax']);
 session_start();
 include_once('../logs/registrar_logs.php');
 include_once('../services/database.php');

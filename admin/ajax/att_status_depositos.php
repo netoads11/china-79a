@@ -5,10 +5,11 @@ include_once('../services/checa_login_adm.php');
 checa_login_adm();
 
 if (isset($_POST['ids'])) {
-    $ids = json_decode($_POST['ids'], true); // Decodificar JSON vindo da requisição
-    $ids_str = implode(',', $ids); // Concatena todos os IDs em uma string separada por vírgulas
+    $ids = json_decode($_POST['ids'], true);
+    $ids = array_filter(array_map('intval', (array)$ids), fn($v) => $v > 0);
+    if (empty($ids)) { echo json_encode(['success' => false]); exit; }
+    $ids_str = implode(',', $ids);
 
-    // Atualizar o status para "expirado"
     $query = "UPDATE transacoes SET status = 'expirado' WHERE id IN ($ids_str)";
     if (mysqli_query($mysqli, $query)) {
         echo json_encode(['success' => true]);
