@@ -86,7 +86,7 @@ $result_afiliados = mysqli_query($mysqli, $query_afiliados);
                                         <h4 class="card-title"><?= admin_t('page_affiliates_title') ?> (<?= $total_afiliados; ?>)</h4>
                                     </div>
                                     <div class="col text-end">
-                                        <a href="export/exportar_usuarios.php" class="btn btn-primary"><?= admin_t('button_export_data') ?></a>
+                                        <a href="export/exportar_usuarios.php" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="left" title="Exporta todos os afiliados para um arquivo CSV/Excel"><?= admin_t('button_export_data') ?></a>
                                     </div>
                                 </div>
                             </div><!--end card-header-->
@@ -111,19 +111,46 @@ $result_afiliados = mysqli_query($mysqli, $query_afiliados);
                                     <table class="table mb-0 table-centered">
                                         <thead class="table-light">
                                             <tr>
-                                                <th><?= admin_t('table_id') ?></th>
-                                                <th><?= admin_t('table_user') ?></th>
-                                                <th><?= admin_t('table_balance') ?></th>
-                                                <th><?= admin_t('table_deposited') ?></th>
-                                                <th><?= admin_t('table_withdrawn') ?></th>
-                                                <th><?= admin_t('table_role') ?></th>
-                                                <th><?= admin_t('table_referrals') ?></th>
+                                                <th>
+                                                    <?= admin_t('table_id') ?>
+                                                    <i class="fa fa-info-circle text-info info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="ID único do afiliado no sistema"></i>
+                                                </th>
+                                                <th>
+                                                    <?= admin_t('table_user') ?>
+                                                    <i class="fa fa-info-circle text-info info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Telefone/usuário de login do afiliado"></i>
+                                                </th>
+                                                <th>
+                                                    <?= admin_t('table_balance') ?>
+                                                    <i class="fa fa-info-circle text-info info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Saldo atual disponível na conta do afiliado"></i>
+                                                </th>
+                                                <th>
+                                                    <?= admin_t('table_deposited') ?>
+                                                    <i class="fa fa-info-circle text-info info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Soma total de depósitos realizados pelos usuários indicados por este afiliado"></i>
+                                                </th>
+                                                <th>
+                                                    <?= admin_t('table_withdrawn') ?>
+                                                    <i class="fa fa-info-circle text-info info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Soma total de saques aprovados realizados pelos usuários indicados por este afiliado"></i>
+                                                </th>
+                                                <th>
+                                                    <?= admin_t('table_role') ?>
+                                                    <i class="fa fa-info-circle text-info info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Cargo/nível do afiliado na plataforma"></i>
+                                                </th>
+                                                <th>
+                                                    <?= admin_t('table_referrals') ?>
+                                                    <i class="fa fa-info-circle text-info info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Quantidade total de usuários que se cadastraram usando o código de indicação deste afiliado"></i>
+                                                </th>
                                                 <th>
                                                     <?= admin_t('users_demo_mode') ?>
                                                     <i class="fa fa-info-circle text-info info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="<?= admin_t('users_demo_mode_help') ?>"></i>
                                                 </th>
-                                                <th><?= admin_t('users_individual_rtp') ?></th>
-                                                <th class="text-end"><?= admin_t('table_details') ?></th>
+                                                <th>
+                                                    <?= admin_t('users_individual_rtp') ?>
+                                                    <i class="fa fa-info-circle text-info info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="RTP (Retorno ao Jogador) individual para os jogos deste afiliado. Arraste para ajustar entre 0% e 100%"></i>
+                                                </th>
+                                                <th class="text-end">
+                                                    <?= admin_t('table_details') ?>
+                                                    <i class="fa fa-info-circle text-info info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Ações disponíveis para este afiliado"></i>
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -160,25 +187,31 @@ $result_afiliados = mysqli_query($mysqli, $query_afiliados);
                                                         <td><?= $cargo_badge; ?></td>
                                                         <td><?= $total_indicados; ?></td>
                                                         <td>
-                                                            <div class="form-check form-switch">
-                                                                <input class="form-check-input modo-demo-switch" 
-                                                                       type="checkbox" 
-                                                                       id="modoDemo_<?= $afiliado['id']; ?>" 
+                                                            <div class="form-check form-switch"
+                                                                 data-bs-toggle="tooltip"
+                                                                 data-bs-placement="top"
+                                                                 title="<?= $modo_demo == 1 ? 'Modo demo ATIVO — o afiliado só vê jogos demo. Clique para desativar.' : 'Modo demo INATIVO — afiliado joga com dinheiro real. Clique para ativar.' ?>">
+                                                                <input class="form-check-input modo-demo-switch"
+                                                                       type="checkbox"
+                                                                       id="modoDemo_<?= $afiliado['id']; ?>"
                                                                        data-mobile="<?= htmlspecialchars($afiliado['mobile']); ?>"
                                                                        <?= $modo_demo == 1 ? 'checked' : ''; ?>>
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="rtp-individual">
+                                                            <div class="rtp-individual"
+                                                                 data-bs-toggle="tooltip"
+                                                                 data-bs-placement="top"
+                                                                 title="RTP atual: <?= $rtp_individual ?>%. Arraste o slider para ajustar o retorno ao jogador. Salvo automaticamente ao soltar.">
                                                                 <label for="rtpSlider_<?= $afiliado['id']; ?>">
                                                                     <span id="rtpValueDisplay_<?= $afiliado['id']; ?>"><?= $rtp_individual; ?>%</span>
                                                                 </label>
-                                                                <input type="range" 
-                                                                       class="form-range rtp-slider" 
-                                                                       min="0" 
-                                                                       max="100" 
-                                                                       step="1" 
-                                                                       value="<?= $rtp_individual; ?>" 
+                                                                <input type="range"
+                                                                       class="form-range rtp-slider"
+                                                                       min="0"
+                                                                       max="100"
+                                                                       step="1"
+                                                                       value="<?= $rtp_individual; ?>"
                                                                        id="rtpSlider_<?= $afiliado['id']; ?>"
                                                                        data-mobile="<?= htmlspecialchars($afiliado['mobile']); ?>">
                                                             </div>
@@ -187,12 +220,16 @@ $result_afiliados = mysqli_query($mysqli, $query_afiliados);
                                                             <div class="dropdown d-inline-block">
                                                                 <a class="dropdown-toggle arrow-none" id="dLabel11"
                                                                     data-bs-toggle="dropdown" href="#" role="button"
-                                                                    aria-haspopup="false" aria-expanded="false">
+                                                                    aria-haspopup="false" aria-expanded="false"
+                                                                    title="">
                                                                     <i class="las la-ellipsis-v fs-20 text-muted"></i>
                                                                 </a>
                                                                 <div class="dropdown-menu dropdown-menu-end">
                                                                     <a class="dropdown-item text-success"
-                                                                        href="<?= $painel_adm_ver_usuarios . encodeAll($afiliado['id']); ?>">
+                                                                        href="<?= $painel_adm_ver_usuarios . encodeAll($afiliado['id']); ?>"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-placement="left"
+                                                                        title="Ver perfil completo, histórico de apostas, depósitos e saques deste afiliado">
                                                                         <i class="las la-info-circle"></i> <?= admin_t('table_details') ?>
                                                                     </a>
                                                                 </div>
@@ -248,9 +285,12 @@ $result_afiliados = mysqli_query($mysqli, $query_afiliados);
                         <!-- Resumo Financeiro Afiliados -->
                         <div class="row mt-4">
                             <div class="col-lg-4 col-md-6 col-sm-12">
-                                <div class="card">
+                                <div class="card" data-bs-toggle="tooltip" data-bs-placement="top" title="Soma total de todos os depósitos feitos por usuários que chegaram via link de afiliado (com código de indicação)">
                                     <div class="card-body">
-                                        <h5 class="card-title"><?= admin_t('affiliates_total_brought') ?></h5>
+                                        <h5 class="card-title">
+                                            <?= admin_t('affiliates_total_brought') ?>
+                                            <i class="fa fa-info-circle text-info info-icon"></i>
+                                        </h5>
                                         <p class="text-muted mb-0">R$
                                             <?= number_format(total_trazido_afiliados(), 2, ',', '.'); ?>
                                         </p>
@@ -258,17 +298,23 @@ $result_afiliados = mysqli_query($mysqli, $query_afiliados);
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12">
-                                <div class="card">
+                                <div class="card" data-bs-toggle="tooltip" data-bs-placement="top" title="Total de usuários cadastrados na plataforma que utilizaram um código de indicação de algum afiliado">
                                     <div class="card-body">
-                                        <h5 class="card-title"><?= admin_t('affiliates_total_people') ?></h5>
+                                        <h5 class="card-title">
+                                            <?= admin_t('affiliates_total_people') ?>
+                                            <i class="fa fa-info-circle text-info info-icon"></i>
+                                        </h5>
                                         <p class="text-muted mb-0"><?= total_pessoas_trazidas(); ?></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12">
-                                <div class="card">
+                                <div class="card" data-bs-toggle="tooltip" data-bs-placement="top" title="Afiliado com o maior número de usuários indicados cadastrados na plataforma">
                                     <div class="card-body">
-                                        <h5 class="card-title"><?= admin_t('affiliates_top_with_referrals') ?></h5>
+                                        <h5 class="card-title">
+                                            <?= admin_t('affiliates_top_with_referrals') ?>
+                                            <i class="fa fa-info-circle text-info info-icon"></i>
+                                        </h5>
                                         <p class="text-muted mb-0"><?= top_afiliado_indicados(); ?></p>
                                     </div>
                                 </div>
